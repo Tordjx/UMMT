@@ -1,5 +1,6 @@
 #%%
 import numpy as np
+import matplotlib.pyplot as plt 
 data_path = "C:/Users/valen/Documents/ENSAE/STATAPP"
 fichier_FR= open(data_path+'/multi30k-dataset/data/task1/tok/train.lc.norm.tok.fr',"r")
 fichier_EN= open(data_path+'/multi30k-dataset/data/task1/tok/train.lc.norm.tok.en',"r")
@@ -38,17 +39,38 @@ def normaliser_dico (d):
         d_[k] = d[k]*factor
     return d_
 
+def Tracer_histogramme(dicos,legende) :
+    for i in range(len(dicos)) : 
+        Dico = dicos[i]
+        Transformé = {key: value for key, value in sorted(Dico.items()) if key.isalpha()}
+        plt.bar(Transformé.keys(), normaliser_dico(Transformé).values(),alpha=1/len(dicos),label=legende[i])
+        plt.legend(loc='upper right')
 #%%Traçons des histogrammes
-import matplotlib.pyplot as plt 
-lettres_fr = {key: value for key, value in sorted(lettres_fr.items())}
-lettres_en = {key: value for key, value in sorted(lettres_en.items())}
-plt.bar(lettres_fr.keys(), normaliser_dico(lettres_fr).values(),alpha=0.5,label="FR")
-plt.bar(lettres_en.keys(), normaliser_dico(lettres_en).values(),alpha = 0.5,label = 'EN')
-plt.legend(loc='upper right')
+Tracer_histogramme([lettres_en,lettres_fr],['EN','FR'])
 
-#%%En ne gardant que les lettres
-lettres_fr = {k: v for k, v in lettres_fr.items() if k.isalpha()}
-lettres_en = {k: v for k, v in lettres_en.items() if k.isalpha()}
-plt.bar(lettres_fr.keys(), normaliser_dico(lettres_fr).values(),alpha=0.5,label="FR")
-plt.bar(lettres_en.keys(), normaliser_dico(lettres_en).values(),alpha = 0.5,label = 'EN')
-plt.legend(loc='upper right')
+#%%Faisons des paires de lettres
+PairesFR={}
+for phrase in liste_FR :
+    for i in range(len(phrase)-1): 
+        if phrase[i] in PairesFR.keys() : 
+            if phrase[i+1] in PairesFR[phrase[i]].keys() : 
+                PairesFR[phrase[i]][phrase[i+1]]+=1
+            else : 
+                PairesFR[phrase[i]][phrase[i+1]]=1
+        else : 
+            PairesFR[phrase[i]]={phrase[i+1]:1}
+
+PairesEN = {}
+for phrase in liste_EN :
+    for i in range(len(phrase)-1): 
+        if phrase[i] in PairesEN.keys() : 
+            if phrase[i+1] in PairesEN[phrase[i]].keys() : 
+                PairesEN[phrase[i]][phrase[i+1]]+=1
+            else : 
+                PairesEN[phrase[i]][phrase[i+1]]=1
+        else : 
+            PairesEN[phrase[i]]={phrase[i+1]:1}
+
+#%%Frequence d'apparition des lettres sachant que la précédente est un t
+lettre = 'e'
+Tracer_histogramme([PairesEN[lettre],PairesFR[lettre]], ['EN','FR'])

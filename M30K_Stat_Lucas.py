@@ -76,10 +76,10 @@ for sentence in list_fr:
             pairs_fr[sentence[i]] = {sentence[i+1]:1}
 
 
-# pairs_fr = {key: value for key, value in sorted(pairs_fr.items()) if key.isalpha()}
-# for x in pairs_fr.keys():
-#     pairs_fr[x] = dict_normalization({key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()})
-
+pairs_fr = {key: value for key, value in sorted(pairs_fr.items()) if key.isalpha()}
+for x in pairs_fr.keys():
+    # pairs_fr[x] = dict_normalization({key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()})
+    pairs_fr[x] = {key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()}
 
 pairs_en = {}
 
@@ -119,12 +119,12 @@ for i in range(len(list_letters_en)):
 
 
 
-# for i in range(len(list_letters_fr)):
-#     for j in range(len(list_letters_fr)):
-#         try:
-#             followers_fr[i,j] = pairs_fr[list_letters_fr[i]].get(list_letters_fr[j]) # / letters_fr.get(list_letters_fr[i])
-#         except:
-#             followers_fr[i,j] = 0
+for i in range(len(list_letters_fr)):
+    for j in range(len(list_letters_fr)):
+        try:
+            followers_fr[i,j] = pairs_fr[list_letters_fr[i]].get(list_letters_fr[j]) # / letters_fr.get(list_letters_fr[i])
+        except:
+            followers_fr[i,j] = 0
 
 plt.figure()
 plt.pcolormesh(followers_en)
@@ -132,5 +132,6 @@ plt.colorbar()
 plt.show()
 
 #%% Lenght of the words, the sentences
+
 
 

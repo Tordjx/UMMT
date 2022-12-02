@@ -44,7 +44,7 @@ def Tracer_histogramme(dicos,legende) :
         Dico = dicos[i]
         Transformé = {key: value for key, value in sorted(Dico.items()) if key.isalpha()}
         plt.bar(Transformé.keys(), normaliser_dico(Transformé).values(),alpha=1/len(dicos),label=legende[i])
-        plt.legend(loc='upper right')
+        plt.legend(loc='upper right')   
 #%%Traçons des histogrammes
 Tracer_histogramme([lettres_en,lettres_fr],['EN','FR'])
 

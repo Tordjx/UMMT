@@ -24,21 +24,23 @@ class TransformerModel(nn.Module):
         self.d_model = d_model
         self.encoder = nn.Embedding(ntoken, d_model)
         self.decoder = nn.Linear(d_model, ntoken)
+        self.d_hid = d_hid
     def init_weights(self) -> None:
         initrange = 0.1
         self.encoder.weight.data.uniform_(-initrange, initrange)
         self.decoder.bias.data.zero_()
         self.decoder.weight.data.uniform_(-initrange, initrange)
-    def forward(self, src: Tensor, hidden: Tensor) -> Tensor:
-        src = self.encoder(src) 
-        src = self.pos_encoder(src)
-        output = self.transformer_encoder(src)
-        output = self.transformer_decoder(output)
+    def forward(self, src: Tensor, src_mask : Tensor) -> Tensor:
+        output = self.encoder(src) * np.sqrt(self.d_model)
+        output = self.pos_encoder(output)
+        output = self.transformer_encoder(output,src_mask)
+        output = self.transformer_decoder(output,src_mask)
         output = self.decoder(output)
         return output
-    def generate_square_subsequent_mask(sz: int) -> Tensor:
+    def generate_square_subsequent_mask(self, sz: int) -> Tensor:
         """Generates an upper-triangular matrix of -inf, with zeros on diag."""
         return torch.triu(torch.ones(sz, sz) * float('-inf'), diagonal=1)
+
 
 class PositionalEncoding(nn.Module):
 
@@ -144,8 +146,9 @@ def train_auto_encoding(langue, model : nn.Module ) -> None :
     start_time =time.time()
     for i in range(len(train_data)) : 
         data = tensorFromSentence(langue,train_data[i])
-        hidden = 
-        output = model(data, hidden)
+        print(train_data[i])
+        src_mask = model.generate_square_subsequent_mask(len(train_data[i]))
+        output = model(data, src_mask)
         loss = criterion(output,data)
         optimizer.zero_grad()
         loss.backward()
@@ -184,3 +187,4 @@ def showPlot(points):
 #%%
 
 train_auto_encoding(langue, model)
+# %%

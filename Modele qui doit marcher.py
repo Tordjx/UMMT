@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 import torch
 import torch.nn as nn
@@ -53,8 +54,8 @@ class Modèle (nn.Module):
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
 
     def forward(self, input) : 
-#L'encoder prend en entrée obligatoire une phrase embedded et le positional encoding
-#Le decoder prend en entrée l'output de l'encoder, l'output du resnet, un masked self attention et le positionnal encoding
+    #L'encoder prend en entrée obligatoire une phrase embedded et le positional encoding
+    #Le decoder prend en entrée l'output de l'encoder, l'output du resnet, un masked self attention et le positionnal encoding
         pos_enc = self.positional_encoder(input[0])
         output = self.encoder(pos_enc) #c'est la phrase
         output = self.decoder (output, input[1], self.generate_square_subsequent_mask(pos_enc))
@@ -68,6 +69,7 @@ class Modèle (nn.Module):
         for p in self.parameters():
             if p.dim() > 1:
                 xavier_uniform_(p)
+
     def train(self, n_iter,train_data) : 
         self.train() #Turn on train mode
         total_loss = 0
@@ -86,6 +88,7 @@ class Modèle (nn.Module):
                 print("Current loss " + str(cur_loss) + "ms_per_batch " + str(ms_per_batch))
                 total_loss = 0
                 start_time = time.time()
+                
     def eval(self, n_iter,eval_data) : 
         self.eval() #Turn on evaluation mode
         total_loss = 0 

@@ -1,4 +1,6 @@
 #%%
+import numpy as np
+import torch
 data_path = "C:/Users/valen/Documents/ENSAE/STATAPP/"
 train_text_path = data_path+'multi30k-dataset/data/task1/tok/train.lc.norm.tok.'
 train_img_path = data_path+"/Images/train-resnet50-res4frelu.npy"
@@ -9,8 +11,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 SOS_token = 0
 EOS_token = 1
 
-import numpy as np
-import torch
+
 class Langue():
     def __init__(self,nom_langue) :
         self.nom_langue = nom_langue

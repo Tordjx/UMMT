@@ -35,6 +35,16 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:x.size(0)]
         return self.dropout(x)
 
+# appliquer subword nmt , nombre d'operation s = 10000 vocab 
+# train_file = concatener train en anglais et train en francais
+
+# reshape pour le resnet ou .view.reshape pour passer de 1414 
+# feedforward : couche linéaire pour passer de 196x1024 aux dimensions des embeddings du texte
+# mettre une option avec ou sans image où on ne fait pas 
+
+# d_model = taille des vecteurs
+
+
 class Modèle (nn.Module):
     def __init__(self,d_model,n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation,device = device) -> None:
         super().__init__()
@@ -45,6 +55,7 @@ class Modèle (nn.Module):
         self.activation = activation 
         self.n_head = n_head
         self.device = device
+        self.embedding = 
         self.encoder = nn.TransformerEncoder(nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device=self.device),num_encoder_layers)
         self.decoder = nn.TransformerDecoder(nn.TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device),num_decoder_layers)
         self.positional_encoder = PositionalEncoding(d_model, dropout)
@@ -52,6 +63,7 @@ class Modèle (nn.Module):
         self.lr = 5.0  # learning rate
         self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
+        # Implementer la controlable attention : copier coller le code source et ajuster , mettre lambda 2 quand meme
 
     def forward(self, input) : 
     #L'encoder prend en entrée obligatoire une phrase embedded et le positional encoding
@@ -71,6 +83,7 @@ class Modèle (nn.Module):
                 xavier_uniform_(p)
 
     def train(self, n_iter,train_data) : 
+        # a chaque batch on tire soit l'un soit l'autre des loss 
         self.train() #Turn on train mode
         total_loss = 0
         log_interval = 200

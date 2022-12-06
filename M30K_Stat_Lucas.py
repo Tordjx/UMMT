@@ -4,6 +4,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# aprés avoir implémenté subword nmt (bpe) faire la frequence des sous mots comme les lettres
+# avoir le nombre de mots uniques par langue
+# nb mots dans le jeu de données test qui ne sont pas dans entrainement
+# Faire des visuels pour le rapport (nuage de mots)
+
 data_path = "C:/Users/lucas/OneDrive/ENSAE/Cours 2A/Statap'app/Codes_modeles"
 file_fr = open(data_path+'/multi30k-dataset/data/task1/tok/train.lc.norm.tok.fr',"r")
 file_en = open(data_path+'/multi30k-dataset/data/task1/tok/train.lc.norm.tok.en',"r")

@@ -1,7 +1,13 @@
 #%% Data reading
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+
+# aprés avoir implémenté subword nmt (bpe) faire la frequence des sous mots comme les lettres
+# avoir le nombre de mots uniques par langue
+# nb mots dans le jeu de données test qui ne sont pas dans entrainement
+# Faire des visuels pour le rapport (nuage de mots)
 
 data_path = "C:/Users/lucas/OneDrive/ENSAE/Cours 2A/Statap'app/Codes_modeles"
 file_fr = open(data_path+'/multi30k-dataset/data/task1/tok/train.lc.norm.tok.fr',"r")
@@ -58,7 +64,7 @@ def histogram(list_dict,legend):
 
 ## Plotting 
 
-# histogram([letters_en, letters_en],["Letters in Frnech","Letters in English"])
+histogram([letters_fr, letters_en],["Letters in Frnech","Letters in English"])
 # Does it work well ? 
 
 #%% Pairs of letters
@@ -78,8 +84,8 @@ for sentence in list_fr:
 
 pairs_fr = {key: value for key, value in sorted(pairs_fr.items()) if key.isalpha()}
 for x in pairs_fr.keys():
-    # pairs_fr[x] = dict_normalization({key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()})
-    pairs_fr[x] = {key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()}
+    pairs_fr[x] = dict_normalization({key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()})
+    # pairs_fr[x] = {key: value for key, value in sorted(pairs_fr[x].items()) if key.isalpha()}
 
 pairs_en = {}
 
@@ -113,7 +119,8 @@ followers_fr = np.zeros((n_fr,n_fr),dtype=np.float64)
 for i in range(len(list_letters_en)):
     for j in range(len(list_letters_en)):
         try:
-            followers_en[i,j] = pairs_fr[list_letters_en[i]].get(list_letters_en[j]) # / letters_en.get(list_letters_en[i])
+            if pairs_en[list_letters_en[i]].get(list_letters_en[j]) != None:
+                followers_en[i,j] = pairs_en[list_letters_en[i]].get(list_letters_en[j])
         except:
             followers_en[i,j] = 0
 
@@ -122,16 +129,82 @@ for i in range(len(list_letters_en)):
 for i in range(len(list_letters_fr)):
     for j in range(len(list_letters_fr)):
         try:
-            followers_fr[i,j] = pairs_fr[list_letters_fr[i]].get(list_letters_fr[j]) # / letters_fr.get(list_letters_fr[i])
+            if pairs_fr[list_letters_fr[i]].get(list_letters_fr[j]) != None:
+                followers_fr[i,j] = pairs_fr[list_letters_fr[i]].get(list_letters_fr[j])
         except:
             followers_fr[i,j] = 0
 
+letters = list(pairs_en.keys())
+
 plt.figure()
+# plt.xticks(list(pairs_en.keys()))
 plt.pcolormesh(followers_en)
+plt.title("English")
+plt.colorbar()
+plt.show()
+plt.figure()
+plt.pcolormesh(followers_fr)
+plt.title("French")
 plt.colorbar()
 plt.show()
 
 #%% Lenght of the words, the sentences
 
+# Lenght of the sentences : 
+
+mean_en = 0
+mean_fr = 0
+
+for sentence in list_en:
+    mean_en = mean_en + len(sentence)
+mean_en = mean_en / len(list_en)
+
+for sentence in list_fr:
+    mean_fr = mean_fr + len(sentence)
+mean_fr = mean_fr / len(list_fr)
+
+# mean Number of words by sentence
+
+def number_of_words(sentence):
+    count = 0 
+    for i in range(len(sentence)):
+        if sentence[i] in [' ',"'",'-']:
+            # print(sentence[i])
+            count += 1
+    return count 
+
+nbBySentence_en = np.mean([number_of_words(sentence) for sentence in list_en]) 
+nbBySentence_fr = np.mean([number_of_words(sentence) for sentence in list_fr]) 
+
+print(nbBySentence_en)
+print(nbBySentence_fr)
 
 
+#%% Dataframes 
+# dataframe with all the info
+
+
+# In English
+d = {
+    "sentence" : list_en,
+    "number of works" : [ number_of_words(sentence) for sentence in list_en],
+    "number of characters" : [ len(sentence) for sentence in list_en] 
+}
+df_en = pd.DataFrame(d)
+
+# In French
+d = {
+    "sentence" : list_fr,
+    "number of works" : [ number_of_words(sentence) for sentence in list_fr],
+    "number of characters" : [ len(sentence) for sentence in list_fr] 
+}
+df_fr = pd.DataFrame(d)
+
+# Both 
+d = {
+    "English sentence" : list_en,
+    "French sentence" : list_fr,
+    "number of works" : [ number_of_words(sentence) for sentence in list_fr],
+    "number of characters" : [ len(sentence) for sentence in list_fr] 
+}
+df_sentences = pd.DataFrame(d)

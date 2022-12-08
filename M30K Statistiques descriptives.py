@@ -72,5 +72,5 @@ for phrase in liste_EN :
             PairesEN[phrase[i]]={phrase[i+1]:1}
 
 #%%Frequence d'apparition des lettres sachant que la précédente est un t
-lettre = 'e'
+lettre = 't'
 Tracer_histogramme([PairesEN[lettre],PairesFR[lettre]], ['EN','FR'])

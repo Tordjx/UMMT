@@ -83,7 +83,7 @@ class Modèle (nn.Module):
                 xavier_uniform_(p)
 
     def train(self, n_iter,train_data) : 
-        # a chaque batch on tire soit l'un soit l'autre des loss 
+        # a chaque batch on tire soit l'un soit l'autre des loss
         self.train() #Turn on train mode
         total_loss = 0
         log_interval = 200

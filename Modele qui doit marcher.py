@@ -7,15 +7,19 @@ from torch.nn.init import xavier_uniform_
 import time
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #SI SRC=torch.rand((10,32,512)), alors d_model = 512,
-d_model = 
+d_model = 1024
 n_head = 4 
-num_encoder_layers = 
-num_decoder_layers = 
-dim_feedforward= 
+num_encoder_layers = 2
+num_decoder_layers = 2
+dim_feedforward= 100
 dropout = 0.1
 activation = nn.Softmax
-
-
+fichier_en = open('vocab.en')
+n_token_en = len(fichier_en.readlines())
+fichier_fr = open('vocab.fr')
+n_token_fr = len(fichier_fr.readlines())
+fichier_en.close()
+fichier_fr.close()
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model: int, dropout: float = 0.1, max_len: int = 5000):
         super().__init__()
@@ -46,7 +50,7 @@ class PositionalEncoding(nn.Module):
 
 
 class Modèle (nn.Module):
-    def __init__(self,d_model,n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation,device = device) -> None:
+    def __init__(self,n_token,d_model,n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation,device ) -> None:
         super().__init__()
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
@@ -55,9 +59,12 @@ class Modèle (nn.Module):
         self.activation = activation 
         self.n_head = n_head
         self.device = device
-        self.embedding = 
-        self.encoder = nn.TransformerEncoder(nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device=self.device),num_encoder_layers)
-        self.decoder = nn.TransformerDecoder(nn.TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device),num_decoder_layers)
+        self.embedding = nn.Embedding(n_token, d_model)
+        self.feedforward = nn.Linear(d_model,d_model)
+        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device=self.device)
+        decoder_layers= nn.TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device)
+        self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers)
+        self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers)
         self.positional_encoder = PositionalEncoding(d_model, dropout)
         self.criterion = nn.CrossEntropyLoss()
         self.lr = 5.0  # learning rate
@@ -68,10 +75,32 @@ class Modèle (nn.Module):
     def forward(self, input) : 
     #L'encoder prend en entrée obligatoire une phrase embedded et le positional encoding
     #Le decoder prend en entrée l'output de l'encoder, l'output du resnet, un masked self attention et le positionnal encoding
-        pos_enc = self.positional_encoder(input[0])
-        output = self.encoder(pos_enc) #c'est la phrase
-        output = self.decoder (output, input[1], self.generate_square_subsequent_mask(pos_enc))
-        return activation(output)
+        if input[1] != None :
+            resnet = input[1].reshape((196,1024))
+
+            embedded = self.embedding(input[0])
+            pos_enc = self.positional_encoder(embedded)
+            input_decoder = self.encoder(pos_enc) #c'est la phrase
+            input_decoder = self.feedforward(resnet) * input_decoder
+            output = self.decoder (input_decoder, self.generate_square_subsequent_mask(pos_enc))
+            return activation(output)
+        else : 
+            embedded = self.embedding(input[0])
+            pos_enc = self.positional_encoder(embedded)
+            input_decoder = self.encoder(pos_enc) #c'est la phrase
+            output = self.decoder (input_decoder , self.generate_square_subsequent_mask(pos_enc))
+            return activation(output)
+
+    # def controllable_attention(self, lambda_1 , lambda_2) :
+    #     Terme_1 = 
+    #     Terme 2 = 0 
+    #     Terme 3 = 0 
+    #     if lambda_1 : 
+    #         Terme_2 = 
+    #     if lambda_2 : 
+    #         Terme_3 = 
+    #     return Terme_1+Terme_2+Terme_3
+
 
     def generate_square_subsequent_mask(self,sz: int) -> Tensor:
         return torch.triu(torch.full((sz, sz), float('-inf'), device=self.device), diagonal=1)
@@ -83,6 +112,7 @@ class Modèle (nn.Module):
                 xavier_uniform_(p)
 
     def train(self, n_iter,train_data) : 
+
         # a chaque batch on tire soit l'un soit l'autre des loss
         self.train() #Turn on train mode
         total_loss = 0
@@ -116,3 +146,10 @@ class Modèle (nn.Module):
     def traduire(self, input):
         output = self(input)
         return output_to_sentence(output)
+
+
+Modèle(n_token_fr,d_model , n_head, num_encoder_layers , num_decoder_layers , dim_feedforward, dropout, activation , device)
+
+
+
+

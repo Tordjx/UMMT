@@ -60,7 +60,7 @@ class Modèle(nn.Module):
 
         self.encoder_layer = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout, device=device)
         self.encoder = nn.TransformerEncoder(self.encoder_layer, num_encoder_layers)
-        self.self_attn_layer= nn.MultiheadAttention(d_model, n_head, dropout=dropout)  # Add self-attention layer
+        
         
         self.decoder_layer = nn.TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device=device)
         self.decoder = nn.TransformerDecoder(self.decoder_layer, num_decoder_layers)
@@ -80,7 +80,7 @@ class Modèle(nn.Module):
             embedded = self.embedding(input[0])
             pos_enc = self.positional_encoder(embedded)
             
-            self_attn_output, _ = self.self_attention(pos_enc, pos_enc, pos_enc)
+            
             encoder_output = self.encoder(self_attn_output)
             
             masked_self_attn_output = self.masked_self_attn_layer(pos_enc, src_mask)

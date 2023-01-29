@@ -33,12 +33,15 @@ def get_train_data():
         for mot in ligne : 
             if mot not in vocab_fr : 
                 vocab_fr[mot] = len(vocab_fr.keys())
-    embedded_fr = [torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_fr]
-    embedded_en = [torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_en]
+
+    #vecteurs unitaires
+    embedded_fr = [torch.tensor([[1 if i == vocab_fr[token] else 0 for i in range(len(vocab_fr))] for token in ligne]) for ligne in train_data_fr]
+    embedded_en = [torch.tensor([[1 if i == vocab_en[token] else 0 for i in range(len(vocab_en))] for token in ligne]) for ligne in train_data_en]
 
     train_final_fr = torch.cat(embedded_fr)
     train_final_en = torch.cat(embedded_en)
     return [train_final_en,train_final_fr]
+t_en,t_fr = get_train_data()
 #A cet endroit, on a un flat tensor de données comme dans le tuto transformers
 #Les lignes suivantes viennent directement du tuto transformer
 def batchify(data: Tensor,device, bsz: int = 20) -> Tensor:

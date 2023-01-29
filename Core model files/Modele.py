@@ -83,7 +83,8 @@ class Modèle (nn.Module):
         else:
             encoded = text_encoded
         # Pass through the decoder
-        output = self.decoder(self.positional_encoder(self.embedding(text_input)),encoded)
+        mask = self.generate_square_subsequent_mask(text_input.shape[0])
+        output = self.decoder(self.positional_encoder(self.embedding(text_input)),encoded,mask)
         
         return output
 

@@ -58,49 +58,76 @@ class MultiModalAttention(nn.Module):
 
 
     def forward(self, q, q_e, q_i, k_e, k_i, v_e, v_i, mask=None):
-        bs = q.size(0)
+        
+        if q_i!=None:
+            bs = q.size(0)
 
-        # A modifier !!! avec le mask
-        q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 
-        q = q.transpose(1,2)
+            # A modifier !!! avec le mask
+            q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 
+            q = q.transpose(1,2)
 
-        q_e = self.q_e_linear(q_e).view(bs, -1, self.h, self.d_k) 
-        q_e = q_e.transpose(1,2)
+            q_e = self.q_e_linear(q_e).view(bs, -1, self.h, self.d_k) 
+            q_e = q_e.transpose(1,2)
 
-        q_i = self.q_i_linear(q_i).view(bs, -1, self.h, self.d_k) 
-        q_i = q_i.transpose(1,2)
+            q_i = self.q_i_linear(q_i).view(bs, -1, self.h, self.d_k) 
+            q_i = q_i.transpose(1,2)
 
-        # Scores for text : 
-        k_e = self.k_e_linear(k_e).view(bs, -1, self.h, self.d_k) 
-        k_e = k_e.transpose(1,2)
-        v_e = self.v_e_linear(v_e).view(bs, -1, self.h, self.d_k)
-        v_e = v_e.transpose(1,2)
-        scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout)
+            # Scores for text : 
+            k_e = self.k_e_linear(k_e).view(bs, -1, self.h, self.d_k) 
+            k_e = k_e.transpose(1,2)
+            v_e = self.v_e_linear(v_e).view(bs, -1, self.h, self.d_k)
+            v_e = v_e.transpose(1,2)
+            scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout)
 
-        # Score for image : 
-        k_i = self.k_i_linear(k_i).view(bs, -1, self.h, self.d_k) 
-        k_i = k_i.transpose(1,2)
-        v_i = self.v_i_linear(v_i).view(bs, -1, self.h, self.d_k)
-        v_i = v_i.transpose(1,2)
-        scores_i = attention(q, k_i, v_i, self.d_k, mask, self.dropout)
+            # Score for image : 
+            k_i = self.k_i_linear(k_i).view(bs, -1, self.h, self.d_k) 
+            k_i = k_i.transpose(1,2)
+            v_i = self.v_i_linear(v_i).view(bs, -1, self.h, self.d_k)
+            v_i = v_i.transpose(1,2)
+            scores_i = attention(q, k_i, v_i, self.d_k, mask, self.dropout)
 
 
-        # Score from text to image : 
-        k_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Permière partie
-        v_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Deuxième partie 
+            # Score from text to image : 
+            k_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Permière partie
+            v_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Deuxième partie 
 
-        k_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Permière partie 
-        v_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Deuxième partie
+            k_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Permière partie 
+            v_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Deuxième partie
 
-        scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, self.dropout)
-        scores_ie =  attention(q, k_ie, v_ie, self.d_k, mask, self.dropout)
+            scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, self.dropout)
+            scores_ie =  attention(q, k_ie, v_ie, self.d_k, mask, self.dropout)
 
-        # final scores 
-        scores = scores_e + self.lambda1 * scores_i + self.lambda2 * (scores_ei + scores_ie)
-        concat = scores.transpose(1,2).contiguous().view(bs, -1, self.d_model)
-        output = self.out(concat)
+            # final scores 
+            scores = scores_e + self.lambda1 * scores_i + self.lambda2 * (scores_ei + scores_ie)
+            concat = scores.transpose(1,2).contiguous().view(bs, -1, self.d_model)
+            output = self.out(concat)
 
-        return output
+            return output
+        else:
+            bs = q.size(0)
+
+            # A modifier !!! avec le mask
+            q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 
+            q = q.transpose(1,2)
+
+            q_e = self.q_e_linear(q_e).view(bs, -1, self.h, self.d_k) 
+            q_e = q_e.transpose(1,2)
+
+           
+
+            # Scores for text : 
+            k_e = self.k_e_linear(k_e).view(bs, -1, self.h, self.d_k) 
+            k_e = k_e.transpose(1,2)
+            v_e = self.v_e_linear(v_e).view(bs, -1, self.h, self.d_k)
+            v_e = v_e.transpose(1,2)
+            scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout)
+            # final scores 
+            
+            concat = scores_e.transpose(1,2).contiguous().view(bs, -1, self.d_model)
+            output = self.out(concat)
+
+            return output
+            
 
 
 

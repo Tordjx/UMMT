@@ -33,15 +33,12 @@ def get_train_data():
         for mot in ligne : 
             if mot not in vocab_fr : 
                 vocab_fr[mot] = len(vocab_fr.keys())
-
-    #vecteurs unitaires
-    embedded_fr = [torch.tensor([[1 if i == vocab_fr[token] else 0 for i in range(len(vocab_fr))] for token in ligne]) for ligne in train_data_fr]
-    embedded_en = [torch.tensor([[1 if i == vocab_en[token] else 0 for i in range(len(vocab_en))] for token in ligne]) for ligne in train_data_en]
+    embedded_fr = [torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_fr]
+    embedded_en = [torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_en]
 
     train_final_fr = torch.cat(embedded_fr)
     train_final_en = torch.cat(embedded_en)
     return [train_final_en,train_final_fr]
-t_en,t_fr = get_train_data()
 #A cet endroit, on a un flat tensor de données comme dans le tuto transformers
 #Les lignes suivantes viennent directement du tuto transformer
 def batchify(data: Tensor,device, bsz: int = 20) -> Tensor:
@@ -84,3 +81,56 @@ def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
     return data.to(device), target.to(device)
 
 
+
+# %%
+from torchtext.datasets import WikiText2
+from torchtext.data.utils import get_tokenizer
+from torchtext.vocab import build_vocab_from_iterator
+from torch.utils.data import dataset
+train_iter = WikiText2(split='train')
+tokenizer = get_tokenizer('basic_english')
+vocab = build_vocab_from_iterator(map(tokenizer, train_iter), specials=['<unk>'])
+vocab.set_default_index(vocab['<unk>'])
+
+def data_process(raw_text_iter: dataset.IterableDataset) -> Tensor:
+    """Converts raw text into a flat Tensor."""
+    data = [torch.tensor(vocab(tokenizer(item)), dtype=torch.long) for item in raw_text_iter]
+    return torch.cat(tuple(filter(lambda t: t.numel() > 0, data)))
+
+# train_iter was "consumed" by the process of building the vocab,
+# so we have to create it again
+train_iter, val_iter, test_iter = WikiText2()
+train_data = data_process(train_iter)
+val_data = data_process(val_iter)
+test_data = data_process(test_iter)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+def batchify(data: Tensor, bsz: int) -> Tensor:
+    """Divides the data into bsz separate sequences, removing extra elements
+    that wouldn't cleanly fit.
+
+    Args:
+        data: Tensor, shape [N]
+        bsz: int, batch size
+
+    Returns:
+        Tensor of shape [N // bsz, bsz]
+    """
+    seq_len = data.size(0) // bsz
+    data = data[:seq_len * bsz]
+    data = data.view(bsz, seq_len).t().contiguous()
+    return data.to(device)
+
+batch_size = 20
+eval_batch_size = 10
+train_data = batchify(train_data, batch_size)  # shape [seq_len, batch_size]
+val_data = batchify(val_data, eval_batch_size)
+test_data = batchify(test_data, eval_batch_size)
+
+i=0
+for item in train_iter : 
+    i+=1
+    print(tokenizer(item))
+    if i > 30 :
+        break 

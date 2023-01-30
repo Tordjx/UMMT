@@ -26,9 +26,10 @@ class TransformerDecoderLayer(nn.Module):
         self.attn_2 = MultiModalAttention(d_model, heads, dropout, lambda1=1, lambda2=1, device=device)
         self.ffn = nn.Sequential(nn.Linear(d_model,d_model),
             nn.ReLU,
+            nn.Dropout(dropout),
             nn.Linear(d_model,d_model)
-            )  # Est-ce les bonnes dimentions ? 
-
+            )  
+        
     def forward(self, x, e_outputs,i_outputs, src_mask, trg_mask):
         x2 = self.norm_1(x)
         x = x + self.dropout_1(self.attn_1(x2, x2, x2, trg_mask))

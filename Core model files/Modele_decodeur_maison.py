@@ -60,8 +60,8 @@ class Modèle (nn.Module):
 
         self.embedding = nn.Embedding(n_token, d_model,device=  device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
-        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device=device)
-        decoder_layers=TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
+        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device)
+        decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)

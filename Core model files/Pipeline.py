@@ -13,6 +13,8 @@ def get_vocab() :
     fichier_vocab_en.close()
     fichier_vocab_fr.close()
     return vocab_en, vocab_fr
+
+
 def get_train_data():
     vocab_en,vocab_fr = get_vocab()
     fichier_train_fr = open('train.BPE.fr')
@@ -24,23 +26,27 @@ def get_train_data():
 
 
     #ATTENTION : DEMANDER IUN AVIS POUR CES DEUX BOUCLES QUI AJOUTENT AU VOCAB CE QUI MANQUE, CEST A DIRE '&@@' et ';@@' a cause des caracteres html
-    for ligne in train_data_en : 
+    for ligne in train_data_en: 
         for mot in ligne : 
-            if mot not in vocab_en : 
+            if mot not in vocab_en: 
                 vocab_en[mot] = len(vocab_en.keys())
 
-    for ligne in train_data_fr : 
-        for mot in ligne : 
-            if mot not in vocab_fr : 
+    for ligne in train_data_fr: 
+        for mot in ligne: 
+            if mot not in vocab_fr: 
                 vocab_fr[mot] = len(vocab_fr.keys())
+
     embedded_fr = [torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_fr]
     embedded_en = [torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_en]
 
     train_final_fr = torch.cat(embedded_fr)
     train_final_en = torch.cat(embedded_en)
+
     return [train_final_en,train_final_fr]
 #A cet endroit, on a un flat tensor de données comme dans le tuto transformers
 #Les lignes suivantes viennent directement du tuto transformer
+
+
 def batchify(data: Tensor,device, bsz: int = 20) -> Tensor:
     """Divides the data into bsz separate sequences, removing extra elements
     that wouldn't cleanly fit.
@@ -63,7 +69,9 @@ def batchify(data: Tensor,device, bsz: int = 20) -> Tensor:
 # val_data = batchify(val_data, eval_batch_size)
 # test_data = batchify(test_data, eval_batch_size)
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
+
 bptt = 35
+
 def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
     """
     Args:

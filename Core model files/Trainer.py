@@ -81,6 +81,7 @@ def cycle_consistency_train(model_fr, model_en,train_data_fr,train_data_en):
         loss = model_A.criterion(output.view(-1, model_A.n_token),target)
 
         model_A.optimizer.zero_grad()
+        # Faire pour modele B 
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.5)
         model_A.optimizer.step()

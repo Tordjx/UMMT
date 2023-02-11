@@ -10,7 +10,9 @@ batch_size = 40
 
 train_final_en,train_final_fr = get_train_data()
 train_data_fr = batchify(train_final_fr, device,batch_size)  
-train_data_en = batchify(train_final_en, device, batch_size)  
+train_data_en = batchify(train_final_en, device, batch_size) 
+
+#%% 
 
 vocab_en,vocab_fr = get_vocab()
 n_token_fr = len(vocab_fr.keys())

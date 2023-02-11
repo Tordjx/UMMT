@@ -58,7 +58,7 @@ class Modèle (nn.Module):
         self.n_head = n_head
         self.n_token= n_token
 
-        self.embedding = nn.Embedding(n_token, d_model,device=  device)
+        self.embedding = nn.Embedding(n_token, d_model,device=device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
@@ -69,27 +69,23 @@ class Modèle (nn.Module):
         self.lr = 5.0  # learning rate
         self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
-        # Implementer la controlable attention : copier coller le code source et ajuster , mettre lambda 2 quand meme
 
-    def forward(self, text_input, image_bool = False , image_input = None) : 
+
+    def forward(self, text_input, image_bool = False, image_input = None) : 
         
         # Encode Text
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)))
         mask = self.generate_square_subsequent_mask(text_input.shape[0])
         if image_bool:
-            image_input =image_input.reshape((196,1024))
+            image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
-            image_encoded =self.feedforward(image_input)
-            
-            output = self.decoder(self.positional_encoder(self.embedding(text_input)),text_encoded, image_encoded ,mask)
-        
+            image_encoded = self.feedforward(image_input)
+            output = self.decoder(self.positional_encoder(self.embedding(text_input)), text_encoded, image_encoded, mask)
             return output
         else:
             image_encoded = None
             # Pass through the decoder
-            
             output = self.decoder(self.positional_encoder(self.embedding(text_input)),text_encoded,image_encoded ,mask)
-        
             return output
 
 

@@ -54,6 +54,8 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     # Pass through the decoder
     output = model_B.decoder(model_B.positional_encoder(model_B.embedding(text_input)),encoded)
     return output
+
+    
 def cycle_consistency_train(model_fr, model_en,train_data_fr,train_data_en):
     model_fr.train()
     model_en.train()

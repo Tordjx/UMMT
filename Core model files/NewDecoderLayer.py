@@ -23,7 +23,7 @@ class TransformerDecoderLayer(nn.Module):
         self.dropout_3 = nn.Dropout(dropout)
         
         self.attn_1 = nn.MultiheadAttention(d_model,heads,dropout)
-        self.attn_2 = MultiModalAttention(d_model, heads, dropout, lambda1=1, lambda2=1, device=device)
+        self.attn_2 = MultiModalAttention(d_model, heads, dropout, lambda1=1, lambda2=1, device=device) # our own multiheadattention layer 
         self.ffn = nn.Sequential(nn.Linear(d_model,d_model),
             nn.ReLU,
             nn.Dropout(dropout),
@@ -34,13 +34,9 @@ class TransformerDecoderLayer(nn.Module):
         x2 = self.norm_1(x)
         x = x + self.dropout_1(self.attn_1(x2, x2, x2, trg_mask))
         x2 = self.norm_2(x)
-        x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, e_outputs, i_outputs, e_outputs, i_outputs, src_mask))
+        ei_outputs = torch.cat((e_outputs, i_outputs), 0)
+        x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, ei_outputs, e_outputs, i_outputs, ei_outputs, src_mask))
         x2 = self.norm_3(x)
         x = x + self.dropout_3(self.ffn(x2))
         return x
     
-    
-    
-    
-    #Source: https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec
-    #Le codes Source de Torch est trop compliqué pour l'instant mais j'apprendrais -Yass

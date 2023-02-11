@@ -38,29 +38,24 @@ class MultiModalAttention(nn.Module):
         self.lambda1 = lambda1
         self.lambda2 = lambda2
 
-        self.ffn = nn.Sequential(nn.Linear(d_model,d_model),
-            nn.ReLU,
-            nn.Linear(d_model,2*d_model)
-            )   # Quelles dimension ?? 
-
-        self.q_linear = nn.Linear(d_model, d_model) 
-        self.q_e_linear = nn.Linear(d_model,d_model)
-        self.q_i_linear = nn.Linear(d_model,d_model)
-        # For text only (indice e) 
+        self.q_linear = nn.Linear(d_model,d_model)
+        # For text (indice e) 
         self.v_e_linear = nn.Linear(d_model, d_model)
         self.k_e_linear = nn.Linear(d_model, d_model)
-        # For image only (indice i)
+        # For image (indice i)
         self.v_i_linear = nn.Linear(d_model,d_model)
         self.k_i_linear = nn.Linear(d_model,d_model)
+        # For both text and image (indice ei)
+        self.v_ei_linear = nn.Linear(d_model,d_model)
+        self.k_ei_linear = nn.Linear(d_model,d_model)
 
         self.dropout = nn.Dropout(dropout) 
         self.out = nn.Linear(d_model, d_model)
 
 
-    def forward(self, q, q_e, q_i, k_e, k_i, v_e, v_i, mask, image_bool=False):
+    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, image_bool=False):
         bs = q.size(0)
 
-        # Peut être un mask à rajouter ici ? Pas compris l'origine de Q_t^d 
         q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 
         q = q.transpose(1,2)
 
@@ -69,7 +64,7 @@ class MultiModalAttention(nn.Module):
         k_e = k_e.transpose(1,2)
         v_e = self.v_e_linear(v_e).view(bs, -1, self.h, self.d_k)
         v_e = v_e.transpose(1,2)
-        scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout)
+        scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout) # Ici ajouter le bon mask
 
         # If there is only text in the input
         if not(image_bool):
@@ -85,24 +80,15 @@ class MultiModalAttention(nn.Module):
             v_i = v_i.transpose(1,2)
             scores_i = attention(q, k_i, v_i, self.d_k, mask, self.dropout)
 
-            q_e = self.q_e_linear(q_e).view(bs, -1, self.h, self.d_k) 
-            q_e = q_e.transpose(1,2)
-
-            q_i = self.q_i_linear(q_i).view(bs, -1, self.h, self.d_k) 
-            q_i = q_i.transpose(1,2)
-
-            # Score from text to image : 
-            k_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Permière partie
-            v_ei = self.ffn(attention(q_e, k_i, v_i, self.d_k)) # Deuxième partie 
-
-            k_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Permière partie 
-            v_ie = self.ffn(attention(q_i, k_e, v_e, self.d_k)) # Deuxième partie
-
+            # Score for text and image : 
+            k_ei = self.k_ei_linear(k_ei).view(bs, -1, self.h, self.d_k) 
+            k_ei = k_ei.transpose(1,2)
+            v_ei = self.v_ei_linear(v_ei).view(bs, -1, self.h, self.d_k)
+            v_ei = v_ei.transpose(1,2)
             scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, self.dropout)
-            scores_ie =  attention(q, k_ie, v_ie, self.d_k, mask, self.dropout)
 
             # final scores 
-            scores = scores_e + self.lambda1 * scores_i + self.lambda2 * (scores_ei + scores_ie)
+            scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei
             concat = scores.transpose(1,2).contiguous().view(bs, -1, self.d_model)
             output = self.out(concat)
 

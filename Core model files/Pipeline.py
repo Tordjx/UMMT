@@ -43,6 +43,8 @@ def get_train_data():
     train_final_en = torch.cat(embedded_en)
 
     return [train_final_en,train_final_fr]
+
+    
 #A cet endroit, on a un flat tensor de données comme dans le tuto transformers
 #Les lignes suivantes viennent directement du tuto transformer
 

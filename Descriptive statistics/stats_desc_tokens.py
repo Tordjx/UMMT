@@ -15,8 +15,8 @@ from patsy import dmatrices
 #%% Functions to get tokens     
 
 def get_sizes() : 
-    fichier_vocab_fr = open('C:/Users/lucas/Documents/GitHub/UMMT/Core model files/vocab.fr')
-    fichier_vocab_en = open('C:/Users/lucas/Documents/GitHub/UMMT/Core model files/vocab.en')
+    fichier_vocab_fr = open('C:/Users/lucas/Documents/GitHub/UMMT/vocab.fr')
+    fichier_vocab_en = open('C:/Users/lucas/Documents/GitHub/UMMT/vocab.en')
     sizes_en = [ line.split(" ")[1] for line in fichier_vocab_en ]
     sizes_en = [ int(x[:len(x)-1]) for x in sizes_en ] 
     sizes_fr = [ line.split(" ")[1] for line in fichier_vocab_fr ]

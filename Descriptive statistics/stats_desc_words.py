@@ -74,10 +74,11 @@ beta_en = results_en.params[1]
 predicted_en = [ const_en + beta_en*x for x in values_en ]
 
 plt.figure()
-plt.scatter(values_en, predicted_en)
-plt.scatter(values_en, true_labels_en, color='r')
+plt.scatter(values_en, predicted_en, label="Predicted rank")
+plt.scatter(values_en, true_labels_en, color='r', label="observed rank")
 plt.plot(values_en, predicted_en)
-plt.title("English")
+plt.title("Regression on the English dataset")
+plt.legend()
 plt.show()
 
 #%% Regression fr 
@@ -96,9 +97,10 @@ beta_fr = results_fr.params[1]
 predicted_fr = [ const_fr + beta_fr*x for x in values_fr ]
 
 plt.figure()
-plt.scatter(values_fr, predicted_fr)
-plt.scatter(values_fr, true_labels_fr, color='r')
+plt.scatter(values_fr, predicted_fr, label="Predicted rank")
+plt.scatter(values_fr, true_labels_fr, color='r', label="observed rank")
 plt.plot(values_fr, predicted_fr)
-plt.title("French")
+plt.title("Regression on the French dataset")
+plt.legend()
 plt.show()
 

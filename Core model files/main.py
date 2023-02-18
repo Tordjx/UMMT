@@ -32,3 +32,5 @@ model_fr = Modèle(n_token_fr,batch_size,n_head, num_encoder_layers,num_decoder_
 model_en = Modèle(n_token_en,batch_size,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
 
 train_auto_encoding(model_fr,train_data_fr)
+
+# %%

@@ -80,12 +80,14 @@ class Modèle(nn.Module):
             image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
-            output = self.decoder(self.positional_encoder(self.embedding(text_input)), text_encoded, image_encoded, mask)
+            x = [text_encoded, image_encoded]
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
+
             return output
         else:
-            image_encoded = None
             # Pass through the decoder
-            output = self.decoder(self.positional_encoder(self.embedding(text_input)),text_encoded,image_encoded ,mask)
+            x = [text_encoded, None]
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
             return output
 
 

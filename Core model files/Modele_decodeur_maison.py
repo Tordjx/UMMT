@@ -46,7 +46,7 @@ class PositionalEncoding(nn.Module):
 # d_model = taille des vecteurs
 
 
-class Modèle (nn.Module):
+class Modèle(nn.Module):
     def __init__(self,n_token,d_model,n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ) -> None:
         super().__init__()
         self.d_model = d_model 

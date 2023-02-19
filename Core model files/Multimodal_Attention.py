@@ -53,7 +53,7 @@ class MultiModalAttention(nn.Module):
         self.out = nn.Linear(d_model, d_model)
 
 
-    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, image_bool=False):
+    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, image_bool=True):
         bs = q.size(0)
 
         q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 
@@ -66,7 +66,7 @@ class MultiModalAttention(nn.Module):
         v_e = v_e.transpose(1,2)
         scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout) # Ici ajouter le bon mask
 
-        # If there is only text in the input
+        # If there is only text in the input, image_bool = False
         if not(image_bool):
             concat = scores_e.transpose(1,2).contiguous().view(bs, -1, self.d_model)
             output = self.out(concat)

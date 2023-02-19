@@ -41,17 +41,4 @@ class TransformerDecoderLayer(nn.Module):
         x2 = self.norm_3(x)
         x = x + self.dropout_3(self.ffn(x2))
         return x
-<<<<<<< HEAD
     
-=======
-    # def forward(self, x, e_outputs,i_outputs, src_mask, tgt_mask):
-    #     x2 = self.norm_1(x)
-    #     x = x + self.dropout_1(self.attn_1(x2, x2, x2, tgt_mask))
-    #     x2 = self.norm_2(x)
-    #     ei_outputs = torch.cat((e_outputs, i_outputs), 0)
-    #     x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, ei_outputs, e_outputs, i_outputs, ei_outputs, src_mask))
-    #     x2 = self.norm_3(x)
-    #     x = x + self.dropout_3(self.ffn(x2))
-    #     return x
-    
->>>>>>> 423998c (decoder debugging)

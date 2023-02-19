@@ -29,14 +29,26 @@ class TransformerDecoderLayer(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(dim_feedforward,d_model)
             )  
-        
-    def forward(self, x, e_outputs,i_outputs, src_mask, trg_mask):
+    
+    def forward(self, x, e_outputs, tgt_mask, memory_mask,tgt_key_padding_mask,memory_key_padding_mask):
+        e_outputs = x[0]
+        i_outputs = x[1]
         x2 = self.norm_1(x)
-        x = x + self.dropout_1(self.attn_1(x2, x2, x2, trg_mask))
+        x = x + self.dropout_1(self.attn_1(x2, x2, x2, tgt_mask))
         x2 = self.norm_2(x)
         ei_outputs = torch.cat((e_outputs, i_outputs), 0)
-        x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, ei_outputs, e_outputs, i_outputs, ei_outputs, src_mask))
+        x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, ei_outputs, e_outputs, i_outputs, ei_outputs, memory_mask))
         x2 = self.norm_3(x)
         x = x + self.dropout_3(self.ffn(x2))
         return x
+
+    # def forward(self, x, e_outputs,i_outputs, src_mask, tgt_mask):
+    #     x2 = self.norm_1(x)
+    #     x = x + self.dropout_1(self.attn_1(x2, x2, x2, tgt_mask))
+    #     x2 = self.norm_2(x)
+    #     ei_outputs = torch.cat((e_outputs, i_outputs), 0)
+    #     x = x + self.dropout_2(self.attn_2(x2, e_outputs, i_outputs, ei_outputs, e_outputs, i_outputs, ei_outputs, src_mask))
+    #     x2 = self.norm_3(x)
+    #     x = x + self.dropout_3(self.ffn(x2))
+    #     return x
     

@@ -12,11 +12,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 class TransformerDecoderLayer(nn.Module):
-    def __init__(self, d_model, heads, dropout=0.1):
+    def __init__(self, d_model, heads,dim_feedforward, dropout=0.1,device=device):
         super().__init__()
-        self.norm_1 = nn.Norm(d_model)
-        self.norm_2 = nn.Norm(d_model)
-        self.norm_3 = nn.Norm(d_model)
+        self.norm_1 = nn.LayerNorm(d_model)
+        self.norm_2 = nn.LayerNorm(d_model)
+        self.norm_3 = nn.LayerNorm(d_model)
         
         self.dropout_1 = nn.Dropout(dropout)
         self.dropout_2 = nn.Dropout(dropout)
@@ -24,10 +24,10 @@ class TransformerDecoderLayer(nn.Module):
         
         self.attn_1 = nn.MultiheadAttention(d_model,heads,dropout)
         self.attn_2 = MultiModalAttention(d_model, heads, dropout, lambda1=1, lambda2=1, device=device) # our own multiheadattention layer 
-        self.ffn = nn.Sequential(nn.Linear(d_model,d_model),
-            nn.ReLU,
+        self.ffn = nn.Sequential(nn.Linear(d_model,dim_feedforward),
+            nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(d_model,d_model)
+            nn.Linear(dim_feedforward,d_model)
             )  
         
     def forward(self, x, e_outputs,i_outputs, src_mask, trg_mask):

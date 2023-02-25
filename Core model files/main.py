@@ -17,13 +17,12 @@ train_data_en = batchify(train_final_en, device, batch_size)
 vocab_en,vocab_fr = get_vocab()
 n_token_fr = len(vocab_fr.keys())
 n_token_en = len(vocab_en.keys())
-
-
+print(n_token_en)
 
 n_head = 4 
 num_encoder_layers = 2
 num_decoder_layers = 2
-dim_feedforward= 100
+dim_feedforward = 100
 dropout = 0.1
 activation = nn.Softmax
 
@@ -35,4 +34,3 @@ model_en = Modèle(n_token_en,batch_size,n_head, num_encoder_layers,num_decoder_
 data,target = get_batch(train_data_en,0,device)
 model_en(data)
 
-# %%

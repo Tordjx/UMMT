@@ -72,17 +72,14 @@ class Modèle(nn.Module):
 
 
     def forward(self, text_input, image_bool = False, image_input = None) : 
-        
-        # Encode Text
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)))
-        mask = self.generate_square_subsequent_mask(text_input.shape[0])
+        mask = self.generate_square_subsequent_mask()  # text_input.shape[0])
         if image_bool:
             image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
             x = Tensor([text_encoded, image_encoded])
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
-
             return output
         else:
             # Pass through the decoder
@@ -94,8 +91,8 @@ class Modèle(nn.Module):
     
 
 
-    def generate_square_subsequent_mask(self,sz: int) -> Tensor:
-        return torch.triu(torch.full((sz, sz), float('-inf'), device=device), diagonal=1)
+    def generate_square_subsequent_mask(self,sz_1=40,sz_2=35):
+        return torch.triu(torch.full((sz_1,sz_2 ), float('-inf'), device=device), diagonal=1)
 
     def _reset_parameters(self):
         r"""Initiate parameters in the transformer model."""

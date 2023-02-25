@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 
 #%% loading data
 
-images = np.load("C:/Users/lucas/Documents/GitHub/UMMT/val-resnet50-res4frelu.npy")
+images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
 
 # Test 
 image_test = images[0]
-# image_test = image_test.reshape((1024,196))
+image_test = image_test.reshape((1024,196))
 
 plt.figure()
 plt.imshow(image_test, interpolation='nearest')

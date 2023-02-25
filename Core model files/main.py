@@ -4,15 +4,17 @@ from Pipeline import *
 
 from Trainer import * 
 
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 batch_size = 40 
 
+# Images
+# images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
+
+# Texts
 train_final_en,train_final_fr = get_train_data()
+print(train_final_fr.shape)
 train_data_fr = batchify(train_final_fr, device,batch_size)  
 train_data_en = batchify(train_final_en, device, batch_size) 
-
-#%% 
 
 vocab_en,vocab_fr = get_vocab()
 n_token_fr = len(vocab_fr.keys())

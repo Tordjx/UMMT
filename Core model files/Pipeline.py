@@ -72,7 +72,7 @@ def batchify(data: Tensor,device, bsz: int = 20) -> Tensor:
 # test_data = batchify(test_data, eval_batch_size)
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
 
-bptt = 35
+bptt = 40
 
 def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
     """

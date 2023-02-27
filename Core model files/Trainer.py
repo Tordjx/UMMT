@@ -18,8 +18,8 @@ def train_auto_encoding(model,train_data):
             src_mask = src_mask[:seq_len, :seq_len]
         print(data.device,target.device,  src_mask.device)
         output = model(data)
-        loss = model.criterion(output.view(-1, model.n_token),target)
-
+        # loss = model.criterion(output.view(-1, model.n_token),target)
+        loss = model.criterion(output,target)
         model.optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)

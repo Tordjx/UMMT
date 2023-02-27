@@ -53,7 +53,6 @@ class TransformerDecoderLayer(nn.Module):
             # Here, att1 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_2(x)
             ei_outputs = None
-            # print(e_outputs.shape, x2.shape,x.shape)
             x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, image_bool=False))
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))

@@ -5,7 +5,7 @@ from Pipeline import *
 from Trainer import * 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 40 
+batch_size = 100 
 
 # Images
 # images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
@@ -40,3 +40,5 @@ model_en(data)
 # train_auto_encoding(model_fr,train_data_fr)
 
 # %%
+ACTUELLEMENT, LE SOUCI EST LE BATCHIFYER. NOTRE INPUT A POUR SHAPE [40,40], DONC LOUTPUT DU EMBEDDING EST [40,40,d_model]
+POUR AVOIR LA DIMENSION CORRECTE, IL FAUDRAIT QUON AIT UNE INPUT DE TAILLE [40]

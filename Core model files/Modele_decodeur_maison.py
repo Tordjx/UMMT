@@ -85,6 +85,8 @@ class Modèle(nn.Module):
         else:
             # Pass through the decoder
             x = text_encoded
+            
+
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
             return output
 

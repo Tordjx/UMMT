@@ -70,7 +70,13 @@ def get_train_data():
     embedded_fr = [torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_fr]
     embedded_en = [torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long) for ligne in train_data_en]
 
-    return embedded_en, embedded_fr
+    sentences_en = [ embedded_en[i].view(len(embedded_en[i]),1) for i in range(len(embedded_en)) ]
+    sentences_fr = [ embedded_fr[i].view(len(embedded_fr[i]),1) for i in range(len(embedded_fr)) ]
+
+    # sentences_en = torch.cat(sentences_en)
+    # sentences_fr = torch.cat(sentences_fr)
+
+    return sentences_en, sentences_fr
 
 
 
@@ -101,3 +107,7 @@ text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in cifar100.cl
 with torch.no_grad():
     image_features = model.encode_image(image_input)
     text_features = model.encode_text(text_inputs)
+
+#%% 
+
+T = torch.Tensor([ [text_en[i][j] for j in range(len(text_en[i]))] for i in range(len(text_en)) ] )

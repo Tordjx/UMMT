@@ -3,6 +3,7 @@ from Pipeline import *
 import time
 import numpy as np 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+epoch = 3
 
 def train_auto_encoding(model,train_data):
     model.train()  # turn on train mode
@@ -12,11 +13,12 @@ def train_auto_encoding(model,train_data):
     src_mask = model.generate_square_subsequent_mask(bptt).to(device)
     num_batches = len(train_data) // bptt
     for batch, i in enumerate(range(0, train_data.size(0) - 1, bptt)):
+        print(i)
         data, target = get_batch(train_data, i,device)
         seq_len = data.size(0)
         if seq_len != bptt:  # only on last batch
             src_mask = src_mask[:seq_len, :seq_len]
-        print(data.device,target.device,  src_mask.device)
+        # print(data.device,target.device,  src_mask.device)
         output = model(data)
         loss = model.criterion(output.view(-1, model.n_token),target)
 

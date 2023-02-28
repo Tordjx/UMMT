@@ -17,8 +17,8 @@ train_data_fr = batchify(train_final_fr, device,batch_size)
 train_data_en = batchify(train_final_en, device, batch_size) 
 
 vocab_en,vocab_fr = get_vocab()
-n_token_fr = len(vocab_fr.keys())
-n_token_en = len(vocab_en.keys())
+n_token_fr = len(vocab_fr.keys())+3
+n_token_en = len(vocab_en.keys())+3
 print(n_token_en)
 
 n_head = 4 
@@ -35,25 +35,25 @@ model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decod
 
 
 #%%
-data,target = get_batch(train_data_en,0,device)
+data,target = get_batch(train_data_fr,0,device)
 
-model_en(data)
+model_fr(data)
 
-
-#%%
-# train_auto_encoding(model_fr,train_data_fr)
 
 #%%
-text_input = data
-print(text_input.shape)
-print(model_en.embedding(text_input).shape)
-print(model_en.positional_encoder(model_en.embedding(text_input)).shape)
-print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
-print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
-mask = model_en.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
-x = model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input)))
-output = model_en.decoder(x, model_en.positional_encoder(model_en.embedding(text_input)), mask)
-print(output.shape)
-print(model_en.output_layer(output).shape)
+train_auto_encoding(model_fr,train_data_fr)
+
+# #%%
+# text_input = data
+# print(text_input.shape)
+# print(model_en.embedding(text_input).shape)
+# print(model_en.positional_encoder(model_en.embedding(text_input)).shape)
+# print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
+# print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
+# mask = model_en.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+# x = model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input)))
+# output = model_en.decoder(x, model_en.positional_encoder(model_en.embedding(text_input)), mask)
+# print(output.shape)
+# print(model_en.output_layer(output).shape)
 
 #%%

@@ -1,59 +1,72 @@
 #%%
 from Modele_decodeur_maison import *
-from Pipeline import * 
 
+from Pipeline import *
 from Trainer import * 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 40 
+batch_size = 10
 
 # Images
 # images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
 
 # Texts
-train_final_en,train_final_fr = get_train_data()
-print(train_final_fr.shape)
-train_data_fr = batchify(train_final_fr, device,batch_size)  
-train_data_en = batchify(train_final_en, device, batch_size) 
+tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau()
+n_token_fr = len(vocab_fr.keys())
+n_token_en = len(vocab_en.keys())
 
-vocab_en,vocab_fr = get_vocab()
-n_token_fr = len(vocab_fr.keys())+3
-n_token_en = len(vocab_en.keys())+3
-print(n_token_en)
+inv_map_en = {v: k for k, v in vocab_en.items()}
+inv_map_fr = {v: k for k, v in vocab_fr.items()}
 
 n_head = 4 
 num_encoder_layers = 2
 num_decoder_layers = 2
-dim_feedforward = 100
+dim_feedforward = 200
 dropout = 0.1
 activation = nn.Softmax
 embedding_dim = 200
 
-model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
+model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation).to(device)
 
-model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
+model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation).to(device)
 
-
-#%%
-data,target = get_batch(train_data_fr,0,device)
-
-model_fr(data)
 
 
 #%%
-train_auto_encoding(model_fr,train_data_fr)
+#%%
+# Y=train_auto_encoding(model_fr,tokenized_fr)
+# Y=train_auto_encoding(model_en,tokenized_en)
+# Y= cycle_consistency_train(model_fr,model_en,tokenized_fr,tokenized_en)
+mixed_train(model_fr,model_en,tokenized_fr,tokenized_en,1)
 
-# #%%
-# text_input = data
-# print(text_input.shape)
-# print(model_en.embedding(text_input).shape)
-# print(model_en.positional_encoder(model_en.embedding(text_input)).shape)
-# print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
-# print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
-# mask = model_en.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
-# x = model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input)))
-# output = model_en.decoder(x, model_en.positional_encoder(model_en.embedding(text_input)), mask)
-# print(output.shape)
-# print(model_en.output_layer(output).shape)
+
+#%%
+def tensor_to_sentence(output,inv_dic):
+    result = [inv_dic[int(x)] for x in output]
+    sentence = ""
+    for word in result : 
+        if word == "DEBUT_DE_PHRASE" :
+            pass
+        elif '@@' in word: 
+            sentence+=word[:-2]
+        elif word == "FIN_DE_PHRASE" :
+            break 
+        else :
+            sentence+=word +" "
+    return sentence
+
+def traduit(model_A,model_B,data, inv_map):
+    model_en.eval()
+    model_fr.eval()
+    output = torch.argmax(cycle_consistent_forward(model_A,model_B,data),dim = 2)
+    return tensor_to_sentence(output.view(-1),inv_map)
+
+i = np.random.randint(29000)
+data= batchify(tokenized_en[i],device,10)
+target =  tokenized_en[i]
+
+
+print("Phrase à traduire : \n" + tensor_to_sentence(target,inv_map_en)+ "\n Phrase traduite : \n "+ traduit(model_en,model_fr,data, inv_map_fr))
+
 
 #%%

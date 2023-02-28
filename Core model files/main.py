@@ -37,7 +37,7 @@ model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decod
 # Y=train_auto_encoding(model_fr,tokenized_fr)
 # Y=train_auto_encoding(model_en,tokenized_en)
 # Y= cycle_consistency_train(model_fr,model_en,tokenized_fr,tokenized_en)
-mixed_train(model_fr,model_en,tokenized_fr,tokenized_en,1)
+mixed_train(model_fr,model_en,tokenized_fr,tokenized_en,10)
 
 
 #%%

@@ -69,6 +69,8 @@ class Modèle(nn.Module):
         self.lr = 5.0  # learning rate
         self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
+        self.output_layer = nn.Linear(d_model, n_token).to(device)
+
 
 
     def forward(self, text_input, image_bool = False, image_input = None) : 
@@ -88,7 +90,7 @@ class Modèle(nn.Module):
             
 
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
-            return output
+            return self.output_layer(output)
 
 
     

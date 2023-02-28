@@ -18,13 +18,12 @@ def train_auto_encoding(model,train_data):
             src_mask = src_mask[:seq_len, :seq_len]
         print(data.device,target.device,  src_mask.device)
         output = model(data)
-        # loss = model.criterion(output.view(-1, model.n_token),target)
-        loss = model.criterion(output,target)
+        loss = model.criterion(output.view(-1, model.n_token),target)
+
         model.optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
         model.optimizer.step()
-
         total_loss += loss.item()
         if batch % log_interval == 0 and batch > 0:
             lr = model.scheduler.get_last_lr()[0]

@@ -5,7 +5,7 @@ from Pipeline import *
 from Trainer import * 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 100 
+batch_size = 40 
 
 # Images
 # images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
@@ -27,18 +27,33 @@ num_decoder_layers = 2
 dim_feedforward = 100
 dropout = 0.1
 activation = nn.Softmax
+embedding_dim = 200
 
-model_fr = Modèle(n_token_fr,batch_size,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
+model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
 
-model_en = Modèle(n_token_en,batch_size,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
+model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation)
 
 
 #%%
 data,target = get_batch(train_data_en,0,device)
 
 model_en(data)
+
+
+#%%
 # train_auto_encoding(model_fr,train_data_fr)
 
-# %%
-# ACTUELLEMENT, LE SOUCI EST LE BATCHIFYER. NOTRE INPUT A POUR SHAPE [40,40], DONC LOUTPUT DU EMBEDDING EST [40,40,d_model]
-# POUR AVOIR LA DIMENSION CORRECTE, IL FAUDRAIT QUON AIT UNE INPUT DE TAILLE [40]
+#%%
+text_input = data
+print(text_input.shape)
+print(model_en.embedding(text_input).shape)
+print(model_en.positional_encoder(model_en.embedding(text_input)).shape)
+print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
+print(model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input))).shape)
+mask = model_en.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+x = model_en.encoder(model_en.positional_encoder(model_en.embedding(text_input)))
+output = model_en.decoder(x, model_en.positional_encoder(model_en.embedding(text_input)), mask)
+print(output.shape)
+print(model_en.output_layer(output).shape)
+
+#%%

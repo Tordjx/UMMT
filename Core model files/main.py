@@ -1,4 +1,4 @@
-#%%test
+#%%
 from Modele_decodeur_maison import *
 
 from Pipeline import *

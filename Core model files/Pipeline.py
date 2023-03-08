@@ -60,9 +60,8 @@ def batchify(data: Tensor,device, bsz: int = 10) -> Tensor:
     Returns:
         Tensor of shape [N // bsz, bsz]
     """
-    seq_len = data.size(0) // bsz
-    data = data[:seq_len * bsz]
-    data = data.view(bsz, seq_len).t().contiguous()
+    seq_len = data.size(1) // bsz
+    data = data.view(data.size(1) , seq_len, bsz)
     return data.to(device)
 
 

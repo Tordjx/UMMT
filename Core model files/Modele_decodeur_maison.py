@@ -76,7 +76,8 @@ class Modèle(nn.Module):
     def forward(self, text_input, image_bool = False, image_input = None) : 
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)))
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
-        mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+        # mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+        mask = None
         if image_bool:
             image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image

@@ -24,7 +24,7 @@ num_decoder_layers = 2
 dim_feedforward = 200
 dropout = 0.1
 activation = nn.Softmax
-embedding_dim = 200
+embedding_dim = 196
 
 model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation).to(device)
 

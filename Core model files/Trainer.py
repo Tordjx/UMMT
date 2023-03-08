@@ -49,14 +49,13 @@ def auto_encoding_train(model,train_data):
 
     src_mask = model.generate_square_subsequent_mask(bptt).to(device)
     # data, target = get_batch(train_data, i,device)
-    data= batchify(train_data,device,10)
-    target = train_data
+    data,target = train_data
     seq_len = data.size(0)
     if seq_len != bptt:  # only on last batch
         src_mask = src_mask[:seq_len, :seq_len]
     # print(data.device,target.device,  src_mask.device)
     output = model(data)
-    loss = model.criterion(output.view(-1, model.n_token),target)
+    loss = model.criterion(output.mT,target)
     model.optimizer.zero_grad()
     loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
@@ -133,14 +132,14 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
 
 
 def cycle_consistency_train(model_A, model_B,train_data):
-
-        data= batchify(train_data,device,10)
-        target = train_data
+        src_mask = model_A.generate_square_subsequent_mask(bptt).to(device)
+        # data= batchify(train_data,device,10)
+        data,target = train_data
         seq_len = data.size(0)
         if seq_len != bptt:  # only on last batch
             src_mask = src_mask[:seq_len, :seq_len]
         output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2))
-        loss = model_A.criterion(output.view(-1, model_A.n_token),target)
+        loss = model_A.criterion(output.mT,target)
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
         loss.backward()
@@ -151,7 +150,7 @@ def cycle_consistency_train(model_A, model_B,train_data):
         return loss.item()
 
 import matplotlib.pyplot as plt
-def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter):
+def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size):
     loss_list = []
     model_fr.train()
     model_en.train()
@@ -159,29 +158,29 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter):
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
-        for i in range(len(train_data_fr)):
+        for i in range(len(train_data_fr)//batch_size):
             if np.random.rand()<1/2 : #Cycle consistency
                 if np.random.rand()<1/2 : 
-                    train_data= train_data_en[i]
+                    train_data= get_batch(train_data_en,i)
                     model_A = model_en
                     model_B = model_fr
                 else : 
-                    train_data= train_data_fr[i]
+                    train_data= get_batch(train_data_fr,i)
                     model_A = model_fr
                     model_B = model_en
                 loss = cycle_consistency_train(model_A,model_B,train_data)
             else: #Auto encoding
                 if np.random.rand()<1/2 : #English
-                    train_data= train_data_en[i]
+                    train_data= get_batch(train_data_en,i)
                     model_A = model_en
                 else : #French
-                    train_data= train_data_fr[i]
+                    train_data= get_batch(train_data_fr,i)
                     model_A = model_fr
                 loss = auto_encoding_train(model_A,train_data)
             loss_list.append(loss)
             total_loss+=loss
-            if i%log_interval == 0 and i !=0 : 
-                print("Iteration : " + str(i_iter) + " data numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/200)) 
+            if (i%log_interval == 0 and i !=0) or i == len(train_data_fr)//batch_size-1 : 
+                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/200)) 
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)

@@ -31,6 +31,7 @@ class TransformerDecoderLayer(nn.Module):
             )  
     
     def forward(self, x, memory, tgt_mask, memory_mask,tgt_key_padding_mask,memory_key_padding_mask):
+        tgt_mask = None #SUPER ATTENTION ICI DEBUGGING
         if len(x.shape) != 3:  # If there is an image
             # print("cas 1 : text + image")
             text = x[0]

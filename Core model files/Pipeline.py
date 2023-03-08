@@ -23,9 +23,8 @@ def get_train_data_nouveau():
     train_data_en = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+["FIN_DE_PHRASE"] for ligne in fichier_train_en ]
     fichier_train_en.close()
     fichier_train_fr.close()
-    # longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
-    # Arrondissons à 100
-    longueur_max=100
+    longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
+
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]
 
@@ -42,14 +41,19 @@ def get_train_data_nouveau():
             if mot not in vocab_fr: 
                 print(mot)
                 vocab_fr[mot] = len(vocab_fr.keys())
-
-    tokenized_fr = [torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long).to(device) for ligne in train_data_fr]
-    tokenized_en = [torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long).to(device) for ligne in train_data_en]
+    # tokenized_fr = torch.zeros( len(train_data_fr),longueur_max)
+    # tokenized_en = torch.zeros( len(train_data_en),longueur_max)
+    # for i in range(len(train_data_fr)) : 
+    #     for j in range (longueur_max) : 
+    #         tokenized_fr[i,j] =  vocab_fr[train_data_fr[i][j]]
+    #         tokenized_en[i,j] =  vocab_en[train_data_en[i][j]]
+    tokenized_fr = torch.tensor([[vocab_fr[x]  for x in ligne ]  for ligne in train_data_fr]).to(device=device, dtype= torch.long)
+    tokenized_en = torch.tensor([[vocab_en[x]  for x in ligne ]  for ligne in train_data_en]).to(device=device, dtype= torch.long)
 #va falloir aussi return les nouveaux vocab
 
     return [tokenized_fr,tokenized_en, vocab_fr,vocab_en]
 
-def batchify(data: Tensor,device, bsz: int = 10) -> Tensor:
+def batchify(data: Tensor,device, bsz: int = 50) -> Tensor:
     """Divides the data into bsz separate sequences, removing extra elements
     that wouldn't cleanly fit.
 
@@ -60,8 +64,7 @@ def batchify(data: Tensor,device, bsz: int = 10) -> Tensor:
     Returns:
         Tensor of shape [N // bsz, bsz]
     """
-    seq_len = data.size(1) // bsz
-    data = data.view(data.size(1) , seq_len, bsz)
+    data = data.view(data.size(0)//bsz , data.size(1), bsz)
     return data.to(device)
 
 
@@ -71,20 +74,21 @@ def batchify(data: Tensor,device, bsz: int = 10) -> Tensor:
 # test_data = batchify(test_data, eval_batch_size)
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
 
-bptt = 10
+def get_batch(source,i) : 
+    return batchify(source,device)[i],batchify(source,device)[i]
 
-def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
-    """
-    Args:
-        source: Tensor, shape [full_seq_len, batch_size]
-        i: int
+# def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
+#     """
+#     Args:
+#         source: Tensor, shape [full_seq_len, batch_size]
+#         i: int
 
-    Returns:
-        tuple (data, target), where data has shape [seq_len, batch_size] and
-        target has shape [seq_len * batch_size]
-    """
-    seq_len = min(bptt, len(source) - 1 - i)
-    data = source[i:i+seq_len]
-    target = source[i:i+seq_len].reshape(-1)
+#     Returns:
+#         tuple (data, target), where data has shape [seq_len, batch_size] and
+#         target has shape [seq_len * batch_size]
+#     """
+#     seq_len = min(bptt, len(source) - 1 - i)
+#     data = source[i:i+seq_len]
+#     target = source[i:i+seq_len].reshape(-1)
 
-    return data.to(device), target.to(device)
+#     return data.to(device), target.to(device)

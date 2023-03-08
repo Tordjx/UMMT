@@ -59,7 +59,7 @@ class Modèle(nn.Module):
         self.n_token= n_token
 
         self.embedding = nn.Embedding(n_token, d_model,device=device)
-        self.feedforward = nn.Linear(196,d_model,device=device)
+        self.feedforward = nn.Linear(d_model,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
@@ -78,11 +78,15 @@ class Modèle(nn.Module):
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
         mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
         if image_bool:
-            image_input = image_input.reshape((1024,196))
+            image_input = image_input.reshape((196,1024)).T
+            text_input = self.positional_encoder(self.embedding(text_input))
+            print(image_input.shape)
+            print(text_input.shape)
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
             x= torch.cat((text_encoded, image_encoded))
-            
+            # x = Tensor([text_encoded, image_encoded])
+            # mask = None #ATTENTION ICI
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
             return output
         else:

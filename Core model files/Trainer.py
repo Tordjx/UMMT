@@ -68,8 +68,14 @@ def auto_encoding_train(model,train_data):
 
 def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, image_bool = False) : 
     # Encode Text
-    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)))
-    mask = model_A.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+    
+    src_mask = model_A.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+    tgt_mask = None
+    src_padding_mask  = None
+    tgt_padding_mask = None
+    memory_mask = None
+    memory_key_padding_mask =None
+    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask)
     if image_bool:
         image_input =image_input.reshape((196,1024))
         # Concatenate encoded text and image
@@ -78,10 +84,10 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     else:
         encoded = text_encoded
     # Pass through the decoder
-    output = model_B.decoder(encoded,model_A.positional_encoder(model_A.embedding(text_input)),mask)
+    output = model_B.decoder(encoded,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
     return model_B.output_layer(output)
 
-    
+
 # def cycle_consistency_train(model_fr, model_en,train_data_fr,train_data_en):
 #     loss_list = []
 #     model_fr.train()

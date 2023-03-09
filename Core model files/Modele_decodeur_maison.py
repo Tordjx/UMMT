@@ -87,7 +87,9 @@ class Modèle(nn.Module):
             # image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
-            x = Tensor([text_encoded, image_encoded])
+            print(text_encoded.shape, image_encoded.shape)
+            x = [text_encoded, image_encoded]
+            
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
             return output
         else:

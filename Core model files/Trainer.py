@@ -33,6 +33,7 @@ def train_auto_encoding(model,train_data):
         model.optimizer.step()
         total_loss += loss.item()
         loss_list.append(loss.item())
+        
         if i % log_interval == 0 and i > 0:
             lr = model.scheduler.get_last_lr()[0]
             ms_per_batch = (time.time() - start_time) * 1000 / log_interval
@@ -154,11 +155,11 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size)
     loss_list = []
     model_fr.train()
     model_en.train()
-    log_interval = 200
+    log_interval = 50
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
-        for i in range(len(train_data_fr)//batch_size):
+        for i in range(len(train_data_fr)):
             if np.random.rand()<1/2 : #Cycle consistency
                 if np.random.rand()<1/2 : 
                     train_data= get_batch(train_data_en,i)
@@ -179,7 +180,8 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size)
                 loss = auto_encoding_train(model_A,train_data)
             loss_list.append(loss)
             total_loss+=loss
-            if (i%log_interval == 0 and i !=0) or i == len(train_data_fr)//batch_size-1 : 
+            
+            if (i%log_interval == 40 and i !=0) : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/200)) 
                 total_loss = 0
                 start_time = time.time()

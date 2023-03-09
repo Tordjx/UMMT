@@ -15,7 +15,7 @@ def get_vocab() :
     return vocab_en, vocab_fr
 
 
-def get_train_data_nouveau():
+def get_train_data_nouveau(batch_size):
     vocab_en,vocab_fr = get_vocab()
     fichier_train_fr = open('train.BPE.fr')
     fichier_train_en = open('train.BPE.en')
@@ -47,25 +47,25 @@ def get_train_data_nouveau():
     #     for j in range (longueur_max) : 
     #         tokenized_fr[i,j] =  vocab_fr[train_data_fr[i][j]]
     #         tokenized_en[i,j] =  vocab_en[train_data_en[i][j]]
-    tokenized_fr = torch.tensor([[vocab_fr[x]  for x in ligne ]  for ligne in train_data_fr]).to(device=device, dtype= torch.long)
-    tokenized_en = torch.tensor([[vocab_en[x]  for x in ligne ]  for ligne in train_data_en]).to(device=device, dtype= torch.long)
-#va falloir aussi return les nouveaux vocab
+    
+    batched_fr = torch.tensor([[[vocab_fr[train_data_fr[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_fr)//batch_size)]).to(device=device, dtype= torch.long)
+    batched_en = torch.tensor([[[vocab_en[train_data_en[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_en)//batch_size)]).to(device=device, dtype= torch.long)
 
-    return [tokenized_fr,tokenized_en, vocab_fr,vocab_en]
+    return [batched_fr,batched_en, vocab_fr,vocab_en]
 
-def batchify(data: Tensor,device, bsz: int = 50) -> Tensor:
-    """Divides the data into bsz separate sequences, removing extra elements
-    that wouldn't cleanly fit.
+# def batchify(data: Tensor,device, bsz: int = 50) -> Tensor:
+#     """Divides the data into bsz separate sequences, removing extra elements
+#     that wouldn't cleanly fit.
 
-    Args:
-        data: Tensor, shape [N]
-        bsz: int, batch size
+#     Args:
+#         data: Tensor, shape [N]
+#         bsz: int, batch size
 
-    Returns:
-        Tensor of shape [N // bsz, bsz]
-    """
-    data = data.view(data.size(0)//bsz , data.size(1), bsz)
-    return data.to(device)
+#     Returns:
+#         Tensor of shape [N // bsz, bsz]
+#     """
+#     data = data.view(data.size(0)//bsz , data.size(1), bsz)
+#     return data.to(device)
 
 
 # eval_batch_size = 10
@@ -75,7 +75,7 @@ def batchify(data: Tensor,device, bsz: int = 50) -> Tensor:
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
 
 def get_batch(source,i) : 
-    return batchify(source,device)[i],batchify(source,device)[i]
+    return source[i],source[i]
 
 # def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
 #     """

@@ -84,7 +84,7 @@ class Modèle(nn.Module):
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
         
         if image_bool:
-            image_input = image_input.reshape((196,1024))
+            # image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
             x = Tensor([text_encoded, image_encoded])

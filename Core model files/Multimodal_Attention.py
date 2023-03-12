@@ -11,7 +11,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 #%% Attention computation
 
-def attention(q, k, v, d_k, mask=None, dropout=None):
+def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None):
     
     output = torch.matmul(q, k.transpose(-2, -1)) /  math.sqrt(d_k)
 
@@ -19,6 +19,9 @@ def attention(q, k, v, d_k, mask=None, dropout=None):
         mask = mask.unsqueeze(1)
         output = output.masked_fill(mask == 0, -1e9)
     output = F.softmax(output, dim=-1)
+
+    if padding_mask is not None:
+        soutputcores = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
     
     if dropout is not None:
         output = dropout(output)
@@ -53,7 +56,7 @@ class MultiModalAttention(nn.Module):
         self.out = nn.Linear(d_model, d_model)
 
 
-    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, image_bool):
+    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, padding_mask, image_bool):
         bs = q.size(0)
 
         q = self.q_linear(q).view(bs, -1, self.h, self.d_k) 

@@ -23,7 +23,8 @@ def get_train_data_nouveau(batch_size):
     train_data_en = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+["FIN_DE_PHRASE"] for ligne in fichier_train_en ]
     fichier_train_en.close()
     fichier_train_fr.close()
-    longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
+    longueur_max = 1024
+    # longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
 
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]
@@ -33,13 +34,13 @@ def get_train_data_nouveau(batch_size):
     for ligne in train_data_en: 
         for mot in ligne : 
             if mot not in vocab_en: 
-                print(mot)
+                # print(mot)
                 vocab_en[mot] = len(vocab_en.keys())
 
     for ligne in train_data_fr: 
         for mot in ligne: 
             if mot not in vocab_fr: 
-                print(mot)
+                # print(mot)
                 vocab_fr[mot] = len(vocab_fr.keys())
     # tokenized_fr = torch.zeros( len(train_data_fr),longueur_max)
     # tokenized_en = torch.zeros( len(train_data_en),longueur_max)

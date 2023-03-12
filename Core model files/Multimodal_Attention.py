@@ -58,6 +58,7 @@ class MultiModalAttention(nn.Module):
 
 
     def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, padding_mask, image_bool):
+        bs = q.size(1)
 
         q = self.q_linear(q).view(-1, q.size(1), self.h, self.d_k) 
         q = q.transpose(1,2)
@@ -71,7 +72,7 @@ class MultiModalAttention(nn.Module):
 
         # If there is only text in the input, image_bool = False
         if not(image_bool):
-            concat = scores_e.transpose(1,2).contiguous().view(-1, q.size(1), self.d_model)
+            concat = scores_e.transpose(1,2).contiguous().view(-1, bs, self.d_model)
             output = self.out(concat)
             return output
         else:
@@ -84,15 +85,15 @@ class MultiModalAttention(nn.Module):
             scores_i = attention(q, k_i, v_i, self.d_k, mask, padding_mask, self.dropout)
 
             # Score for text and image : 
-            k_ei = self.k_ei_linear(k_ei).view(-1, k_e.size(1), self.h, self.d_k) 
+            k_ei = self.k_ei_linear(k_ei).view(-1, k_ei.size(1), self.h, self.d_k) 
             k_ei = k_ei.transpose(1,2)
-            v_ei = self.v_ei_linear(v_ei).view(-1, v_e.size(1), self.h, self.d_k)
+            v_ei = self.v_ei_linear(v_ei).view(-1, v_ei.size(1), self.h, self.d_k)
             v_ei = v_ei.transpose(1,2)
             scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, padding_mask, self.dropout)
 
             # final scores 
             scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei
-            concat = scores.transpose(1,2).contiguous().view(-1, q.size(1), self.d_model)
+            concat = scores.transpose(1,2).contiguous().view(-1, bs, self.d_model)
             output = self.out(concat)
 
             return output

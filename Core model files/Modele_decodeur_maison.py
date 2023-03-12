@@ -47,7 +47,7 @@ class PositionalEncoding(nn.Module):
 
 
 class Modèle(nn.Module):
-    def __init__(self,n_token,d_model,n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ) -> None:
+    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ) -> None:
         super().__init__()
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
@@ -58,7 +58,7 @@ class Modèle(nn.Module):
         self.n_head = n_head
         self.n_token= n_token
 
-        self.embedding = nn.Embedding(n_token, d_model,device=device)
+        self.embedding = nn.Embedding(n_token, d_model, device=device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image

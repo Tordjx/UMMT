@@ -74,22 +74,30 @@ class Modèle(nn.Module):
 
 
     def forward(self, text_input, image_bool = False, image_input = None) : 
-        text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)))
+        src_mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+        tgt_mask = None
+        src_padding_mask  = None
+        tgt_padding_mask = None
+        memory_mask = None
+        memory_key_padding_mask =None
+        text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
-        mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
+        
         if image_bool:
-            image_input = image_input.reshape((196,1024))
+            # image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
-            x = Tensor([text_encoded, image_encoded])
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
+            print(text_encoded.shape, image_encoded.shape)
+            x = [text_encoded, image_encoded]
+            
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
             return output
         else:
             # Pass through the decoder
             x = text_encoded
             
 
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), mask)
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
             return self.output_layer(output)
 
 

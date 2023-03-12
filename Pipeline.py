@@ -15,7 +15,7 @@ def get_vocab() :
     return vocab_en, vocab_fr
 
 
-def get_train_data_nouveau(batch_size):
+def get_train_data_nouveau():
     vocab_en,vocab_fr = get_vocab()
     fichier_train_fr = open('train.BPE.fr')
     fichier_train_en = open('train.BPE.en')
@@ -27,7 +27,6 @@ def get_train_data_nouveau(batch_size):
 
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]
-
 
     #ATTENTION : DEMANDER IUN AVIS POUR CES DEUX BOUCLES QUI AJOUTENT AU VOCAB CE QUI MANQUE, CEST A DIRE '&@@' et ';@@' a cause des caracteres html
     for ligne in train_data_en: 
@@ -41,31 +40,46 @@ def get_train_data_nouveau(batch_size):
             if mot not in vocab_fr: 
                 print(mot)
                 vocab_fr[mot] = len(vocab_fr.keys())
-    # tokenized_fr = torch.zeros( len(train_data_fr),longueur_max)
-    # tokenized_en = torch.zeros( len(train_data_en),longueur_max)
-    # for i in range(len(train_data_fr)) : 
-    #     for j in range (longueur_max) : 
-    #         tokenized_fr[i,j] =  vocab_fr[train_data_fr[i][j]]
-    #         tokenized_en[i,j] =  vocab_en[train_data_en[i][j]]
+
+    # tokenized_fr = torch.tensor([torch.tensor([vocab_fr[x]  for x in ligne ], dtype= torch.long).to(device) for ligne in train_data_fr]).to(device)
+    # tokenized_en = torch.tensor([torch.tensor([vocab_en[x]  for x in ligne ], dtype= torch.long).to(device) for ligne in train_data_en]).to(device)
+#va falloir aussi return les nouveaux vocab
+    tokenized_fr = torch.zeros(longueur_max, len(train_data_fr)).to(dtype = torch.long, device = device)
+    tokenized_en = torch.zeros(longueur_max, len(train_data_en)).to(dtype = torch.long, device = device)
+    for i in range(longueur_max) : 
+        for j in range(len(train_data_fr)) : 
+            tokenized_fr[i,j] = vocab_fr[train_data_fr[j][i]]
+            tokenized_en[i,j] = vocab_en[train_data_en[j][i]]
+
+
+
+    return [tokenized_fr,tokenized_en, vocab_fr,vocab_en]
+
+
+
     
-    batched_fr = torch.tensor([[[vocab_fr[train_data_fr[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_fr)//batch_size)]).to(device=device, dtype= torch.long)
-    batched_en = torch.tensor([[[vocab_en[train_data_en[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_en)//batch_size)]).to(device=device, dtype= torch.long)
 
-    return [batched_fr,batched_en, vocab_fr,vocab_en]
 
-# def batchify(data: Tensor,device, bsz: int = 50) -> Tensor:
-#     """Divides the data into bsz separate sequences, removing extra elements
-#     that wouldn't cleanly fit.
 
-#     Args:
-#         data: Tensor, shape [N]
-#         bsz: int, batch size
 
-#     Returns:
-#         Tensor of shape [N // bsz, bsz]
-#     """
-#     data = data.view(data.size(0)//bsz , data.size(1), bsz)
-#     return data.to(device)
+
+
+
+
+def batchify(data: Tensor,device, bsz: int = 10) -> Tensor:
+    """Divides the data into bsz separate sequences, removing extra elements
+    that wouldn't cleanly fit.
+
+    Args:
+        data: Tensor, shape [N]
+        bsz: int, batch size
+
+    Returns:
+        Tensor of shape [N // bsz, bsz]
+    """
+    seq_len = data.size(1) // bsz
+    data = data.view (seq_len,data.size(0), bsz)
+    return data.to(device)
 
 
 # eval_batch_size = 10
@@ -74,21 +88,20 @@ def get_train_data_nouveau(batch_size):
 # test_data = batchify(test_data, eval_batch_size)
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
 
-def get_batch(source,i) : 
-    return source[i],source[i]
+bptt = 10
 
-# def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
-#     """
-#     Args:
-#         source: Tensor, shape [full_seq_len, batch_size]
-#         i: int
+def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
+    """
+    Args:
+        source: Tensor, shape [full_seq_len, batch_size]
+        i: int
 
-#     Returns:
-#         tuple (data, target), where data has shape [seq_len, batch_size] and
-#         target has shape [seq_len * batch_size]
-#     """
-#     seq_len = min(bptt, len(source) - 1 - i)
-#     data = source[i:i+seq_len]
-#     target = source[i:i+seq_len].reshape(-1)
+    Returns:
+        tuple (data, target), where data has shape [seq_len, batch_size] and
+        target has shape [seq_len * batch_size]
+    """
+    seq_len = min(bptt, len(source) - 1 - i)
+    data = source[i:i+seq_len]
+    target = source[i:i+seq_len].reshape(-1)
 
-#     return data.to(device), target.to(device)
+    return data.to(device), target.to(device)

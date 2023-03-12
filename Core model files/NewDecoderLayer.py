@@ -31,11 +31,14 @@ class TransformerDecoderLayer(nn.Module):
             )  
     
     def forward(self, x, memory, tgt_mask, memory_mask,tgt_key_padding_mask,memory_key_padding_mask):
-        if len(x.shape) != 3:  # If there is an image
+        if type(x) == list:  # If there is an image
             # print("cas 1 : text + image")
             text = x[0]
             i_outputs = x[1]
+            print(text.shape)
             x2 = self.norm_1(text)
+            print(i_outputs.shape)
+            x=text
             x = x + self.dropout_1(self.attn_1(x2, x2, x2, tgt_mask)[0])
             # Here, att1 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_2(x)

@@ -30,12 +30,12 @@ dict_captions = { names[i] : captions[i] for i in range(len(names)) }
 
 model, preprocess = clip.load('ViT-B/32', device)
 
-def similarity(file_name):
+def similarity(file_name, nb=1):
     # image 
     im = Image.open(r"C:/Users/lucas/Downloads/flickr30k-images.tar/flickr30k-images/"+ file_name) 
     image = preprocess(im).unsqueeze(0).to(device)
     # text 
-    texts = clip.tokenize(names).to(device)
+    texts = clip.tokenize(names[:100]).to(device)
     
     with torch.no_grad():
         image_features = model.encode_image(image)
@@ -45,26 +45,23 @@ def similarity(file_name):
     text_features /= text_features.norm(dim=-1, keepdim=True)
     similarity = (100.0 * image_features @ text_features.T).softmax(dim=-1)
 
-    values, indices = similarity[0].topk(5)
-
-    # Print the result
-    print("\nTop predictions:\n")
+    values, indices = similarity[0].topk(nb)
+    print("Top predictions:")
     for value, index in zip(values, indices):
-        print(value + " " + index)
+        print("Caption n°" + str(index.item()) + " : " + str(value.item()))
 
-similarity(names[0])
+    # logits_per_image, logits_per_text = model(image, texts)
+    # probs = logits_per_image.softmax(dim=-1).cpu().detach().numpy()
+    # print("Label probs:", probs)
 
+    return values, indices
 
-#%% Test tuto 
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load('ViT-B/32', device)
-
-# Download the dataset
-cifar100 = CIFAR100(root=os.path.expanduser("~/.cache"), download=True, train=False)
-
-# Prepare the inputs
-image, class_id = cifar100[3637]
-image_input = preprocess(image).unsqueeze(0).to(device)
-text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in cifar100.classes]).to(device)
+c = 0
+for i in range(100):
+    values, indices = similarity(names[i])
+    for value, index in zip(values, indices):
+        if index.item() == i:
+            c += 1
+print(c/100)
+    
 

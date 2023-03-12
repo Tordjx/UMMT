@@ -48,9 +48,9 @@ def get_train_data_nouveau(batch_size):
     #     for j in range (longueur_max) : 
     #         tokenized_fr[i,j] =  vocab_fr[train_data_fr[i][j]]
     #         tokenized_en[i,j] =  vocab_en[train_data_en[i][j]]
-    
-    batched_fr = torch.tensor([[[vocab_fr[train_data_fr[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_fr)//batch_size)]).to(device=device, dtype= torch.long)
-    batched_en = torch.tensor([[[vocab_en[train_data_en[k*batch_size+i][j]] for i in range (batch_size)] for j in range(longueur_max)] for k in range(len(train_data_en)//batch_size)]).to(device=device, dtype= torch.long)
+
+    batched_fr = torch.tensor([[[vocab_fr[train_data_fr[k*batch_size+j][i]] for i in range (longueur_max)] for j in range(batch_size)] for k in range(len(train_data_fr)//batch_size)]).to(device=device, dtype= torch.long)
+    batched_en = torch.tensor([[[vocab_en[train_data_en[k*batch_size+j][i]] for i in range (longueur_max)] for j in range(batch_size)] for k in range(len(train_data_en)//batch_size)]).to(device=device, dtype= torch.long)
 
     return [batched_fr,batched_en, vocab_fr,vocab_en]
 

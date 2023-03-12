@@ -30,7 +30,7 @@ class TransformerDecoderLayer(nn.Module):
             nn.Linear(dim_feedforward,d_model)
             )  
     
-    def forward(self, x, memory, tgt_mask, memory_mask,tgt_key_padding_mask,memory_key_padding_mask):
+    def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):
         if type(x) == list:  # If there is an image
             # print("cas 1 : text + image")
             text = x[0]
@@ -56,7 +56,7 @@ class TransformerDecoderLayer(nn.Module):
             # Here, att1 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_2(x)
             ei_outputs = None
-            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, image_bool=False))
+            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, memory_key_padding_mask, image_bool=False))
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         return x

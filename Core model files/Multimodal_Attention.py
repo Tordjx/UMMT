@@ -18,10 +18,11 @@ def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None):
     if mask is not None:
         mask = mask.unsqueeze(1)
         output = output.masked_fill(mask == 0, -1e9)
-    output = F.softmax(output, dim=-1)
 
     if padding_mask is not None:
-        soutputcores = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
+        output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
+
+    output = F.softmax(output, dim=-1)
     
     if dropout is not None:
         output = dropout(output)
@@ -67,7 +68,7 @@ class MultiModalAttention(nn.Module):
         k_e = k_e.transpose(1,2)
         v_e = self.v_e_linear(v_e).view(bs, -1, self.h, self.d_k)
         v_e = v_e.transpose(1,2)
-        scores_e = attention(q, k_e, v_e, self.d_k, mask, self.dropout) # Ici ajouter le bon mask
+        scores_e = attention(q, k_e, v_e, self.d_k, mask, padding_mask, self.dropout) 
 
         # If there is only text in the input, image_bool = False
         if not(image_bool):
@@ -80,14 +81,14 @@ class MultiModalAttention(nn.Module):
             k_i = k_i.transpose(1,2)
             v_i = self.v_i_linear(v_i).view(bs, -1, self.h, self.d_k)
             v_i = v_i.transpose(1,2)
-            scores_i = attention(q, k_i, v_i, self.d_k, mask, self.dropout)
+            scores_i = attention(q, k_i, v_i, self.d_k, mask, padding_mask, self.dropout)
 
             # Score for text and image : 
             k_ei = self.k_ei_linear(k_ei).view(bs, -1, self.h, self.d_k) 
             k_ei = k_ei.transpose(1,2)
             v_ei = self.v_ei_linear(v_ei).view(bs, -1, self.h, self.d_k)
             v_ei = v_ei.transpose(1,2)
-            scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, self.dropout)
+            scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, padding_mask, self.dropout)
 
             # final scores 
             scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei

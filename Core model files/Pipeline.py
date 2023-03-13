@@ -75,8 +75,11 @@ def get_train_data_nouveau(batch_size):
 # test_data = batchify(test_data, eval_batch_size)
 #ICI CEST LE BATCHIFIER DU AUTO ENCODING!!!!!!!!!!!!S
 
-def get_batch(source,i) : 
-    return source[i],source[i]
+def get_batch(source,i, image_bool = False) : 
+    if image_bool : 
+        return source[0][i],source[1][i]
+    else :
+        return source[i],source[i]
 
 # def get_batch(source: Tensor, i: int,device) -> Tuple[Tensor, Tensor]:
 #     """

@@ -181,7 +181,6 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
-        print(i_iter)
         if image_bool : 
             N = len(train_data_fr[0])
         else : 
@@ -226,7 +225,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             loss_list.append(loss)
             total_loss+=loss
             
-            if (i%log_interval == 40 and i !=0) : 
+            if (i%log_interval == 40 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/200)) 
                 total_loss = 0
                 start_time = time.time()

@@ -52,12 +52,7 @@ def auto_encoding_train(model,train_data, image_bool):
         data, feature = train_data
     else : 
         data,target = train_data
-    src_mask = model.generate_square_subsequent_mask(bptt).to(device)
     # data, target = get_batch(train_data, i,device)
-
-    seq_len = data.size(0)
-    if seq_len != bptt:  # only on last batch
-        src_mask = src_mask[:seq_len, :seq_len]
     # print(data.device,target.device,  src_mask.device)
     if image_bool : 
         output = model(data,True,feature)
@@ -76,13 +71,14 @@ def auto_encoding_train(model,train_data, image_bool):
 def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, image_bool = False) : 
     # Encode Text
     
-    src_mask = model_A.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
-    tgt_mask = None
-    src_padding_mask  = None
-    tgt_padding_mask = None
+    src_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]) # square mask 
+    tgt_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
+    src_padding_mask  = (text_input== 6574).to(device=device)
+    tgt_padding_mask = (text_input== 6574).to(device=device)
+    print(tgt_padding_mask.shape)
     memory_mask = None
     memory_key_padding_mask =None
-    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask)
+    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
     if image_bool:
         # Concatenate encoded text and image
         image_encoded =model_A.feedforward(image_input)
@@ -151,11 +147,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         else :
             data,target = train_data
 
-        src_mask = model_A.generate_square_subsequent_mask(bptt).to(device)
-        # data= batchify(train_data,device,10)
-        seq_len = data.size(0)
-        if seq_len != bptt:  # only on last batch
-            src_mask = src_mask[:seq_len, :seq_len]
+
         if image_bool : 
             
             output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data, features, image_bool),dim = 2), features, image_bool)

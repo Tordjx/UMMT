@@ -60,7 +60,7 @@ class Modèle(nn.Module):
 
         self.embedding = nn.Embedding(n_token, d_model, device=device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
-        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device)
+        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device,batch_first=True)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
@@ -74,12 +74,13 @@ class Modèle(nn.Module):
 
 
     def forward(self, text_input, image_bool = False, image_input = None) : 
-        src_mask = self.generate_square_subsequent_mask(text_input.shape[0]) # square mask 
-        tgt_mask = None
-        src_padding_mask  = None
-        tgt_padding_mask = None
+        src_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]) # square mask 
+        tgt_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
+        src_padding_mask  = (text_input== 6574).to(device=device)
+        tgt_padding_mask = (text_input== 6574).to(device=device)
         memory_mask = None
         memory_key_padding_mask =None
+        print(text_input.shape, src_mask.shape, src_padding_mask.shape)
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
         
@@ -106,8 +107,8 @@ class Modèle(nn.Module):
     # def generate_square_subsequent_mask(self,sz_1=40,sz_2=35):
     #     return torch.triu(torch.full((sz_1,sz_2 ), float('-inf'), device=device), diagonal=1)
 
-    def generate_square_subsequent_mask(self,sz: int) -> Tensor:
-        return torch.triu(torch.full((sz, sz), float('-inf'), device=device), diagonal=1)
+    def generate_square_subsequent_mask(self,a,b) -> Tensor:
+        return torch.triu(torch.full((self.n_head*a,b,b), float('-inf'), device=device), diagonal=1)
 
     def _reset_parameters(self):
         r"""Initiate parameters in the transformer model."""

@@ -77,7 +77,7 @@ def get_train_data_nouveau(batch_size):
 
 def get_batch(source,i, image_bool = False) : 
     if image_bool : 
-        return source[0][i],source[1][i]
+        return source[0][i],source[1][i].to(device)
     else :
         return source[i],source[i]
 

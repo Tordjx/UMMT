@@ -86,7 +86,7 @@ def similarity_score():
         text_features /= text_features.norm(dim=-1, keepdim=True)
         similarity = (100.0 * image_features @ text_features.T)
 
-        simi_scores["file_name"] = similarity
+        simi_scores[file_name] = similarity
     
     return simi_scores
 

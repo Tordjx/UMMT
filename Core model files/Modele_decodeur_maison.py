@@ -60,8 +60,8 @@ class Modèle(nn.Module):
 
         self.embedding = nn.Embedding(n_token, d_model, device=device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
-        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device,batch_first=True)
-        decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device) # NewDecoderLayer qui prend en compte l'image
+        encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)
+        decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device, batch_first=True) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
@@ -79,8 +79,8 @@ class Modèle(nn.Module):
         src_padding_mask  = (text_input== 6574).to(device=device)
         tgt_padding_mask = (text_input== 6574).to(device=device)
         memory_mask = None
-        memory_key_padding_mask =None
-        print(text_input.shape, src_mask.shape, src_padding_mask.shape)
+        memory_key_padding_mask = None
+        # print(tgt_padding_mask.shape)
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
         
@@ -89,7 +89,6 @@ class Modèle(nn.Module):
             # Concatenate encoded text and image
             image_encoded = self.feedforward(image_input)
             x = [text_encoded, image_encoded]
-            
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
             return self.output_layer(output)
         else:

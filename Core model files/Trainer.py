@@ -71,11 +71,12 @@ def auto_encoding_train(model,train_data, image_bool):
 def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, image_bool = False) : 
     # Encode Text
     
-    src_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]) # square mask 
-    tgt_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
+    src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
+    tgt_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1])
     src_padding_mask  = (text_input== 6574).to(device=device)
     tgt_padding_mask = (text_input== 6574).to(device=device)
-    print(tgt_padding_mask.shape)
+    # src_padding_mask = None
+    # tgt_padding_mask=None
     memory_mask = None
     memory_key_padding_mask =None
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
@@ -160,6 +161,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.5)
         torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.5)
+        
         model_A.optimizer.step()
         model_B.optimizer.step()
         return loss.item()
@@ -217,8 +219,10 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             loss_list.append(loss)
             total_loss+=loss
             
+            
+            
             if (i%log_interval == 40 and i !=0) or i == N-1 : 
-                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/200)) 
+                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)

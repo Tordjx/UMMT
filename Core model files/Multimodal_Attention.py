@@ -144,13 +144,3 @@ class MultiModalAttention(nn.Module):
     #         output = self.out(concat)
 
     #         return output
-
-#%% test
-
-tensor1 = torch.randn(50,97,196)
-tensor2 = torch.randn(50,1024,196)
-
-tensor1 = tensor1.view(-1, tensor1.size(1), 4, 49).transpose(1,2)
-tensor2 = tensor2.view(-1, tensor2.size(1), 4, 49).transpose(1,2)
-
-tensor3 = torch.matmul(tensor1,tensor2.transpose(-2,-1))

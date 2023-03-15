@@ -6,6 +6,7 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 bptt = 10
 epoch = 1
+torch.autograd.set_detect_anomaly(True)
 def train_auto_encoding(model,train_data):
 
     loss_list=[]
@@ -86,6 +87,8 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
+    # print("Text encoded : ")
+    # print(text_encoded)
     if image_bool:
         # Concatenate encoded text and image
         mem_masks = [memory_mask, mem_ei_mask]
@@ -93,11 +96,16 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         image_encoded = model_A.feedforward(image_input)
         x = [text_encoded, image_encoded]
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        # print("output decoder")
+        # print(output)
     else:
         x = text_encoded
     # Pass through the decoder
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-    return model_B.output_layer(output)
+    # print("output softamxé")
+    # print(model_B.activation(model_B.output_layer(output)))
+
+    return model_B.activation(model_B.output_layer(output))
 
 
 # Old version 
@@ -136,10 +144,21 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
 
 
         if image_bool : 
-            
-            output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data, features, image_bool),dim = 2), features, image_bool)
+            # print("premier cycle softmaxé")
+            first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data, features, image_bool),dim = 2)
+            # print(first_output)
+            output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
+            # print("forward output")
+            # print(output)
             loss = model_A.criterion(output.mT,data)
+            # print('output')
+            # print(output)
+            # print("input data")
+            # print(data)
+            # print('loss')
+            # print(loss)
         else :
+
             output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2))
             loss = model_A.criterion(output.mT,target)
         model_A.optimizer.zero_grad()
@@ -153,6 +172,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         return loss.item()
 
 import matplotlib.pyplot as plt
+proba = 1
 def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False):
     loss_list = []
     model_fr.train()
@@ -166,9 +186,10 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
         else : 
             N = len(train_data_fr[0])
         for i in range(N):
-            if np.random.rand()<1/2 : #Cycle consistency
+            if np.random.rand()<proba : #Cycle consistency
                 
                 if np.random.rand()<1/2 : 
+                    # print("données EN")
                     if image_bool : 
                         train_data= get_batch(train_data_en,i,image_bool)
                         
@@ -177,6 +198,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                     model_A = model_en
                     model_B = model_fr
                 else : 
+                    # print("données FR")
                     if image_bool : 
                         train_data= get_batch(train_data_fr,i,image_bool)
                         
@@ -203,6 +225,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                     model_A = model_fr
                 loss = auto_encoding_train(model_A,train_data,image_bool)
             loss_list.append(loss)
+            print(loss)
             total_loss+=loss
             
             

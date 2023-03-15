@@ -66,7 +66,7 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss()
-        self.lr = 0.001 # learning rate
+        self.lr = 5# learning rate
         self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
@@ -97,12 +97,12 @@ class Modèle(nn.Module):
             image_encoded = self.feedforward(image_input)
             x = [text_encoded, image_encoded]
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-            return self.output_layer(output)
+            return self.activation(self.output_layer(output))
         else:
             # Pass through the decoder
             x = text_encoded
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-            return self.output_layer(output)
+            return self.activation(self.output_layer(output))
 
 
     

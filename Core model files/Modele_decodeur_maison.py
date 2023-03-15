@@ -74,7 +74,6 @@ class Modèle(nn.Module):
 
 
     def forward(self, text_input, image_bool = False, image_input = None) : 
-
         src_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
         src_padding_mask  = (text_input== 6574).to(device=device)
@@ -82,23 +81,27 @@ class Modèle(nn.Module):
         # src_padding_mask = None
         # tgt_padding_mask=None
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
-        memory_key_padding_mask = (text_input== 6574).to(device=device)
-        # print(tgt_padding_mask.shape)
+        memory_key_padding_mask = (text_input == 6574).to(device=device)
+        if image_bool:
+            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]])
+            # mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1] + image_input.shape[1], text_input.shape[1] + image_input.shape[1]])  # Other dimension for the mem_ei_mask for test
+            mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
+            mem_ei_key_padding_mask = (text_input == 6574).to(device=device)
+            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False)), dim=1)
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
-        # mask = self.generate_square_subsequent_mask()  # text_input.shape[0]) masque rectangle
         if image_bool:
             # image_input = image_input.reshape((196,1024))
             # Concatenate encoded text and image
+            mem_masks = [memory_mask, mem_ei_mask]
+            mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
             image_encoded = self.feedforward(image_input)
             x = [text_encoded, image_encoded]
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
             return self.output_layer(output)
         else:
             # Pass through the decoder
             x = text_encoded
-            
-
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , memory_mask , tgt_padding_mask, memory_key_padding_mask)
+            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
             return self.output_layer(output)
 
 

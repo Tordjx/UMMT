@@ -11,16 +11,17 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 #%% Attention computation
 
-def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None):
+def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None, only_image=False):
     
     output = torch.matmul(q, k.transpose(-2, -1)) /  math.sqrt(d_k)
 
-    if mask is not None:
-        mask = mask.unsqueeze(1)
-        output = output.masked_fill(mask == 0, -1e9)
+    if not(only_image):
+        if mask is not None:
+            mask = mask.unsqueeze(1)
+            output = output.masked_fill(mask == 0, -1e9)
 
-    if padding_mask is not None:
-        output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
+        if padding_mask is not None:
+            output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
 
     output = F.softmax(output, dim=-1)
     
@@ -58,7 +59,7 @@ class MultiModalAttention(nn.Module):
         self.out = nn.Linear(d_model, d_model)
 
 
-    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask, padding_mask, image_bool):
+    def forward(self, q, k_e, k_i, k_ei, v_e, v_i, v_ei, mask_e, mask_ei, padding_mask_e, padding_mask_ei, image_bool):
         if not(self.batch_first):
             raise TypeError("The dimensions of the inputs are not batch_size * seq_len * embedding")
         else:
@@ -72,7 +73,7 @@ class MultiModalAttention(nn.Module):
             k_e = k_e.transpose(1,2)
             v_e = self.v_e_linear(v_e).view(-1, v_e.size(1), self.h, self.d_k)
             v_e = v_e.transpose(1,2)
-            scores_e = attention(q, k_e, v_e, self.d_k, mask, padding_mask, self.dropout) 
+            scores_e = attention(q, k_e, v_e, self.d_k, mask_e, padding_mask_e, self.dropout, only_image=False) 
 
             # If there is only text in the input, image_bool = False
             if not(image_bool):
@@ -86,14 +87,14 @@ class MultiModalAttention(nn.Module):
                 k_i = k_i.transpose(1,2)
                 v_i = self.v_i_linear(v_i).view(-1, v_i.size(1), self.h, self.d_k)
                 v_i = v_i.transpose(1,2)
-                scores_i = attention(q, k_i, v_i, self.d_k, mask, padding_mask, self.dropout)
+                scores_i = attention(q, k_i, v_i, self.d_k, None, None, self.dropout, only_image=True)
 
                 # Score for text and image : 
                 k_ei = self.k_ei_linear(k_ei).view(-1, k_ei.size(1), self.h, self.d_k) 
                 k_ei = k_ei.transpose(1,2)
                 v_ei = self.v_ei_linear(v_ei).view(-1, v_ei.size(1), self.h, self.d_k)
                 v_ei = v_ei.transpose(1,2)
-                scores_ei = attention(q, k_ei, v_ei, self.d_k, mask, padding_mask, self.dropout)
+                scores_ei = attention(q, k_ei, v_ei, self.d_k, None, padding_mask_ei, self.dropout, only_image=False)
 
                 # final scores 
                 scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei

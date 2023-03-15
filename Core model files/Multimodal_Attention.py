@@ -64,7 +64,6 @@ class MultiModalAttention(nn.Module):
             raise TypeError("The dimensions of the inputs are not batch_size * seq_len * embedding")
         else:
             bs = q.size(1)
-
             q = self.q_linear(q).view(-1, q.size(1), self.h, self.d_k) 
             q = q.transpose(1,2)
 

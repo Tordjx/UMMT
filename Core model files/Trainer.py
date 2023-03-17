@@ -85,17 +85,17 @@ def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None,
         mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
         mem_ei_key_padding_mask = (text_input == 6574).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
-    text_encoded = model_A.encoder(model_A.positional_encoder(output),src_mask,src_padding_mask)
+    text_encoded = model_B.encoder(model_B.positional_encoder(output),src_mask,src_padding_mask)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
         x = [text_encoded, image_encoded]
-        output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        output = model_A.decoder(x,model_B.positional_encoder(model_B.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
     else:
         x = text_encoded
-        output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-    return model_B.activation(model_B.output_layer(output))
+        output = model_A.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+    return model_A.activation(model_A.output_layer(output))
 
 def differentiable_cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
@@ -106,7 +106,7 @@ def differentiable_cycle_consistency_train(model_A, model_B,train_data,image_boo
             output = differentiable_cycle_forward(model_A,model_B, data, features, image_bool)
             loss = model_A.criterion(output.mT,data)
         else :
-            output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2))
+            output = differentiable_cycle_forward(model_A,model_B, data)
             loss = model_A.criterion(output.mT,target)
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
@@ -169,12 +169,12 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                     train_data= get_batch(train_data_fr,i)
                 model_A = model_fr
                 model_B = model_en
-            if V < 1 / 3 :#AUTO ENCODING
+            if V < 1  :#AUTO ENCODING
                 loss = auto_encoding_train(model_A,train_data,image_bool)
-            elif V < 2/3 :#CYCLE CONSISTENT
+            else  :#CYCLE CONSISTENT
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
-            else : #DIFFERENTIABLE CYCLE
-                loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
+            # else : #DIFFERENTIABLE CYCLE
+            #     loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
             print(loss)
             total_loss+=loss

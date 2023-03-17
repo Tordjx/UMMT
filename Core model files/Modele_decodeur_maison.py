@@ -78,8 +78,8 @@ class Modèle(nn.Module):
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
         src_padding_mask  = (text_input== 6574).to(device=device)
         tgt_padding_mask = (text_input== 6574).to(device=device)
-        # src_padding_mask = None
-        # tgt_padding_mask=None
+        # memory_mask = None
+        # memory_key_padding_mask=None
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
         memory_key_padding_mask = (text_input == 6574).to(device=device)
         if image_bool:
@@ -102,7 +102,8 @@ class Modèle(nn.Module):
             # Pass through the decoder
             x = text_encoded
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-            return self.activation(self.output_layer(output))
+            # return self.activation(self.output_layer(output))
+            return self.output_layer(output)
 
 
     

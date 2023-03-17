@@ -48,18 +48,21 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
     return model_B.activation(model_B.output_layer(output))
 
-def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False):
+def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False, mask_ei = False):
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     tgt_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1])
     src_padding_mask  = (text_input== 6574).to(device=device)
     tgt_padding_mask = (text_input== 6574).to(device=device)
     memory_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
     memory_key_padding_mask = (text_input == 6574).to(device=device)
-    if image_bool:
+    if image_bool and mask_ei:
         mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
         mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
         mem_ei_key_padding_mask = (text_input == 6574).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+    else:
+        mem_ei_mask = None
+        mem_ei_key_padding_mask = None
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]

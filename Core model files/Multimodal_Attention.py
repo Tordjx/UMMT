@@ -93,7 +93,7 @@ class MultiModalAttention(nn.Module):
                 k_ei = k_ei.transpose(1,2)
                 v_ei = self.v_ei_linear(v_ei).view(-1, v_ei.size(1), self.h, self.d_k)
                 v_ei = v_ei.transpose(1,2)
-                scores_ei = attention(q, k_ei, v_ei, self.d_k, None, padding_mask_ei, self.dropout, only_image=False)
+                scores_ei = attention(q, k_ei, v_ei, self.d_k, mask_ei, padding_mask_ei, self.dropout, only_image=False)
 
                 # final scores 
                 scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei

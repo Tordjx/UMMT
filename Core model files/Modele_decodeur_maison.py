@@ -47,7 +47,7 @@ class PositionalEncoding(nn.Module):
 
 
 class Modèle(nn.Module):
-    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ) -> None:
+    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ,padding_id) -> None:
         super().__init__()
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
@@ -57,7 +57,7 @@ class Modèle(nn.Module):
         self.dropout = dropout
         self.n_head = n_head
         self.n_token= n_token
-
+        self.padding_id = padding_id
         self.embedding = nn.Embedding(n_token, d_model, device=device)
         self.feedforward = nn.Linear(d_model,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)
@@ -76,17 +76,17 @@ class Modèle(nn.Module):
     def forward(self, text_input, image_bool = False, image_input = None, mask_ei = False) : 
         src_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
-        src_padding_mask  = (text_input== 6574).to(device=device)
-        tgt_padding_mask = (text_input== 6574).to(device=device)
+        src_padding_mask  = (text_input== self.padding_id).to(device=device)
+        tgt_padding_mask = (text_input== self.padding_id).to(device=device)
         # memory_mask = None
         # memory_key_padding_mask=None
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
-        memory_key_padding_mask = (text_input == 6574).to(device=device)
+        memory_key_padding_mask = (text_input == self.padding_id).to(device=device)
         if image_bool and mask_ei:
             mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
             # mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1] + image_input.shape[1], text_input.shape[1] + image_input.shape[1]])  # Other dimension for the mem_ei_mask for test
             mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
-            mem_ei_key_padding_mask = (text_input == 6574).to(device=device)
+            mem_ei_key_padding_mask = (text_input == self.padding_id).to(device=device)
             mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
         else:
             mem_ei_mask = None

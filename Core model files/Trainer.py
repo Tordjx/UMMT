@@ -129,19 +129,22 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
             with torch.no_grad():
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data, features, image_bool),dim = 2)
             output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
-            loss = model_A.criterion(output.mT,data)
         else :
-            output = cycle_consistent_forward(model_B,model_A, torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2))
-            loss = model_A.criterion(output.mT,target)
+            with torch.no_grad() : 
+                first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
+            output = cycle_consistent_forward(model_B,model_A, first_output)
+        loss_A = model_A.criterion(output.mT,data)
+        loss_B = model_B.criterion(output.mT,data)
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.5)
-        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.5)
+        loss_A.backward(retain_graph=True)
+        loss_B.backward()
+        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 5)
+        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 5)
         model_A.optimizer.step()
         model_B.optimizer.step()
-        return loss.item()
-
+        
+        return (loss_A.item()+loss_B.item())/2
 import matplotlib.pyplot as plt
 def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
     loss_list = []
@@ -189,4 +192,5 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)
+    
     

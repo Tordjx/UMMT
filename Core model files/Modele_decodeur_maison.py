@@ -70,6 +70,7 @@ class Modèle(nn.Module):
         self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
+        self.loss_list = []
 
 
 
@@ -91,6 +92,7 @@ class Modèle(nn.Module):
         else:
             mem_ei_mask = None
             mem_ei_key_padding_mask = None
+
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         if image_bool:
             # image_input = image_input.reshape((196,1024))
@@ -100,7 +102,7 @@ class Modèle(nn.Module):
             image_encoded = self.feedforward(image_input)
             x = [text_encoded, image_encoded]
             output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-            return self.activation(self.output_layer(output))
+            return self.output_layer(output)
         else:
             # Pass through the decoder
             x = text_encoded

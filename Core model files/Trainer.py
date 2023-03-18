@@ -46,7 +46,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     else:
         x = text_encoded
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-    return model_B.activation(model_B.output_layer(output))
+    return model_B.output_layer(output)
 
 def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False, mask_ei = False):
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
@@ -75,7 +75,7 @@ def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None,
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
     #Intermediate result to have the new masks
     with torch.no_grad():
-        text_input = torch.argmax(model_B.activation(model_B.output_layer(output)),dim = 2)
+        text_input = torch.argmax(model_B.output_layer(output),dim = 2)
     #Compute new masks with augmented data
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     tgt_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1])
@@ -98,7 +98,7 @@ def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None,
     else:
         x = text_encoded
         output = model_A.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-    return model_A.activation(model_A.output_layer(output))
+    return model_A.output_layer(output)
 
 def differentiable_cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
@@ -143,7 +143,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         return loss.item()
 
 import matplotlib.pyplot as plt
-def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False):
+def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
     loss_list = []
     model_fr.train()
     model_en.train()
@@ -172,12 +172,15 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                     train_data= get_batch(train_data_fr,i)
                 model_A = model_fr
                 model_B = model_en
-            if V < 1/2  :#AUTO ENCODING
+            if V < repartition[0]  :#AUTO ENCODING
                 loss = auto_encoding_train(model_A,train_data,image_bool)
-            else  :#CYCLE CONSISTENT
+                model_A.loss_list.append(loss)
+            elif V < repartition[1]  :#CYCLE CONSISTENT
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
-            # else : #DIFFERENTIABLE CYCLE
-            #     loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
+                model_A.loss_list.append(loss)
+                model_B.loss_list.append(loss)
+            else : #DIFFERENTIABLE CYCLE
+                loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
             print(loss)
             total_loss+=loss

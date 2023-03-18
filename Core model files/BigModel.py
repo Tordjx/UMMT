@@ -32,6 +32,7 @@ class PositionalEncoding(nn.Module):
 class Modèle(nn.Module):
     def __init__(self,n_token_A, n_token_B, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation, padding_id_A, padding_id_B ) -> None:
         super().__init__()
+        self.loss_list = []
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
         self.num_decoder_layers= num_decoder_layers
@@ -91,11 +92,11 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_A(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
                 else : 
                     text_encoded = self.encoder_B(self.positional_encoder(self.embedding_B(text_input)), src_mask, src_padding_mask)
                     if image_bool : 
@@ -104,11 +105,11 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_B(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_B(output))
+                        return self.output_layer_B(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_B(output))
+                        return self.output_layer_B(output)
             ########################################################
             elif forward_type == "Cycle" :
                 if data_source == "A" :
@@ -119,11 +120,11 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_A(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_B(output))
+                        return self.output_layer_B(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_B(output))
+                        return self.output_layer_B(output)
                 else : 
                     text_encoded = self.encoder_B(self.positional_encoder(self.embedding_B(text_input)), src_mask, src_padding_mask)
                     if image_bool : 
@@ -132,11 +133,11 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_B(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
             ########################################################
             else :#Differentiable cycle 
                 if data_source == "A" :
@@ -152,7 +153,7 @@ class Modèle(nn.Module):
                         x = text_encoded
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
                     with torch.no_grad():
-                        text_input = torch.argmax(self.activation(self.output_layer_B(output)),dim = 2)
+                        text_input = torch.argmax(self.output_layer_B(output),dim = 2)
                     if data_source == "A" :
                         PADDING = self.padding_id_B
                     else : 
@@ -174,11 +175,11 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_B(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_A(output))
+                        return self.output_layer_A(output)
                 ######B INPUT
                 else : 
                     text_encoded = self.encoder_B(self.positional_encoder(self.embedding_B(text_input)), src_mask, src_padding_mask)
@@ -192,7 +193,7 @@ class Modèle(nn.Module):
                         x = text_encoded
                         output = self.decoder_A(x, self.positional_encoder(self.embedding_B(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
                     with torch.no_grad():
-                        text_input = torch.argmax(self.activation(self.output_layer_A(output)),dim = 2)
+                        text_input = torch.argmax(self.output_layer_A(output),dim = 2)
                     if data_source == "A" :
                         PADDING = self.padding_id_B
                     else : 
@@ -210,12 +211,12 @@ class Modèle(nn.Module):
                         image_encoded = self.feedforward_A(image_input)
                         x = [text_encoded, image_encoded]
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-                        return self.activation(self.output_layer_B(output))
+                        return self.output_layer_B(output)
                     else : 
                         x = text_encoded
                         output = self.decoder_B(x, self.positional_encoder(self.embedding_A(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_padding_mask])
-                        return self.activation(self.output_layer_B(output))
-                
+                        return self.output_layer_B(output)
+            
     
     def generate_padding_mask(self, text_input,padding_id):
         return (text_input== padding_id).to(device=device)

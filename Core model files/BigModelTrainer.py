@@ -8,7 +8,6 @@ torch.autograd.set_detect_anomaly(True)
 #CONVENTION A = FR B = EN
 import matplotlib.pyplot as plt
 def mixed_train(model,train_data_fr,train_data_en,n_iter,batch_size, repartition, image_bool = False):
-    loss_list = []
     model.train()
     log_interval = 50
     total_loss = 0
@@ -65,7 +64,7 @@ def mixed_train(model,train_data_fr,train_data_en,n_iter,batch_size, repartition
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
             model.optimizer.step()
-            loss_list.append(loss.item())
+            model.loss_list.append(loss.item())
             print(loss.item())
             total_loss+=loss
             if (i%log_interval == 40 and i !=0) or i == N-1 : 

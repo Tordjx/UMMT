@@ -6,7 +6,7 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 bptt = 10
 epoch = 1
-torch.autograd.set_detect_anomaly(True)
+# torch.autograd.set_detect_anomaly(True)
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
         data, feature = train_data
@@ -37,15 +37,20 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
+    print("encoded text")
+    print(text_encoded)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
         x = [text_encoded, image_encoded]
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        print("post decoder")
+        print(output)
     else:
         x = text_encoded
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+        
     return model_B.output_layer(output)
 
 def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False, mask_ei = False):
@@ -127,8 +132,15 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
             data,target = train_data
         if image_bool : 
             with torch.no_grad():
-                first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data, features, image_bool),dim = 2)
+                first_output = cycle_consistent_forward(model_A,model_B, data, features, image_bool)
+                print("before argmax")
+                print(first_output)
+                first_output = torch.argmax(first_output,dim = 2)
+            print('first output')
+            print(first_output)
             output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
+            print('output')
+            print(output)
         else :
             with torch.no_grad() : 
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)

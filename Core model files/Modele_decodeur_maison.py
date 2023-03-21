@@ -118,7 +118,7 @@ class Modèle(nn.Module):
     #     return torch.triu(torch.full((sz_1,sz_2 ), float('-inf'), device=device), diagonal=1)
 
     def generate_square_subsequent_mask(self,a,b) -> Tensor:
-        return torch.triu(torch.full((a,b,b), float('-inf'), device=device), diagonal=1)
+        return torch.triu(torch.full((a,b,b), True, device=device,dtype = bool), diagonal=1)
 
     def _reset_parameters(self):
         r"""Initiate parameters in the transformer model."""

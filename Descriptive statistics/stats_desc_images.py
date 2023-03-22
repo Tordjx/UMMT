@@ -126,5 +126,5 @@ def similarity_comparaison(file_name,nb=10,printing=False):
 
 # Tests : 
 for file_name, caption in dict_captions.items():
-    similarity_comparaison(file_name, printing=False)
+    similarity_comparaison(file_name, printing=True)
 

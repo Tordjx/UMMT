@@ -9,13 +9,7 @@ from NewDecoderLayer import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #SI SRC=torch.rand((10,32,512)), alors d_model = 512,
-d_model = 1024
-n_head = 4 
-num_encoder_layers = 2
-num_decoder_layers = 2
-dim_feedforward= 100
-dropout = 0.1
-activation = nn.Softmax
+
 
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model: int, dropout: float = 0.1, max_len: int = 5000):
@@ -66,8 +60,8 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss()
-        self.lr = 10**(-4)# learning rate
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-4))
+        self.lr = 10**(-5)# learning rate
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-3))
         # self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []

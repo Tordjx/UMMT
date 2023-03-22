@@ -53,7 +53,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     else:
         x = text_encoded
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-        print("post decoder")
+    print("post decoder")
     print(output)
     return model_B.output_layer(output)
 
@@ -150,12 +150,25 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
             output = cycle_consistent_forward(model_B,model_A, first_output)
         loss_A = model_A.criterion(output.mT,data)
-        print(loss_A.item())
+        # print(loss_A.item())
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
+        for name,param in model_A.named_parameters():
+            if param.grad is not None : 
+                print("A+"+name, param.grad)
+            else :
+                print("A"+name)
+                print("NONE")
+        for name,param in model_B.named_parameters():
+            if param.grad is not None : 
+                print("B+"+name, param.grad)
+            else :
+                print("B"+name)
+                print("NONE")
+                
         loss_A.backward()
-        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 5)
-        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 5)
+        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.1)
+        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.1)
         model_A.optimizer.step()
         model_B.optimizer.step()
         
@@ -191,16 +204,18 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                 model_A = model_fr
                 model_B = model_en
             if V < repartition[0]  :#AUTO ENCODING
+                print('auto enc')
                 loss = auto_encoding_train(model_A,train_data,image_bool)
                 model_A.loss_list.append(loss)
             elif V < repartition[1]  :#CYCLE CONSISTENT
+                print('gvpt')
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
                 model_A.loss_list.append(loss)
                 model_B.loss_list.append(loss)
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
-            # print(loss)
+            print(loss)
             total_loss+=loss
             if (i%log_interval == 40 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 

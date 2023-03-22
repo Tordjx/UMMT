@@ -59,22 +59,22 @@ class Modèle(nn.Module):
         self.n_token= n_token
         self.padding_id = padding_id
         self.embedding = nn.Embedding(n_token, d_model, device=device)
-        self.feedforward = nn.Linear(d_model,d_model,device=device)
+        self.feedforward = nn.Linear(196,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device, batch_first=True) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss()
-        self.lr = 5# learning rate
-        self.optimizer = torch.optim.SGD(self.parameters(), lr=self.lr)
-        self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
+        self.lr = 10**(-4)# learning rate
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-4))
+        # self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 
 
 
-    def forward(self, text_input, image_bool = False, image_input = None, mask_ei = True) : 
+    def forward(self, text_input, image_bool = False, image_input = None, mask_ei = False) : 
         src_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
         src_padding_mask  = (text_input== self.padding_id).to(device=device)
@@ -84,7 +84,7 @@ class Modèle(nn.Module):
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
         memory_key_padding_mask = (text_input == self.padding_id).to(device=device)
         if image_bool and mask_ei:
-            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
+            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
             # mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1] + image_input.shape[1], text_input.shape[1] + image_input.shape[1]])  # Other dimension for the mem_ei_mask for test
             mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
             mem_ei_key_padding_mask = (text_input == self.padding_id).to(device=device)
@@ -92,7 +92,6 @@ class Modèle(nn.Module):
         else:
             mem_ei_mask = None
             mem_ei_key_padding_mask = None
-            
 
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         if image_bool:

@@ -23,7 +23,6 @@ def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None, only_ima
         if padding_mask is not None:
             output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
 
-
     output = F.softmax(output, dim=-1)
     
     if dropout is not None:

@@ -6,7 +6,7 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 bptt = 10
 epoch = 1
-# torch.autograd.set_detect_anomaly(True)
+torch.autograd.set_detect_anomaly(True)
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
         data, feature = train_data
@@ -32,12 +32,12 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     memory_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
     memory_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
     if image_bool:
-        mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
+        mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
         mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
-    print("encoded text")
+    print('text_encoded')
     print(text_encoded)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
@@ -45,12 +45,16 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         image_encoded = model_A.feedforward(image_input)
         x = [text_encoded, image_encoded]
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-        print("post decoder")
-        print(output)
+
+    # U = [src_mask,tgt_mask, src_padding_mask, tgt_padding_mask, memory_mask, memory_key_padding_mask, mem_ei_mask, mem_ei_key_padding_mask]
+    # for i in range(len(U)) :
+    #     print(i)
+    #     print(U[i])
     else:
         x = text_encoded
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-        
+        print("post decoder")
+    print(output)
     return model_B.output_layer(output)
 
 def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False, mask_ei = False):
@@ -133,30 +137,29 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
             with torch.no_grad():
                 first_output = cycle_consistent_forward(model_A,model_B, data, features, image_bool)
-                print("before argmax")
+                print("pre argmax")
                 print(first_output)
                 first_output = torch.argmax(first_output,dim = 2)
-            print('first output')
-            print(first_output)
+                print('post argmax')
+                print(first_output)
             output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
-            print('output')
+            print("full output")
             print(output)
         else :
             with torch.no_grad() : 
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
             output = cycle_consistent_forward(model_B,model_A, first_output)
         loss_A = model_A.criterion(output.mT,data)
-        loss_B = model_B.criterion(output.mT,data)
+        print(loss_A.item())
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
-        loss_A.backward(retain_graph=True)
-        loss_B.backward()
+        loss_A.backward()
         torch.nn.utils.clip_grad_norm_(model_A.parameters(), 5)
         torch.nn.utils.clip_grad_norm_(model_B.parameters(), 5)
         model_A.optimizer.step()
         model_B.optimizer.step()
         
-        return (loss_A.item()+loss_B.item())/2
+        return loss_A.item()
 import matplotlib.pyplot as plt
 def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
     loss_list = []
@@ -197,7 +200,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
-            print(loss)
+            # print(loss)
             total_loss+=loss
             if (i%log_interval == 40 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 

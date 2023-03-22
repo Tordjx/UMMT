@@ -74,7 +74,7 @@ class Modèle(nn.Module):
 
 
 
-    def forward(self, text_input, image_bool = False, image_input = None, mask_ei = False) : 
+    def forward(self, text_input, image_bool = False, image_input = None, mask_ei = True) : 
         src_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
         src_padding_mask  = (text_input== self.padding_id).to(device=device)
@@ -84,7 +84,7 @@ class Modèle(nn.Module):
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
         memory_key_padding_mask = (text_input == self.padding_id).to(device=device)
         if image_bool and mask_ei:
-            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
+            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
             # mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1] + image_input.shape[1], text_input.shape[1] + image_input.shape[1]])  # Other dimension for the mem_ei_mask for test
             mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
             mem_ei_key_padding_mask = (text_input == self.padding_id).to(device=device)
@@ -92,6 +92,7 @@ class Modèle(nn.Module):
         else:
             mem_ei_mask = None
             mem_ei_key_padding_mask = None
+            
 
         text_encoded = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         if image_bool:

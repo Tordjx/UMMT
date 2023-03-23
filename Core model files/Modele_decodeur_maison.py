@@ -41,7 +41,7 @@ class PositionalEncoding(nn.Module):
 
 
 class Modèle(nn.Module):
-    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ,padding_id) -> None:
+    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ,padding_id,begin_id, end_id) -> None:
         super().__init__()
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
@@ -52,6 +52,8 @@ class Modèle(nn.Module):
         self.n_head = n_head
         self.n_token= n_token
         self.padding_id = padding_id
+        self.begin_id = begin_id
+        self.end_id = end_id
         self.embedding = nn.Embedding(n_token, d_model, device=device)
         self.feedforward = nn.Linear(196,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)

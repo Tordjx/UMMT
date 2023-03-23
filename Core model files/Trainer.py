@@ -37,8 +37,8 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
-    print('text_encoded')
-    print(text_encoded)
+    # print('text_encoded')
+    # print(text_encoded)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
@@ -53,8 +53,8 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     else:
         x = text_encoded
         output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-    print("post decoder")
-    print(output)
+    # print("post decoder")
+    # print(output)
     return model_B.output_layer(output)
 
 def differentiable_cycle_forward(model_A,model_B,text_input, image_input = None, image_bool = False, mask_ei = False):
@@ -137,14 +137,14 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
             with torch.no_grad():
                 first_output = cycle_consistent_forward(model_A,model_B, data, features, image_bool)
-                print("pre argmax")
-                print(first_output)
-                first_output = torch.argmax(first_output,dim = 2)
-                print('post argmax')
-                print(first_output)
+                # print("pre argmax")
+                # print(first_output)
+                first_output = check_data(torch.argmax(first_output,dim = 2),model_B.padding_id,model_B.begin_id,model_B.end_id)
+                # print('post argmax')
+                # print(first_output)
             output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
-            print("full output")
-            print(output)
+            # print("full output")
+            # print(output)
         else :
             with torch.no_grad() : 
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
@@ -153,18 +153,18 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         # print(loss_A.item())
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
-        for name,param in model_A.named_parameters():
-            if param.grad is not None : 
-                print("A+"+name, param.grad)
-            else :
-                print("A"+name)
-                print("NONE")
-        for name,param in model_B.named_parameters():
-            if param.grad is not None : 
-                print("B+"+name, param.grad)
-            else :
-                print("B"+name)
-                print("NONE")
+        # for name,param in model_A.named_parameters():
+        #     if param.grad is not None : 
+        #         print("A+"+name, param.grad)
+        #     else :
+        #         print("A"+name)
+        #         print("NONE")
+        # for name,param in model_B.named_parameters():
+        #     if param.grad is not None : 
+        #         print("B+"+name, param.grad)
+        #     else :
+        #         print("B"+name)
+        #         print("NONE")
                 
         loss_A.backward()
         torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.1)
@@ -204,11 +204,9 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                 model_A = model_fr
                 model_B = model_en
             if V < repartition[0]  :#AUTO ENCODING
-                print('auto enc')
                 loss = auto_encoding_train(model_A,train_data,image_bool)
                 model_A.loss_list.append(loss)
             elif V < repartition[1]  :#CYCLE CONSISTENT
-                print('gvpt')
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
                 model_A.loss_list.append(loss)
                 model_B.loss_list.append(loss)

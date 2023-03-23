@@ -96,3 +96,9 @@ def get_batch(source,i, image_bool = False) :
 #     target = source[i:i+seq_len].reshape(-1)
 
 #     return data.to(device), target.to(device)
+def check_data(data,padding_id,begin_id,end_id):
+    for i in range(len(data)):
+        if torch.equal(data[i] , padding_id*torch.ones_like(data[i])):
+            data[i][0] = begin_id
+            data[i][1] = end_id
+    return data

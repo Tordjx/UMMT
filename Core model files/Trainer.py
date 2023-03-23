@@ -149,29 +149,33 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
             with torch.no_grad() : 
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
             output = cycle_consistent_forward(model_B,model_A, first_output)
+        # import pickle
+        # gradient_list=[output.mT,data]
+        # with open('mypicklefile', 'wb') as f1:
+        #     pickle.dump(gradient_list, f1)
         loss_A = model_A.criterion(output.mT,data)
         # print(loss_A.item())
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
+
         # for name,param in model_A.named_parameters():
         #     if param.grad is not None : 
-        #         print("A+"+name, param.grad)
-        #     else :
-        #         print("A"+name)
-        #         print("NONE")
+        #         gradient_list.append(param.grad)
         # for name,param in model_B.named_parameters():
         #     if param.grad is not None : 
-        #         print("B+"+name, param.grad)
-        #     else :
-        #         print("B"+name)
-        #         print("NONE")
-                
+        #         gradient_list.append(param.grad)
+        # with open('mypicklefile', 'wb') as f1:
+        #     pickle.dump(gradient_list, f1)
+
         loss_A.backward()
         torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.1)
         torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.1)
         model_A.optimizer.step()
         model_B.optimizer.step()
-        
+        # model_A.scheduler.step()
+        # model_B.scheduler.step()
+        # print("lra"+str(model_A.scheduler.get_last_lr()))
+        # print("lrb"+str(model_B.scheduler.get_last_lr()))
         return loss_A.item()
 import matplotlib.pyplot as plt
 def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
@@ -213,7 +217,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
-            # print(loss)
+            print(loss)
             total_loss+=loss
             if (i%log_interval == 40 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 

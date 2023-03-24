@@ -221,7 +221,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             loss_list.append(loss)
             # print(loss)
             total_loss+=loss
-            if (i%log_interval == 40 and i !=0) or i == N-1 : 
+            if (i%log_interval == 0 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
                 total_loss = 0
                 start_time = time.time()

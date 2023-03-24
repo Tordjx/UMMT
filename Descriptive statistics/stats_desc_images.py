@@ -86,7 +86,7 @@ def similarity_score():
         text_features /= text_features.norm(dim=-1, keepdim=True)
         similarity = (100.0 * image_features @ text_features.T)
 
-        simi_scores[file_name] = similarity
+        simi_scores[file_name] = similarity.item()
     
     return simi_scores
 
@@ -108,23 +108,24 @@ def similarity_comparaison(file_name,nb=10,printing=False):
         text_features /= text_features.norm(dim=-1, keepdim=True)
         similarity = (100.0 * image_features @ text_features.T)
 
-    other_captions = rd.choice(list(captions),size=nb)
+    other_captions = np.random.choice(list(captions),size=nb)
     similarities = []
     for cap in other_captions:
+        cap = clip.tokenize([cap]).to(device)
         with torch.no_grad():
             cap_features = model.encode_text(cap)
             cap_features /= cap_features.norm(dim=-1, keepdim=True)
-            similarities.append((100.0 * image_features @ cap_features.T))
+            similarities.append((100.0 * image_features @ cap_features.T).item())
 
     if printing:
         print("Real similarity : " + str(similarity))
         for i in range(len(similarities)):
             print("Random caption " + str(i) + " : " + str(similarities[i]))
     
-    similarities.insert(0,similarity)
+    similarities.insert(0,similarity.item())
     return similarities
 
 # Tests : 
+results_comparaison = {}
 for file_name, caption in dict_captions.items():
-    similarity_comparaison(file_name, printing=True)
-
+    results_comparaison[(file_name,caption)] = similarity_comparaison(file_name, printing=False)

@@ -102,3 +102,16 @@ def check_data(data,padding_id,begin_id,end_id):
             data[i][0] = begin_id
             data[i][1] = end_id
     return data
+
+
+def range_le_padding(data,padding_id) : 
+    for i in range(data.size(0)):
+        j=0
+        while j < data.size(1): 
+            if torch.equal(data[i][j:] , padding_id * torch.ones_like(data[i][j:])):
+                break
+            elif data[i][j] == padding_id : 
+                data[i] = torch.cat((data[i][:j],data[i][j+1:],torch.Tensor([padding_id]).to(device= device, dtype = torch.int64)))
+            else : 
+                j+=1
+    return data

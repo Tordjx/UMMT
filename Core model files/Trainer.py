@@ -139,7 +139,8 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
                 first_output = cycle_consistent_forward(model_A,model_B, data, features, image_bool)
                 # print("pre argmax")
                 # print(first_output)
-                first_output = check_data(torch.argmax(first_output,dim = 2),model_B.padding_id,model_B.begin_id,model_B.end_id)
+                first_output = range_le_padding(check_data(torch.argmax(first_output,dim = 2),model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
+                
                 # print('post argmax')
                 # print(first_output)
             output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
@@ -148,9 +149,10 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         else :
             with torch.no_grad() : 
                 first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
+                first_output = range_le_padding(check_data(first_output,model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
             output = cycle_consistent_forward(model_B,model_A, first_output)
         # import pickle
-        # gradient_list=[output.mT,data]
+        # gradient_list=[output.mT,first_output]
         # with open('mypicklefile', 'wb') as f1:
         #     pickle.dump(gradient_list, f1)
         loss_A = model_A.criterion(output.mT,data)
@@ -217,7 +219,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
             loss_list.append(loss)
-            print(loss)
+            # print(loss)
             total_loss+=loss
             if (i%log_interval == 40 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 

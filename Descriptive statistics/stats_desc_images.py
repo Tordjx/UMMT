@@ -134,3 +134,16 @@ def similarity_comparaison(file_name,nb=10,printing=False):
 results_comparaison = {}
 for file_name, caption in dict_captions.items():
     results_comparaison[(file_name,caption)] = similarity_comparaison(file_name, printing=False)
+
+with open('comparaison_score.csv', 'w') as f:
+    for key in results_comparaison.keys():
+        f.write("%s,%s\n"%(key,results_comparaison[key]))
+
+#%% Distribution
+
+sorted_simi = [ value for key, value in simi_scores.items() ]
+sorted_simi.sort()
+
+plt.figure()
+plt.hist(sorted_simi, density=True)
+plt.show()

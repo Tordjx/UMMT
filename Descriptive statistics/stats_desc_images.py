@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import random as rd
+import csv
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -91,6 +92,10 @@ def similarity_score():
     return simi_scores
 
 simi_scores = similarity_score()
+
+with open('similarity_score.csv', 'w') as f:
+    for key in simi_scores.keys():
+        f.write("%s,%s\n"%(key,simi_scores[key]))
 
 #%% Comparaison with other values
 

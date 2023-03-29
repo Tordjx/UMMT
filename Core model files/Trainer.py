@@ -186,7 +186,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
     loss_list = []
     model_fr.train()
     model_en.train()
-    log_interval = 50
+    
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
@@ -196,6 +196,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             N = len(batched_data_fr[0])
         else : 
             N = len(batched_data_fr)
+        log_interval = N//10
         for i in range(N):
             U = np.random.rand()
             V = np.random.rand()
@@ -226,7 +227,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             # print(loss)
             total_loss+=loss
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
-                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
+                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)

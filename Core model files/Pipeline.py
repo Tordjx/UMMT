@@ -72,7 +72,7 @@ def batchify(data: Tensor, bsz: int, image_bool) -> Tensor:
         permutation = torch.randperm(text.shape[0])
         text = text[permutation]
         features = features[permutation]
-        return text.view(text.shape[0]//bsz, bsz, text.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2])
+        return text.view(text.shape[0]//bsz, bsz, text.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)
     else : 
         
         permutation = torch.randperm(data.shape[0])

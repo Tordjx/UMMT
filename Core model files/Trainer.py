@@ -10,6 +10,7 @@ torch.autograd.set_detect_anomaly(True)
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
         data, feature = train_data
+        feature = feature.to(device = device, dtype = torch.float32)
     else : 
         data,target = train_data
     if image_bool : 
@@ -132,6 +133,7 @@ def differentiable_cycle_consistency_train(model_A, model_B,train_data,image_boo
 def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
             data, features = train_data
+            features = features.to(device = device, dtype = torch.float32)
         else :
             data,target = train_data
         if image_bool : 

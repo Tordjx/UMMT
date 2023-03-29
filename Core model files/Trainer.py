@@ -188,25 +188,27 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
+        batched_data_fr = batchify(train_data_fr,batch_size , image_bool)
+        batched_data_en = batchify(train_data_en, batch_size ,image_bool)
         if image_bool : 
-            N = len(train_data_fr[0])
+            N = len(batched_data_fr[0])
         else : 
-            N = len(train_data_fr)
+            N = len(batched_data_fr)
         for i in range(N):
             U = np.random.rand()
             V = np.random.rand()
             if U<1/2 : #ENGLISH DATA
                 if image_bool : 
-                    train_data= get_batch(train_data_en,i,image_bool)
+                    train_data= get_batch(batched_data_en,i,image_bool)
                 else : 
-                    train_data= get_batch(train_data_en,i)
+                    train_data= get_batch(batched_data_en,i)
                 model_A = model_en
                 model_B = model_fr
             else : #FRENCH DATA
                 if image_bool : 
-                        train_data= get_batch(train_data_fr,i,image_bool)
+                        train_data= get_batch(batched_data_fr,i,image_bool)
                 else : 
-                    train_data= get_batch(train_data_fr,i)
+                    train_data= get_batch(batched_data_fr,i)
                 model_A = model_fr
                 model_B = model_en
             if V < repartition[0]  :#AUTO ENCODING

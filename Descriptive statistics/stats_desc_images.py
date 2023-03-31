@@ -29,6 +29,12 @@ def get_captions():
 names, captions = get_captions()
 dict_captions = { names[i] : captions[i] for i in range(len(names)) }
 
+#%% Show images
+
+im = Image.open(r"C:/Users/lucas/Downloads/flickr30k-images.tar/flickr30k-images/83482568.jpg")
+plt.imshow(im)
+plt.show()
+
 #%% Similarity prediction computation
 
 model, preprocess = clip.load('ViT-B/32', device)

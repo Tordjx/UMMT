@@ -10,6 +10,7 @@ torch.autograd.set_detect_anomaly(True)
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
         data, feature = train_data
+        feature = feature.to(device = device, dtype = torch.float32)
     else : 
         data,target = train_data
     if image_bool : 
@@ -132,6 +133,7 @@ def differentiable_cycle_consistency_train(model_A, model_B,train_data,image_boo
 def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         if image_bool : 
             data, features = train_data
+            features = features.to(device = device, dtype = torch.float32)
         else :
             data,target = train_data
         if image_bool : 
@@ -184,29 +186,32 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
     loss_list = []
     model_fr.train()
     model_en.train()
-    log_interval = 50
+    
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
+        batched_data_fr = batchify(train_data_fr,batch_size , image_bool)
+        batched_data_en = batchify(train_data_en, batch_size ,image_bool)
         if image_bool : 
-            N = len(train_data_fr[0])
+            N = len(batched_data_fr[0])
         else : 
-            N = len(train_data_fr)
+            N = len(batched_data_fr)
+        log_interval = N//10
         for i in range(N):
             U = np.random.rand()
             V = np.random.rand()
             if U<1/2 : #ENGLISH DATA
                 if image_bool : 
-                    train_data= get_batch(train_data_en,i,image_bool)
+                    train_data= get_batch(batched_data_en,i,image_bool)
                 else : 
-                    train_data= get_batch(train_data_en,i)
+                    train_data= get_batch(batched_data_en,i)
                 model_A = model_en
                 model_B = model_fr
             else : #FRENCH DATA
                 if image_bool : 
-                        train_data= get_batch(train_data_fr,i,image_bool)
+                        train_data= get_batch(batched_data_fr,i,image_bool)
                 else : 
-                    train_data= get_batch(train_data_fr,i)
+                    train_data= get_batch(batched_data_fr,i)
                 model_A = model_fr
                 model_B = model_en
             if V < repartition[0]  :#AUTO ENCODING
@@ -222,7 +227,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             # print(loss)
             total_loss+=loss
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
-                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/log_interval)) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
+                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)

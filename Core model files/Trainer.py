@@ -223,6 +223,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                 model_B.loss_list.append(loss)
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
+            
             loss_list.append(loss)
             # print(loss)
             total_loss+=loss

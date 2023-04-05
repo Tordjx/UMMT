@@ -190,8 +190,7 @@ for i in range(len(comparaison_score["list_values"])):
     simi_score.append(b[0])
     comp_score.append(b[1:])
 
-#%% Treatment 
-
+#%% Stats 
 # Comparaison simi_score vs mean of other scores
 simi_score_index = [ (simi_score[i], i) for i in range(len(simi_score)) ]
 simi_score_index.sort()
@@ -203,7 +202,7 @@ comp_score = [ comp_score[i] for i in permutation ] # permute the other scores w
 mean_comp_score = [ np.mean(x) for x in comp_score ] 
 plt.figure()
 plt.plot(index, simi_score, color="red")
-plt.scatter(index, comp_score, color="blue", s=0.01 )
+plt.scatter(index, mean_comp_score, color="blue", s=0.01 )
 plt.show()
 
 # Difference : 
@@ -226,6 +225,7 @@ plt.plot(x, p_c, 'k', linewidth=2)
 plt.show()
 
 #%% Both
+
 # Both histogram : 
 plt.figure()
 plt.hist(sorted_comp_score, density=True, label="means of other scores", color="blue")

@@ -175,5 +175,32 @@ pylab.show()
 ks_statistic, p_value = kstest(sorted_simi, 'norm')
 print(ks_statistic, p_value)
 
-#%% 
+#%% Distribution comparaison score
 
+comparaison_score = pd.read_csv("comparaison_score.csv",sep=')',on_bad_lines='skip', names = ["file", "list_values"])
+
+simi_score = []
+comp_score = []
+for i in range(len(comparaison_score["list_values"])):
+    a=comparaison_score["list_values"][i].split(",")
+    del a[0]
+    a[0] = a[0][1:]
+    a[-1] = a[-1][:-1]
+    b = [ float(x) for x in a]
+    simi_score.append(b[0])
+    comp_score.append(b[1:])
+
+#%% Treatment 
+
+# Comparaison simi_score vs mean of other scores
+simi_score_index = [ (simi_score[i], i) for i in range(len(simi_score)) ]
+simi_score_index.sort()
+simi_score, permutation = zip(*simi_score_index)
+
+comp_score = [ np.mean(comp_score[i]) for i in permutation ] # permute the other scores with the sorting permutation
+index = [ i for i in range(len(simi_score)) ]
+
+plt.figure()
+plt.plot(index, simi_score, color="red")
+plt.scatter(index, comp_score, color="blue", s=0.001 ) #linewidths=0.001)
+plt.show()

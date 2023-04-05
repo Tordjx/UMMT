@@ -48,6 +48,7 @@ class Modèle(nn.Module):
         self.num_decoder_layers= num_decoder_layers
         self.dim_feedforward = dim_feedforward
         self.activation = activation 
+        self.lr_list = []
         self.dropout = dropout
         self.n_head = n_head
         self.n_token= n_token
@@ -62,9 +63,9 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss()
-        self.lr = 10**(-3)# learning rate
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-4))
-        # self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
+        self.lr = 10**(-5)# learning rate
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-5))
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer,T_max = 20)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 

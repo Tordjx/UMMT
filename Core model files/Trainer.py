@@ -23,6 +23,7 @@ def auto_encoding_train(model,train_data, image_bool):
     loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
     model.optimizer.step()
+    model.scheduler.step()
     return loss.item()
 
 def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, image_bool = False) : 
@@ -177,6 +178,8 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.1)
         model_A.optimizer.step()
         model_B.optimizer.step()
+        model_A.scheduler.step()
+        model_B.scheduler.step()
         # model_A.scheduler.step()
         # model_B.scheduler.step()
         # print("lra"+str(model_A.scheduler.get_last_lr()))
@@ -224,12 +227,13 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                 model_B.loss_list.append(loss)
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
-            
+            model_fr.lr_list.append(model_fr.scheduler.get_last_lr())
+            model_en.lr_list.append(model_en.scheduler.get_last_lr())
             loss_list.append(loss)
             # print(loss)
             total_loss+=loss
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
-                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval)) 
+                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval) + " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_fr.scheduler.get_last_lr()))
                 total_loss = 0
                 start_time = time.time()
         plt.plot(loss_list)

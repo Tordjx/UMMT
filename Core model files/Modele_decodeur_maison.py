@@ -62,8 +62,8 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss()
-        self.lr = 10**(-5)# learning rate
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-3))
+        self.lr = 10**(-3)# learning rate
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-4))
         # self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer, 1.0, gamma=0.95)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
@@ -79,6 +79,7 @@ class Modèle(nn.Module):
         # memory_key_padding_mask=None
         memory_mask = self.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
         memory_key_padding_mask = (text_input == self.padding_id).to(device=device)
+        
         if image_bool and mask_ei:
             mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device)
             # mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1] + image_input.shape[1], text_input.shape[1] + image_input.shape[1]])  # Other dimension for the mem_ei_mask for test

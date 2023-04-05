@@ -37,6 +37,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+    # print((src_mask.dtype),(tgt_mask.dtype),(src_padding_mask.dtype),(tgt_padding_mask.dtype),(memory_mask.dtype),(memory_key_padding_mask.dtype))
     text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
     # print('text_encoded')
     # print(text_encoded)

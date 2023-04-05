@@ -212,3 +212,30 @@ plt.figure()
 plt.plot(index, simi_score, color="red")
 plt.scatter(index, diff_comp_score, s=0.01)
 plt.show()
+
+# histrogram 
+sorted_comp_score = sorted(mean_comp_score)
+mu_c, std_c = norm.fit(sorted_comp_score) 
+
+plt.figure()
+plt.hist(sorted_comp_score, density=True)
+xmin, xmax = plt.xlim()
+x = np.linspace(xmin, xmax, 100)
+p_c = norm.pdf(x, mu_c, std_c)
+plt.plot(x, p_c, 'k', linewidth=2)
+plt.show()
+
+#%% Both
+# Both histogram : 
+plt.figure()
+plt.hist(sorted_comp_score, density=True, label="means of other scores", color="blue")
+plt.hist(sorted_simi, density=True, label="similarity scores",color="red")
+xmin, xmax = plt.xlim()
+x = np.linspace(xmin, xmax, 100)
+p_c = norm.pdf(x, mu_c, std_c)
+plt.plot(x, p_c, 'k', linewidth=2)
+p = norm.pdf(x, mu, std)
+plt.plot(x, p, 'k', linewidth=2)
+plt.legend()
+plt.show()
+

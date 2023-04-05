@@ -196,11 +196,19 @@ for i in range(len(comparaison_score["list_values"])):
 simi_score_index = [ (simi_score[i], i) for i in range(len(simi_score)) ]
 simi_score_index.sort()
 simi_score, permutation = zip(*simi_score_index)
-
-comp_score = [ np.mean(comp_score[i]) for i in permutation ] # permute the other scores with the sorting permutation
 index = [ i for i in range(len(simi_score)) ]
+comp_score = [ comp_score[i] for i in permutation ] # permute the other scores with the sorting permutation
 
+# Mean :
+mean_comp_score = [ np.mean(x) for x in comp_score ] 
 plt.figure()
 plt.plot(index, simi_score, color="red")
-plt.scatter(index, comp_score, color="blue", s=0.001 ) #linewidths=0.001)
+plt.scatter(index, comp_score, color="blue", s=0.01 )
+plt.show()
+
+# Difference : 
+diff_comp_score = [ simi_score[i] - mean_comp_score[i] for i in range(len(simi_score)) ]
+plt.figure()
+plt.plot(index, simi_score, color="red")
+plt.scatter(index, diff_comp_score, s=0.01)
 plt.show()

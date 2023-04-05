@@ -13,7 +13,6 @@ import pandas as pd
 from scipy.stats import norm
 import statsmodels.api as sm
 import pylab
-from scipy.stats import kstest, norm
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -168,7 +167,7 @@ plt.show()
 # Histogram
 plt.figure()
 plt.title("Distribution of similarity scores on the train dataset")
-plt.hist(sorted_simi, density=True, label="Similarity scores distribution")
+plt.hist(sorted_simi, density=True, bins = 50, label="Similarity scores distribution")
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, mu, std)
@@ -182,8 +181,17 @@ plt.show()
 sm.qqplot(sorted_simi, line='45')
 pylab.show()
 # KS test :
+from scipy.stats import kstest
 ks_statistic, p_value = kstest(sorted_simi, 'norm')
-print(ks_statistic, p_value)
+print("KS test : ",ks_statistic, p_value)
+# Lilliefors test
+from statsmodels.stats.diagnostic import lilliefors
+liliefors_stat, L_pvalue = lilliefors(sorted_simi)
+print("Lilliefors test : ", liliefors_stat, L_pvalue)
+# Shapiro Wilk test
+from scipy.stats import shapiro
+sw_stat, sw_pvalue = shapiro(sorted_simi)
+print("Shapiro test : ", sw_stat, sw_pvalue)
 
 #%% Distribution comparaison score
 
@@ -231,7 +239,7 @@ sorted_comp_score = sorted(mean_comp_score)
 mu_c, std_c = norm.fit(sorted_comp_score) 
 
 plt.figure()
-plt.hist(sorted_comp_score, density=True, label="means of other scores distribution")
+plt.hist(sorted_comp_score, density=True, bins=50, label="means of other scores distribution")
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p_c = norm.pdf(x, mu_c, std_c)
@@ -244,8 +252,8 @@ plt.show()
 
 # Both histogram : 
 plt.figure()
-plt.hist(sorted_comp_score, density=True, label="means of other scores", color="blue")
-plt.hist(sorted_simi, density=True, label="similarity scores",color="red")
+plt.hist(sorted_comp_score, density=True, bins=50, label="means of other scores", color="blue")
+plt.hist(sorted_simi, density=True, bins=50, label="similarity scores",color="red")
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p_c = norm.pdf(x, mu_c, std_c)

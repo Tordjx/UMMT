@@ -155,15 +155,25 @@ with open('comparaison_score.csv', 'w') as f:
 simi_scores = pd.read_csv("similarity_score.csv",names = ["file", "score"])
 sorted_simi = np.array(list(simi_scores["score"]))
 sorted_simi.sort()
+index = [ i for i in range(len(sorted_simi)) ]
 
 mu, std = norm.fit(sorted_simi) 
 
+# values
 plt.figure()
-plt.hist(sorted_simi, density=True)
+plt.plot(index, sorted_simi)
+plt.title("Similarity scores (sorted)")
+plt.show()
+
+# Histogram
+plt.figure()
+plt.title("Distribution of similarity scores on the train dataset")
+plt.hist(sorted_simi, density=True, label="Similarity scores distribution")
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, mu, std)
-plt.plot(x, p, 'k', linewidth=2)
+plt.plot(x, p, 'k', linewidth=2, label="Gaussian distribution")
+plt.legend()
 plt.show()
 
 # Test for the gaussian distribution 
@@ -191,7 +201,7 @@ for i in range(len(comparaison_score["list_values"])):
     comp_score.append(b[1:])
 
 #%% Stats 
-# Comparaison simi_score vs mean of other scores
+# Comparison simi_score vs mean of other scores
 simi_score_index = [ (simi_score[i], i) for i in range(len(simi_score)) ]
 simi_score_index.sort()
 simi_score, permutation = zip(*simi_score_index)
@@ -201,15 +211,19 @@ comp_score = [ comp_score[i] for i in permutation ] # permute the other scores w
 # Mean :
 mean_comp_score = [ np.mean(x) for x in comp_score ] 
 plt.figure()
-plt.plot(index, simi_score, color="red")
-plt.scatter(index, mean_comp_score, color="blue", s=0.01 )
+plt.plot(index, simi_score, color="red", label="Similarity scores")
+plt.scatter(index, mean_comp_score, color="blue", s=0.01, label="Mean of other scores" )
+plt.title("Comparison between the similarity scores and the mean of other random scores")
+plt.legend()
 plt.show()
 
 # Difference : 
 diff_comp_score = [ simi_score[i] - mean_comp_score[i] for i in range(len(simi_score)) ]
 plt.figure()
-plt.plot(index, simi_score, color="red")
-plt.scatter(index, diff_comp_score, s=0.01)
+plt.plot(index, simi_score, color="red", label="Similarity scores")
+plt.scatter(index, diff_comp_score, s=0.01, label="Difference between similarity score and mean of other scores")
+plt.legend()
+plt.title("Difference between the similarity scores and the means of other random scores")
 plt.show()
 
 # histrogram 
@@ -217,11 +231,13 @@ sorted_comp_score = sorted(mean_comp_score)
 mu_c, std_c = norm.fit(sorted_comp_score) 
 
 plt.figure()
-plt.hist(sorted_comp_score, density=True)
+plt.hist(sorted_comp_score, density=True, label="means of other scores distribution")
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p_c = norm.pdf(x, mu_c, std_c)
-plt.plot(x, p_c, 'k', linewidth=2)
+plt.plot(x, p_c, 'k', linewidth=2, label="Gaussian distribution")
+plt.legend()
+plt.title("Distribution of the means of other scores")
 plt.show()
 
 #%% Both

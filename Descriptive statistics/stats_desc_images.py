@@ -9,6 +9,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import random as rd
 import csv
+import pandas as pd
+from scipy.stats import norm
+import statsmodels.api as sm
+import pylab
+from scipy.stats import kstest, norm
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -145,11 +150,30 @@ with open('comparaison_score.csv', 'w') as f:
     for key in results_comparaison.keys():
         f.write("%s,%s\n"%(key,results_comparaison[key]))
 
-#%% Distribution
+#%% Distribution for similarity 
 
-sorted_simi = [ value for key, value in simi_scores.items() ]
+simi_scores = pd.read_csv("similarity_score.csv",names = ["file", "score"])
+sorted_simi = np.array(list(simi_scores["score"]))
 sorted_simi.sort()
+
+mu, std = norm.fit(sorted_simi) 
 
 plt.figure()
 plt.hist(sorted_simi, density=True)
+xmin, xmax = plt.xlim()
+x = np.linspace(xmin, xmax, 100)
+p = norm.pdf(x, mu, std)
+plt.plot(x, p, 'k', linewidth=2)
 plt.show()
+
+# Test for the gaussian distribution 
+
+# qqplot :
+sm.qqplot(sorted_simi, line='45')
+pylab.show()
+# KS test :
+ks_statistic, p_value = kstest(sorted_simi, 'norm')
+print(ks_statistic, p_value)
+
+#%% 
+

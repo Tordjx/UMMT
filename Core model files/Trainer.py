@@ -46,8 +46,8 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
-        x = [text_encoded, image_encoded]
-        output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
+        output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
 
     # U = [src_mask,tgt_mask, src_padding_mask, tgt_padding_mask, memory_mask, memory_key_padding_mask, mem_ei_mask, mem_ei_key_padding_mask]
     # for i in range(len(U)) :
@@ -55,7 +55,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     #     print(U[i])
     else:
         x = text_encoded
-        output = model_B.decoder(x,model_A.positional_encoder(model_A.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+        output = model_B.decoder(model_A.positional_encoder(model_A.embedding(text_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
     # print("post decoder")
     # print(output)
     return model_B.output_layer(output)

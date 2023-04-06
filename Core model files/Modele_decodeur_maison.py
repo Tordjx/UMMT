@@ -98,13 +98,13 @@ class Modèle(nn.Module):
             mem_masks = [memory_mask, mem_ei_mask]
             mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
             image_encoded = self.feedforward(image_input)
-            x = [text_encoded, image_encoded]
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+            x = [self.positional_encoder(self.embedding(text_input)), image_encoded]
+            output = self.decoder(x, text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
             return self.output_layer(output)
         else:
             # Pass through the decoder
             x = text_encoded
-            output = self.decoder(x, self.positional_encoder(self.embedding(text_input)), tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            output = self.decoder(self.positional_encoder(self.embedding(text_input)),x , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
             # return self.activation(self.output_layer(output))
             return self.output_layer(output)
 

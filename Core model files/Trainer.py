@@ -46,6 +46,14 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
+        #ATTENTION C DES TEST
+        text_input = torch.ones(batch_size ,1,dtype = torch.int).fill(self.begin_id)
+        x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
+        output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        return output
+        
+        
+        
         x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
         output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
 

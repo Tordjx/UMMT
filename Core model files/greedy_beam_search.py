@@ -11,7 +11,9 @@ batch_size = 16
 
 #%% Greedy 
  
-def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = False) : 
+def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = False): 
+    max_len = 97
+
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     src_padding_mask  = (text_input== model_A.padding_id).to(device=device)
     
@@ -31,7 +33,7 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
     text_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
     
-    for i in range(97-1):
+    for i in range(max_len-1):
 
         tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*text_input.shape[0],text_input.shape[1])
         tgt_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
@@ -61,6 +63,7 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 #%% Beam search 
 
 def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool = False, beam_size=3):
+    max_len = 97
 
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     src_padding_mask  = (text_input== model_A.padding_id).to(device=device)
@@ -79,31 +82,31 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
     
-    text_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    decoder_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
 
-    for i in range(97-1):
+    for i in range(max_len-1):
 
-        tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*text_input.shape[0],text_input.shape[1])
-        tgt_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
-        memory_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
-        memory_key_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
+        tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*decoder_input.shape[0],decoder_input.shape[1])
+        tgt_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
+        memory_mask = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1])
+        memory_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
         if image_bool:
-            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
-            mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
-            mem_ei_key_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
-            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+            mem_ei_mask = torch.zeros([decoder_input.shape[0], decoder_input.shape[1], decoder_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
+            mem_ei_mask[:,0:decoder_input.shape[1], 0:decoder_input.shape[1]] = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1]).to(device=device)
+            mem_ei_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
+            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([decoder_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
 
         if image_bool :  
-            x = [model_B.positional_encoder(model_B.embedding(text_input)), image_encoded]
+            x = [model_B.positional_encoder(model_B.embedding(decoder_input)), image_encoded]
             output = model_B.decoder(x,text_encoded, None , mem_masks , None, mem_padding_masks)
         else:
             x = text_encoded
-            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(text_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
 
         # Beam search 
         logs_prob = torch.log_softmax(model_B.output_layer(output), dim=1)
         # Here we can penalize the longest sentences ... 
-        print(logs_prob.shape)
+        print(logs_prob)
         break
 
 

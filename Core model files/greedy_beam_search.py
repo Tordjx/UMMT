@@ -64,6 +64,7 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
 def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool = False, beam_size=3):
     max_len = 97
+    end_id = model_A.end_id
 
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     src_padding_mask  = (text_input== model_A.padding_id).to(device=device)
@@ -83,6 +84,7 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
         image_encoded = model_A.feedforward(image_input)
     
     decoder_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    scores = torch.Tensor([0.])
 
     for i in range(max_len-1):
 
@@ -104,11 +106,13 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
             output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
 
         # Beam search 
-        logs_prob = torch.log_softmax(model_B.output_layer(output), dim=1)
+        log_probs = torch.log_softmax(model_B.output_layer(output), dim=1)
         # Here we can penalize the longest sentences ... 
-        print(logs_prob)
-        break
+        bool_paths_end_reached = decoder_input[:, -1]==end_id
+        log_probs[bool_paths_end_reached, : ] = 0
+        scores = scores.unsqueeze(1) + log_probs
 
+        break
 
 
 #%% Data for tests : 

@@ -46,14 +46,6 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
-        #ATTENTION C DES TEST
-        text_input = torch.ones(batch_size ,1,dtype = torch.int).fill(self.begin_id)
-        x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
-        output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-        return output
-        
-        
-        
         x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
         output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
 
@@ -194,8 +186,10 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         # print("lrb"+str(model_B.scheduler.get_last_lr()))
         return loss_A.item()
 import matplotlib.pyplot as plt
+from livelossplot import PlotLosses
 def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
     loss_list = []
+    liveloss= PlotLosses()
     model_fr.train()
     model_en.train()
     
@@ -240,10 +234,14 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             loss_list.append(loss)
             # print(loss)
             total_loss+=loss
+
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
                 print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval) + " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
+                liveloss.update({"Model FR mean training loss":np.mean(model_fr.loss_list[-log_interval:]),"Model EN mean training loss":np.mean(model_fr.loss_list[-log_interval:])})
+                liveloss.send()
                 total_loss = 0
                 start_time = time.time()
-        plt.plot(loss_list)
+
+        # plt.plot(loss_list)
     
     

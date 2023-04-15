@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 from torch import Tensor
 from torch.nn.init import xavier_uniform_
+import heapq
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 batch_size = 16
@@ -31,48 +32,49 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
 
-    text_input = torch.cat((torch.ones(batch_size, 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
-    
+    decoder_input = torch.cat((torch.ones(batch_size, 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    print(decoder_input.shape)
+
     for i in range(max_len-1):
 
-        tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*text_input.shape[0],text_input.shape[1])
-        tgt_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
-        memory_mask = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1])
-        memory_key_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
+        tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*decoder_input.shape[0],decoder_input.shape[1])
+        tgt_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
+        memory_mask = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1])
+        memory_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
         if image_bool:
-            mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
-            mem_ei_mask[:,0:text_input.shape[1], 0:text_input.shape[1]] = model_A.generate_square_subsequent_mask(text_input.shape[0],text_input.shape[1]).to(device=device)
-            mem_ei_key_padding_mask = (text_input ==  model_B.padding_id).to(device=device)
-            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+            mem_ei_mask = torch.zeros([decoder_input.shape[0], decoder_input.shape[1], decoder_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
+            mem_ei_mask[:,0:decoder_input.shape[1], 0:decoder_input.shape[1]] = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1]).to(device=device)
+            mem_ei_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
+            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([decoder_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
 
         if image_bool :  
-            x = [model_B.positional_encoder(model_B.embedding(text_input)), image_encoded]
+            x = [model_B.positional_encoder(model_B.embedding(decoder_input)), image_encoded]
             output = model_B.decoder(x,text_encoded, None , mem_masks , None, mem_padding_masks)
         else:
             x = text_encoded
-            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(text_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
         
         # Greedy 
         prob =  model_B.output_layer(output)
         next_words = torch.argmax(prob, dim=2)[:,i]
-        text_input[:,i] = next_words
+        decoder_input[:,i] = next_words
 
     return model_B.output_layer(output)
 
 
 #%% Beam search 
 
-def sequence_length_penalty(length: int, alpha: float=0.6) -> float:
-    return ((5 + length) / (5 + 1)) ** alpha
 
-def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool = False, beam_size=3):
+# A priori fonctionne mais pas avec des données batchified
+def CCF_beam_search_v1(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False):
     max_len = 97
-    end_id = model_A.end_id
+    device = text_input.device
 
-    src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
-    src_padding_mask  = (text_input== model_A.padding_id).to(device=device)
-    
-    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
+    src_mask = model_A.generate_square_subsequent_mask(model_A.n_head * text_input.shape[0], text_input.shape[1])
+    src_padding_mask = (text_input == model_A.padding_id).to(device=device)
+
+    # Encode the text input
+    text_encoded = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)), src_mask, src_padding_mask)
 
     if image_bool:
         mem_ei_mask = torch.zeros([text_input.shape[0], text_input.shape[1], text_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
@@ -85,44 +87,55 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
-    
-    decoder_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
-    scores = torch.Tensor([0.])
 
-    for i in range(max_len-1):
-        print(i)
+    # Initialize the beam
+    beam = [(torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), 0)]
 
-        tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*decoder_input.shape[0],decoder_input.shape[1])
-        tgt_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
-        memory_mask = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1])
-        memory_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
-        if image_bool:
-            mem_ei_mask = torch.zeros([decoder_input.shape[0], decoder_input.shape[1], decoder_input.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
-            mem_ei_mask[:,0:decoder_input.shape[1], 0:decoder_input.shape[1]] = model_A.generate_square_subsequent_mask(decoder_input.shape[0],decoder_input.shape[1]).to(device=device)
-            mem_ei_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
-            mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([decoder_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+    # Loop until the maximum length is reached
+    for i in range(max_len - 1):
+        new_beam = []
+        for seq, seq_score in beam:
+            # Get the last token of the sequence
+            last_token = seq[:, -1].unsqueeze(1)
 
-        if image_bool:  
-            x = [model_B.positional_encoder(model_B.embedding(decoder_input)), image_encoded]
-            output = model_B.decoder(x,text_encoded, None , mem_masks , None, mem_padding_masks)
-        else:
-            x = text_encoded
-            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            # If the last token is the end-of-sequence token, add the sequence to the new beam
+            if last_token.item() == model_B.end_id:
+                new_beam.append((seq, seq_score))
+                continue
 
-        # Beam search 
-        log_probs = torch.log_softmax(model_B.output_layer(output), dim=1)
-        # Here we can penalize the longest sentences ... 
-        log_probs = log_probs / sequence_length_penalty(i+1)
-        bool_paths_end_reached = decoder_input[:, -1]==end_id
-        log_probs[bool_paths_end_reached, : ] = 0
-        print(log_probs.shape)
-        print(scores.unsqueeze(1).shape)
-        scores = scores.unsqueeze(1) + log_probs
-        scores, indices = torch.topk(scores.reshape(-1), beam_size)
-        beam_indices = torch.divide(indices, n_token_en, rounding_mode='floor')
-        print(beam_indices)
+            tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*last_token.shape[0],last_token.shape[1])
+            tgt_padding_mask = (last_token ==  model_B.padding_id).to(device=device)
+            memory_mask = model_A.generate_square_subsequent_mask(last_token.shape[0],last_token.shape[1])
+            memory_key_padding_mask = (last_token ==  model_B.padding_id).to(device=device)
+            if image_bool:
+                mem_ei_mask = torch.zeros([last_token.shape[0], last_token.shape[1], last_token.shape[1] + image_input.shape[1]]).to(device=device,dtype = bool)
+                mem_ei_mask[:,0:last_token.shape[1], 0:last_token.shape[1]] = model_A.generate_square_subsequent_mask(last_token.shape[0],last_token.shape[1]).to(device=device)
+                mem_ei_key_padding_mask = (last_token ==  model_B.padding_id).to(device=device)
+                mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([last_token.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
+            
+            # Decode the next token
+            if image_bool:
+                x = [model_B.positional_encoder(model_B.embedding(last_token)), image_encoded]
+                output = model_B.decoder(x, text_encoded, None, mem_masks, None, mem_padding_masks)
+            else:
+                x = text_encoded
+                output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
 
-        if i == 2: break
+            # Get the top k candidates using log probabilities
+            log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1)
+            top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1)
+
+            # Add the top k candidates to the new beam
+            for j in range(beam_size):
+                new_seq = torch.cat([seq, top_k_tokens[:, j].unsqueeze(1)], dim=-1)
+                new_score = seq_score - top_k_scores[:, j].item()
+                new_beam.append((new_seq, new_score))
+
+        # Prune the beam to keep only the top k sequences
+        beam = heapq.nsmallest(beam_size, new_beam, key=lambda x: x[1])
+
+    # Return the top sequence
+    return beam[0][0]
 
 
 #%% Data for tests : 
@@ -155,4 +168,4 @@ data = batched_data
 
 #%% Tests 
 
-CCF_beam_search(model_fr,model_en, data[0])
+A = CCF_beam_search_v1(model_fr,model_en, data[0][0])

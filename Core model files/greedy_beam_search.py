@@ -89,7 +89,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
     # Initialize the beam
 
-    beam = [(torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), torch.zeros(batch_size))]
+    beam = [ [torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), torch.zeros(batch_size)] ]
 
     # Loop until the maximum length is reached
     for i in range(max_len - 1):
@@ -136,7 +136,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                 new_beam.append((new_seq, new_score))
 
             # 
-            beam = [ (torch.zeros((16,i+2), dtype = torch.int), torch.zeros(16)) for _ in range(beam_size) ]
+            beam = [ [torch.zeros((16,i+2), dtype = torch.int), torch.zeros(16)] for _ in range(beam_size) ]
             for k in range(batch_size):
                 scores_path = torch.zeros(len(new_beam))
                 for path in range(len(new_beam)):
@@ -151,19 +151,6 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
     # Return the top sequence
     return beam[0][0]
-
-
-# def sort_list_tensor(L, k):
-#     sorted, indices = torch.sort(L[1],descending=True)   # Pas vraiment sur de s'il faut faire ascending ou descending
-#     new_first = torch.cat([ L[0][i].unsqueeze(0) for i in indices], dim=0)
-#     return (new_first[:k], sorted[:k])
-
-# def topk_of_all(L, k):
-#     paths = torch.cat([L[i][0] for i in range(len(L))], dim=0)
-#     scores, indices = torch.topk(torch.cat([L[i][1] for i in range(len(L))], dim=0), k=k)
-#     res = [ (paths[indices[i]], scores[i]) for i in range(len(indices)) ]
-#     return res
-
 
 #%% Data for tests : 
 
@@ -196,4 +183,4 @@ data = batched_data
 #%% Tests 
 
 A = CCF_beam_search(model_fr,model_en, data[0])
-B = CCF_greedy(model_fr,model_en, data[0])
+# B = CCF_greedy(model_fr,model_en, data[0])

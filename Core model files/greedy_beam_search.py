@@ -33,7 +33,6 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
         image_encoded = model_A.feedforward(image_input)
 
     decoder_input = torch.cat((torch.ones(batch_size, 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
-    print(decoder_input.shape)
 
     for i in range(max_len-1):
 
@@ -65,8 +64,8 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 #%% Beam search 
 
 
-# A priori fonctionne mais pas avec des données batchified
-def CCF_beam_search_v1(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False):
+# Size of the output : batch_size * max_len
+def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False):
     max_len = 97
     device = text_input.device
 
@@ -89,19 +88,24 @@ def CCF_beam_search_v1(model_A, model_B, text_input, beam_size=3, image_input=No
         image_encoded = model_A.feedforward(image_input)
 
     # Initialize the beam
-    beam = [(torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), 0)]
+
+    beam = [(torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), torch.zeros(batch_size))]
 
     # Loop until the maximum length is reached
     for i in range(max_len - 1):
+
         new_beam = []
-        for seq, seq_score in beam:
+        for seq, seq_score in beam:   # dim of seq : batch_size * i 
+            # print("beam")
+            # print(beam)
+            # print("-------------")
             # Get the last token of the sequence
             last_token = seq[:, -1].unsqueeze(1)
 
             # If the last token is the end-of-sequence token, add the sequence to the new beam
-            if last_token.item() == model_B.end_id:
-                new_beam.append((seq, seq_score))
-                continue
+            # if last_token.item() == model_B.end_id:
+            #     new_beam.append((seq, seq_score))
+            #     continue
 
             tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*last_token.shape[0],last_token.shape[1])
             tgt_padding_mask = (last_token ==  model_B.padding_id).to(device=device)
@@ -123,19 +127,42 @@ def CCF_beam_search_v1(model_A, model_B, text_input, beam_size=3, image_input=No
 
             # Get the top k candidates using log probabilities
             log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1)
-            top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1)
+            top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1) # Dim : [batch_size, beam_size]
 
             # Add the top k candidates to the new beam
             for j in range(beam_size):
                 new_seq = torch.cat([seq, top_k_tokens[:, j].unsqueeze(1)], dim=-1)
-                new_score = seq_score - top_k_scores[:, j].item()
+                new_score = seq_score - top_k_scores[:, j]
                 new_beam.append((new_seq, new_score))
 
-        # Prune the beam to keep only the top k sequences
-        beam = heapq.nsmallest(beam_size, new_beam, key=lambda x: x[1])
+            # 
+            beam = [ (torch.zeros((16,i+2), dtype = torch.int), torch.zeros(16)) for _ in range(beam_size) ]
+            for k in range(batch_size):
+                scores_path = torch.zeros(len(new_beam))
+                for path in range(len(new_beam)):
+                    # get the tokens/scores for one sentence
+                    scores_path[path] = new_beam[path][1][k].item()
+                _, indices = torch.topk(scores_path, beam_size)
+                for id in range(len(indices)):
+                    beam[id][0][k] = new_beam[indices[id]][0][k]
+                    beam[id][1][k] = scores_path[id]
+
+        # print(beam)
 
     # Return the top sequence
     return beam[0][0]
+
+
+# def sort_list_tensor(L, k):
+#     sorted, indices = torch.sort(L[1],descending=True)   # Pas vraiment sur de s'il faut faire ascending ou descending
+#     new_first = torch.cat([ L[0][i].unsqueeze(0) for i in indices], dim=0)
+#     return (new_first[:k], sorted[:k])
+
+# def topk_of_all(L, k):
+#     paths = torch.cat([L[i][0] for i in range(len(L))], dim=0)
+#     scores, indices = torch.topk(torch.cat([L[i][1] for i in range(len(L))], dim=0), k=k)
+#     res = [ (paths[indices[i]], scores[i]) for i in range(len(indices)) ]
+#     return res
 
 
 #%% Data for tests : 
@@ -168,4 +195,5 @@ data = batched_data
 
 #%% Tests 
 
-A = CCF_beam_search_v1(model_fr,model_en, data[0][0])
+A = CCF_beam_search(model_fr,model_en, data[0])
+B = CCF_greedy(model_fr,model_en, data[0])

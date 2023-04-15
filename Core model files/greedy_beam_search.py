@@ -31,7 +31,7 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
 
-    text_input = torch.cat((torch.ones(batch_size ,1,dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    text_input = torch.cat((torch.ones(batch_size, 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size ,96,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
     
     for i in range(max_len-1):
 
@@ -62,6 +62,9 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
 #%% Beam search 
 
+def sequence_length_penalty(length: int, alpha: float=0.6) -> float:
+    return ((5 + length) / (5 + 1)) ** alpha
+
 def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool = False, beam_size=3):
     max_len = 97
     end_id = model_A.end_id
@@ -87,6 +90,7 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
     scores = torch.Tensor([0.])
 
     for i in range(max_len-1):
+        print(i)
 
         tgt_mask = model_B.generate_square_subsequent_mask(model_B.n_head*decoder_input.shape[0],decoder_input.shape[1])
         tgt_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
@@ -98,7 +102,7 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
             mem_ei_key_padding_mask = (decoder_input ==  model_B.padding_id).to(device=device)
             mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([decoder_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
 
-        if image_bool :  
+        if image_bool:  
             x = [model_B.positional_encoder(model_B.embedding(decoder_input)), image_encoded]
             output = model_B.decoder(x,text_encoded, None , mem_masks , None, mem_padding_masks)
         else:
@@ -108,11 +112,17 @@ def CCF_beam_search(model_A,model_B,text_input, image_input = None, image_bool =
         # Beam search 
         log_probs = torch.log_softmax(model_B.output_layer(output), dim=1)
         # Here we can penalize the longest sentences ... 
+        log_probs = log_probs / sequence_length_penalty(i+1)
         bool_paths_end_reached = decoder_input[:, -1]==end_id
         log_probs[bool_paths_end_reached, : ] = 0
+        print(log_probs.shape)
+        print(scores.unsqueeze(1).shape)
         scores = scores.unsqueeze(1) + log_probs
+        scores, indices = torch.topk(scores.reshape(-1), beam_size)
+        beam_indices = torch.divide(indices, n_token_en, rounding_mode='floor')
+        print(beam_indices)
 
-        break
+        if i == 2: break
 
 
 #%% Data for tests : 

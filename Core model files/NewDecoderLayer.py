@@ -44,7 +44,8 @@ class TransformerDecoderLayer(nn.Module):
             # Here we get the two mem_masks
             memory_mask, mem_ei_mask = memory_mask
             memory_key_padding_mask, mem_ei_key_padding_mask = memory_key_padding_mask
-            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True))
+            # Here, att2 returns a tuple, the first being the result, the second being the attention weights
+            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)[0])
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         else: # If there is only the text
@@ -58,7 +59,8 @@ class TransformerDecoderLayer(nn.Module):
             # Here, att1 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_2(x)
             ei_outputs = None
-            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, None, memory_key_padding_mask, None, image_bool=False))
+            x = x + self.dropout_2(self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, None, memory_key_padding_mask, None, image_bool=False)[0])          
+            # Here, att2 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         return x

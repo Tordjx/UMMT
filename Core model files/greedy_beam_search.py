@@ -63,8 +63,6 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
 #%% Beam search 
 
-
-# Size of the output : batch_size * max_len
 def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False):
     max_len = 97
     device = text_input.device
@@ -85,10 +83,10 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
+        print(image_input.type)
         image_encoded = model_A.feedforward(image_input)
 
     # Initialize the beam
-
     beam = [ [torch.ones(text_input.shape[0], 1, dtype=torch.int).fill_(model_B.begin_id), torch.zeros(batch_size)] ]
 
     # Loop until the maximum length is reached
@@ -96,9 +94,6 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
         new_beam = []
         for seq, seq_score in beam:   # dim of seq : batch_size * i 
-            # print("beam")
-            # print(beam)
-            # print("-------------")
             # Get the last token of the sequence
             last_token = seq[:, -1].unsqueeze(1)
 
@@ -146,16 +141,13 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                 for id in range(len(indices)):
                     beam[id][0][k] = new_beam[indices[id]][0][k]
                     beam[id][1][k] = scores_path[id]
-
-        # print(beam)
-
     # Return the top sequence
     return beam[0][0]
 
 #%% Data for tests : 
 
 from Modele_decodeur_maison import Modèle
-from Pipeline import get_train_data_nouveau, batchify
+from Pipeline import get_train_data_nouveau, batchify, get_batch 
 
 # Texts
 tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)
@@ -174,13 +166,19 @@ embedding_dim = 512
 model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_fr["TOKEN_VIDE"],vocab_fr["DEBUT_DE_PHRASE"],vocab_fr["FIN_DE_PHRASE"]).to(device)
 model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_en["TOKEN_VIDE"],vocab_en["DEBUT_DE_PHRASE"],vocab_en["FIN_DE_PHRASE"]).to(device)
 
-val_features = np.load("C:/Users/lucas/Desktop/val-resnet50-res4frelu.npy")
-val_features = torch.from_numpy(val_features)
-train_data_en = tokenized_en
-batched_data = batchify(train_data_en,batch_size,False)
-data = batched_data
+# With images
+train_features = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
+train_features = torch.from_numpy(train_features)
+train_data_en = [tokenized_en, train_features]
+batched_data = batchify(train_data_en,batch_size,True)
+texts, images = get_batch(batched_data, 0, True)
+
+# Text only 
+# train_data_en = tokenized_en
+# batched_data = batchify(train_data_en,batch_size,False)
+# data = batched_data
 
 #%% Tests 
 
-A = CCF_beam_search(model_fr,model_en, data[0])
-# B = CCF_greedy(model_fr,model_en, data[0])
+A = CCF_beam_search(model_fr,model_en, texts,image_input=images, image_bool=True)
+# B = CCF_greedy(model_fr,model_en, data[0])A

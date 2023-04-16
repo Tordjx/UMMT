@@ -90,7 +90,7 @@ def batchify(data: Tensor, bsz: int, image_bool) -> Tensor:
     
 def get_batch(source,i, image_bool = False) : 
     if image_bool : 
-        return source[0][i],source[1][i].to(device)
+        return source[0][i],source[1][i].to(device) #, dtype = torch.float16)
     else :
         return source[i],source[i]
 

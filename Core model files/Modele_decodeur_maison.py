@@ -69,8 +69,6 @@ class Modèle(nn.Module):
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 
-
-
     def forward(self, text_input, image_bool = False, image_input = None, mask_ei = False) : 
         src_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
         tgt_mask = self.generate_square_subsequent_mask(self.n_head*text_input.shape[0],text_input.shape[1])
@@ -107,9 +105,6 @@ class Modèle(nn.Module):
             output = self.decoder(self.positional_encoder(self.embedding(text_input)),x , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
             # return self.activation(self.output_layer(output))
             return self.output_layer(output)
-
-
-    
 
 # masque rectangle
     # def generate_square_subsequent_mask(self,sz_1=40,sz_2=35):

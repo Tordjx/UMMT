@@ -83,7 +83,6 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
-        print(image_input.type)
         image_encoded = model_A.feedforward(image_input)
 
     # Initialize the beam
@@ -147,7 +146,13 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 #%% Data for tests : 
 
 from Modele_decodeur_maison import Modèle
-from Pipeline import get_train_data_nouveau, batchify, get_batch 
+from Pipeline import get_train_data_nouveau, batchify
+
+def get_batch(source,i, image_bool = False) : 
+    if image_bool : 
+        return source[0][i],source[1][i].to(device, dtype = torch.float32)
+    else :
+        return source[i],source[i]
 
 # Texts
 tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)

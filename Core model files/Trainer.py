@@ -196,8 +196,9 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
-        batched_data_fr = batchify(train_data_fr,batch_size , image_bool)
-        batched_data_en = batchify(train_data_en, batch_size ,image_bool)
+        batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
+        # batched_data_fr = batchify(train_data_fr,batch_size , image_bool)
+        # batched_data_en = batchify(train_data_en, batch_size ,image_bool)
         if image_bool : 
             N = len(batched_data_fr[0])
         else : 

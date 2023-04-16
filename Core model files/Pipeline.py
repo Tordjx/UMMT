@@ -68,24 +68,29 @@ def batchify(data: Tensor, bsz: int, image_bool) -> Tensor:
         Tensor of shape [N // bsz, bsz]
     """
     if image_bool : 
-        text,features = data
+        data_en,data_fr = data
+        text_en,features = data_en
+        text_fr,features = data_fr
         
-        permutation = torch.randperm(text.shape[0])
-        text = text[permutation]
+        permutation = torch.randperm(text_en.shape[0])
+        text_en = text_en[permutation]
+        text_fr = text_fr[permutation]
         features = features[permutation]
-        if text.shape[0]%bsz != 0 :
-            text = text[:(text.shape[0]-text.shape[0]%bsz)]
-            features = features[:(text.shape[0]-text.shape[0]%bsz)] 
+        if text_en.shape[0]%bsz != 0 :
+            text_en = text_en[:(text_en.shape[0]-text_en.shape[0]%bsz)]
+            text_fr = text_fr[:(text_fr.shape[0]-text_fr.shape[0]%bsz)]
+            features = features[:(text_fr.shape[0]-text_fr.shape[0]%bsz)] 
         # print(text.shape)
-        return text.view(text.shape[0]//bsz, bsz, text.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)
+        return [text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)],[text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)]
     else : 
-        
-        permutation = torch.randperm(data.shape[0])
-        text = data[permutation]
-        if text.shape[0]%bsz != 0 :
-            text = text[:(text.shape[0]-text.shape[0]%bsz)]
-            
-        return text.view(text.shape[0]//bsz, bsz, text.shape[1])
+        text_en,text_fr = data
+        permutation = torch.randperm(text_fr.shape[0])
+        text_en = text_en[permutation]
+        text_fr = text_fr[permutation]
+        if text_fr.shape[0]%bsz != 0 :
+            text_fr = text_fr[:(text_fr.shape[0]-text_fr.shape[0]%bsz)]
+            text_en = text_en[:(text_en.shape[0]-text_en.shape[0]%bsz)]
+        return text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]),text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1])
         
     
 def get_batch(source,i, image_bool = False) : 

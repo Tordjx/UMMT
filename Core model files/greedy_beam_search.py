@@ -91,7 +91,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
     # Loop until the maximum length is reached
     for i in range(max_len - 1):
-        print("i="+str(i))
+        # print("i="+str(i))
         new_beam = []
         for seq, seq_score in beam:   # dim of seq : batch_size * i 
             # Get the last token of the sequence
@@ -114,22 +114,23 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
             
             # Decode the next token
             if image_bool:
-                x = [model_B.positional_encoder(model_B.embedding(last_token)), image_encoded]
+                x = [model_B.positional_encoder(model_B.embedding(last_token.to(device))), image_encoded]
                 output = model_B.decoder(x, text_encoded, None, mem_masks, None, mem_padding_masks)
             else:
                 x = text_encoded
                 output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
 
             # Get the top k candidates using log probabilities
-            log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1)
-            top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1) # Dim : [batch_size, beam_size]
+            # log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1)
+            log_probs = model_B.output_layer(output)[:, -1, :]
+            top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1,largest = False) # Dim : [batch_size, beam_size]
 
             # Add the top k candidates to the new beam
             for j in range(beam_size):
                 new_seq = copy.deepcopy(seq)
                 new_seq[:,i+1] = top_k_tokens[:, j].view(-1,1).squeeze()
                 # new_seq = torch.cat([seq, top_k_tokens[:, j].unsqueeze(1)], dim=-1) 
-                new_score = seq_score - top_k_scores[:, j]
+                new_score = seq_score.to(device) - top_k_scores[:, j].to(device)
                 new_beam.append((new_seq, new_score))
 
             beam = [ [torch.cat((torch.ones(batch_size, i+2, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size,97-(i+2),dtype = torch.int).fill_(model_B.padding_id)),dim =1) , torch.zeros(16)] for _ in range(beam_size) ]
@@ -138,7 +139,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                 for path in range(len(new_beam)):
                     # get the tokens/scores for one sentence
                     scores_path[path] = new_beam[path][1][k].item()
-                _, indices = torch.topk(scores_path, beam_size)
+                _, indices = torch.topk(scores_path, beam_size,largest = False)
                 for id in range(len(indices)):
                     beam[id][0][k] = new_beam[indices[id]][0][k]
                     beam[id][1][k] = scores_path[id]
@@ -148,45 +149,45 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
 #%% Data for tests : 
 
-from Modele_decodeur_maison import Modèle
-from Pipeline import get_train_data_nouveau, batchify
+# from Modele_decodeur_maison import Modèle
+# from Pipeline import get_train_data_nouveau, batchify
 
-def get_batch(source,i, image_bool = False): 
-    if image_bool : 
-        return source[0][i],source[1][i].to(device, dtype = torch.float32)
-    else :
-        return source[i],source[i]
+# def get_batch(source,i, image_bool = False): 
+#     if image_bool : 
+#         return source[0][i],source[1][i].to(device, dtype = torch.float32)
+#     else :
+#         return source[i],source[i]
 
-# Texts
-tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)
-#Data non batchés
-n_token_fr = len(vocab_fr.keys())
-n_token_en = len(vocab_en.keys())
+# # Texts
+# tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)
+# #Data non batchés
+# n_token_fr = len(vocab_fr.keys())
+# n_token_en = len(vocab_en.keys())
 
-n_head =4 
-num_encoder_layers = 4
-num_decoder_layers = 4
-dim_feedforward = 1024
-dropout = 0.1
-activation = nn.Softmax(dim=2)
-embedding_dim = 512
+# n_head =4 
+# num_encoder_layers = 4
+# num_decoder_layers = 4
+# dim_feedforward = 1024
+# dropout = 0.1
+# activation = nn.Softmax(dim=2)
+# embedding_dim = 512
 
-model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_fr["TOKEN_VIDE"],vocab_fr["DEBUT_DE_PHRASE"],vocab_fr["FIN_DE_PHRASE"]).to(device)
-model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_en["TOKEN_VIDE"],vocab_en["DEBUT_DE_PHRASE"],vocab_en["FIN_DE_PHRASE"]).to(device)
+# model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_fr["TOKEN_VIDE"],vocab_fr["DEBUT_DE_PHRASE"],vocab_fr["FIN_DE_PHRASE"]).to(device)
+# model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_en["TOKEN_VIDE"],vocab_en["DEBUT_DE_PHRASE"],vocab_en["FIN_DE_PHRASE"]).to(device)
 
-# With images
-# train_features = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
-# train_features = torch.from_numpy(train_features)
-# train_data_en = [tokenized_en, train_features]
-# batched_data = batchify(train_data_en,batch_size,True)
-# texts, images = get_batch(batched_data, 0, True)
+# # With images
+# # train_features = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
+# # train_features = torch.from_numpy(train_features)
+# # train_data_en = [tokenized_en, train_features]
+# # batched_data = batchify(train_data_en,batch_size,True)
+# # texts, images = get_batch(batched_data, 0, True)
 
-# Text only 
-# train_data_en = tokenized_en
-# batched_data = batchify(train_data_en,batch_size,False)
-# data = batched_data
+# # Text only 
+# # train_data_en = tokenized_en
+# # batched_data = batchify(train_data_en,batch_size,False)
+# # data = batched_data
 
-#%% Tests 
+# #%% Tests 
 
-# A = CCF_beam_search(model_fr,model_en, texts,image_input=images, image_bool=True)
-B = CCF_beam_search(model_fr,model_en, texts)
+# # A = CCF_beam_search(model_fr,model_en, texts,image_input=images, image_bool=True)
+# B = CCF_beam_search(model_fr,model_en, texts)

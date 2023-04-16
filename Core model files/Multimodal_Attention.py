@@ -97,7 +97,7 @@ class MultiModalAttention(nn.Module):
 
                 # final scores 
                 scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei
-                attn_weights = attn_weights_e + self.lambda1 * attn_weights_i + self.lambda2 * attn_weights_ei
+                attn_weights = [attn_weights_e, attn_weights_i, attn_weights_ei]
                 concat = scores.transpose(1,2).contiguous().view(-1, bs, self.d_model)
                 output = self.out(concat)
 

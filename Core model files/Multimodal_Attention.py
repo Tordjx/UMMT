@@ -23,13 +23,13 @@ def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None, only_ima
         if padding_mask is not None:
             output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
 
-    output = F.softmax(output, dim=-1)
+    attn_weights = F.softmax(output, dim=-1)
     
     if dropout is not None:
-        output = dropout(output)
+        output = dropout(attn_weights)
         
-    output = torch.matmul(output, v)
-    return output
+    output = torch.matmul(attn_weights, v)
+    return output,attn_weights
 
 #%% Multimodal Attention
 
@@ -72,7 +72,7 @@ class MultiModalAttention(nn.Module):
             k_e = k_e.transpose(1,2)
             v_e = self.v_e_linear(v_e).view(-1, v_e.size(1), self.h, self.d_k)
             v_e = v_e.transpose(1,2)
-            scores_e = attention(q, k_e, v_e, self.d_k, mask_e, padding_mask_e, self.dropout, only_image=False) 
+            scores_e, attn_weights_e = attention(q, k_e, v_e, self.d_k, mask_e, padding_mask_e, self.dropout, only_image=False)
 
             # If there is only text in the input, image_bool = False
             if not(image_bool):
@@ -86,21 +86,22 @@ class MultiModalAttention(nn.Module):
                 k_i = k_i.transpose(1,2)
                 v_i = self.v_i_linear(v_i).view(-1, v_i.size(1), self.h, self.d_k)
                 v_i = v_i.transpose(1,2)
-                scores_i = attention(q, k_i, v_i, self.d_k, None, None, self.dropout, only_image=True)
+                scores_i, attn_weights_i = attention(q, k_i, v_i, self.d_k, None, None, self.dropout, only_image=True)
 
                 # Score for text and image : 
                 k_ei = self.k_ei_linear(k_ei).view(-1, k_ei.size(1), self.h, self.d_k) 
                 k_ei = k_ei.transpose(1,2)
                 v_ei = self.v_ei_linear(v_ei).view(-1, v_ei.size(1), self.h, self.d_k)
                 v_ei = v_ei.transpose(1,2)
-                scores_ei = attention(q, k_ei, v_ei, self.d_k, mask_ei, padding_mask_ei, self.dropout, only_image=False)
+                scores_ei, attn_weights_ei = attention(q, k_ei, v_ei, self.d_k, mask_ei, padding_mask_ei, self.dropout, only_image=False)
 
                 # final scores 
                 scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei
+                attn_weights = attn_weights_e + self.lambda1 * attn_weights_i + self.lambda2 * attn_weights_ei
                 concat = scores.transpose(1,2).contiguous().view(-1, bs, self.d_model)
                 output = self.out(concat)
 
-                return output
+                return output,attn_weights
         
 
 # Old version

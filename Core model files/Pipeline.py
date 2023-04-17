@@ -27,8 +27,8 @@ def get_train_data_nouveau(batch_size, train_bool):
     train_data_en = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+["FIN_DE_PHRASE"] for ligne in fichier_train_en ]
     fichier_train_en.close()
     fichier_train_fr.close()
-    # longueur_max = 1024
-    longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
+    # longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
+    longueur_max = 97
 
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]
@@ -46,17 +46,18 @@ def get_train_data_nouveau(batch_size, train_bool):
 #             if mot not in vocab_fr: 
 #                 # print(mot)
 #                 vocab_fr[mot] = len(vocab_fr.keys())
-    for i in range(len(train_data_en)):
-        for j in range(len(train_data_en[i])):
-            for mot in vocab_en : 
-                train_data_en[i][j]="TOKEN_INCONNU"
-    for i in range(len(train_data_fr)):
-        for j in range(len(train_data_fr[i])):
-            for mot in vocab_fr : 
-                train_data_fr[i][j]="TOKEN_INCONNU"
     for token in ['TOKEN_INCONNU','TOKEN_VIDE','DEBUT_DE_PHRASE','FIN_DE_PHRASE']:
         vocab_fr[token] = len(vocab_fr.keys())
         vocab_en[token] = len(vocab_en.keys())
+    for i in range(len(train_data_en)):
+        for j in range(len(train_data_en[i])):
+            if train_data_en[i][j] not in vocab_en :
+                train_data_en[i][j]="TOKEN_INCONNU"
+    for i in range(len(train_data_fr)):
+        for j in range(len(train_data_fr[i])):
+            if train_data_fr[i][j]  not in vocab_fr : 
+                train_data_fr[i][j]="TOKEN_INCONNU"
+
     # tokenized_fr = torch.zeros( len(train_data_fr),longueur_max)
     # tokenized_en = torch.zeros( len(train_data_en),longueur_max)
     # for i in range(len(train_data_fr)) : 

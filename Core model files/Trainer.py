@@ -189,7 +189,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         return loss_A.item()
 import matplotlib.pyplot as plt
 from livelossplot import PlotLosses
-def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1/2]):
+def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1]):
     loss_list = []
     liveloss= PlotLosses()
     model_fr.train()
@@ -205,7 +205,7 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             N = len(batched_data_fr[0])
         else : 
             N = len(batched_data_fr)
-        log_interval = N//10
+        log_interval = N//100
         for i in range(N):
             U = np.random.rand()
             V = np.random.rand()

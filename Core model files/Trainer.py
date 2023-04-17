@@ -3,6 +3,7 @@
 from Pipeline import *
 import time
 import numpy as np 
+from greedy_beam_search import *
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 bptt = 10
 epoch = 1
@@ -26,7 +27,7 @@ def auto_encoding_train(model,train_data, image_bool):
     model.scheduler.step()
     return loss.item()
 
-def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, image_bool = False) : 
+def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = None, image_bool = False) : 
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
     tgt_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1])
     src_padding_mask  = (text_input== model_A.padding_id).to(device=device)
@@ -46,7 +47,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
-        x = [model_A.positional_encoder(model_A.embedding(text_input)), image_encoded]
+        x = [model_B.positional_encoder(model_B.embedding(target)), image_encoded]
         output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
 
     # U = [src_mask,tgt_mask, src_padding_mask, tgt_padding_mask, memory_mask, memory_key_padding_mask, mem_ei_mask, mem_ei_key_padding_mask]
@@ -55,7 +56,7 @@ def cycle_consistent_forward(model_A,model_B,text_input, image_input = None, ima
     #     print(U[i])
     else:
         x = text_encoded
-        output = model_B.decoder(model_A.positional_encoder(model_A.embedding(text_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+        output = model_B.decoder(model_B.positional_encoder(model_B.embedding(target)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
     # print("post decoder")
     # print(output)
     return model_B.output_layer(output)
@@ -140,21 +141,22 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
             data,target = train_data
         if image_bool : 
             with torch.no_grad():
-                first_output = cycle_consistent_forward(model_A,model_B, data, features, image_bool)
+                
+                first_output = CCF_greedy(model_A,model_B, data, features, image_bool)
                 # print("pre argmax")
                 # print(first_output)
                 first_output = range_le_padding(check_data(torch.argmax(first_output,dim = 2),model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
                 
                 # print('post argmax')
                 # print(first_output)
-            output = cycle_consistent_forward(model_B,model_A, first_output, features, image_bool)
+            output = cycle_consistent_forward(model_B,model_A, first_output,data, features, image_bool)
             # print("full output")
             # print(output)
         else :
             with torch.no_grad() : 
-                first_output = torch.argmax(cycle_consistent_forward(model_A,model_B, data),dim = 2)
+                first_output = torch.argmax(CCF_greedy(model_A,model_B, data),dim = 2)
                 first_output = range_le_padding(check_data(first_output,model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
-            output = cycle_consistent_forward(model_B,model_A, first_output)
+            output = cycle_consistent_forward(model_B,model_A, first_output,data)
         # import pickle
         # gradient_list=[output.mT,first_output]
         # with open('mypicklefile', 'wb') as f1:

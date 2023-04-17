@@ -49,7 +49,7 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
         if image_bool :  
             x = [model_B.positional_encoder(model_B.embedding(decoder_input.to(device))), image_encoded]
-            output = model_B.decoder(x,text_encoded, None , [None,None] , None, [None,None])
+            output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
         else:
             x = text_encoded
             output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input)),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
@@ -115,7 +115,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
             # Decode the next token
             if image_bool:
                 x = [model_B.positional_encoder(model_B.embedding(last_token.to(device))), image_encoded]
-                output = model_B.decoder(x, text_encoded, None, [None,None], tgt_padding_mask, mem_padding_masks)
+                output = model_B.decoder(x, text_encoded,tgt_mask,mem_masks, tgt_padding_mask, mem_padding_masks)
             else:
                 x = text_encoded
                 output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
@@ -134,7 +134,8 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                 new_score = top_k_scores[:, j].to(device)
                 new_beam.append((new_seq, new_score))
 
-            beam = [ [torch.cat((torch.ones(batch_size, i+2, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size,97-(i+2),dtype = torch.int).fill_(model_B.padding_id)),dim =1) , torch.zeros(16)] for _ in range(beam_size) ]
+            # beam = [ [torch.cat((torch.ones(batch_size, i+2, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size,97-(i+2),dtype = torch.int).fill_(model_B.padding_id)),dim =1) , torch.zeros(16)] for _ in range(beam_size) ]
+            beam = [ [torch.ones(batch_size, max_len,dtype = torch.int).fill_(model_B.padding_id) , torch.zeros(16)] for _ in range(beam_size) ]
 #            
             for k in range(batch_size):
                 scores_path = torch.zeros(len(new_beam))

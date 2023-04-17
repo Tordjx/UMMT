@@ -15,10 +15,14 @@ def get_vocab() :
     return vocab_en, vocab_fr
 
 
-def get_train_data_nouveau(batch_size):
+def get_train_data_nouveau(batch_size, train_bool):
     vocab_en,vocab_fr = get_vocab()
-    fichier_train_fr = open('train.BPE.fr')
-    fichier_train_en = open('train.BPE.en')
+    if train_bool : 
+        fichier_train_fr = open('train.BPE.fr')
+        fichier_train_en = open('train.BPE.en')
+    else: 
+        fichier_train_fr = open('val.BPE.fr')
+        fichier_train_en = open('val.BPE.en')
     train_data_fr = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+['FIN_DE_PHRASE'] for ligne in fichier_train_fr ]
     train_data_en = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+["FIN_DE_PHRASE"] for ligne in fichier_train_en ]
     fichier_train_en.close()
@@ -31,17 +35,28 @@ def get_train_data_nouveau(batch_size):
 
 
     #ATTENTION : DEMANDER IUN AVIS POUR CES DEUX BOUCLES QUI AJOUTENT AU VOCAB CE QUI MANQUE, CEST A DIRE '&@@' et ';@@' a cause des caracteres html
-    for ligne in train_data_en: 
-        for mot in ligne : 
-            if mot not in vocab_en: 
-                # print(mot)
-                vocab_en[mot] = len(vocab_en.keys())
+#     for ligne in train_data_en: 
+#         for mot in ligne : 
+#             if mot not in vocab_en: 
+#                 # print(mot)
+#                 vocab_en[mot] = len(vocab_en.keys())
 
-    for ligne in train_data_fr: 
-        for mot in ligne: 
-            if mot not in vocab_fr: 
-                # print(mot)
-                vocab_fr[mot] = len(vocab_fr.keys())
+#     for ligne in train_data_fr: 
+#         for mot in ligne: 
+#             if mot not in vocab_fr: 
+#                 # print(mot)
+#                 vocab_fr[mot] = len(vocab_fr.keys())
+    for i in range(len(train_data_en)):
+        for j in range(len(train_data_en[i])):
+            for mot in vocab_en : 
+                train_data_en[i][j]="TOKEN_INCONNU"
+    for i in range(len(train_data_fr)):
+        for j in range(len(train_data_fr[i])):
+            for mot in vocab_fr : 
+                train_data_fr[i][j]="TOKEN_INCONNU"
+    for token in ['TOKEN_INCONNU','TOKEN_VIDE','DEBUT_DE_PHRASE','FIN_DE_PHRASE']:
+        vocab_fr[token] = len(vocab_fr.keys())
+        vocab_en[token] = len(vocab_en.keys())
     # tokenized_fr = torch.zeros( len(train_data_fr),longueur_max)
     # tokenized_en = torch.zeros( len(train_data_en),longueur_max)
     # for i in range(len(train_data_fr)) : 

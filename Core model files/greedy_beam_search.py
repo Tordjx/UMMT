@@ -124,7 +124,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
             # log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1) LUCAS VERSION
             log_probs = torch.sum(torch.log_softmax(model_B.output_layer(output),dim = 2)[:,:i+1,:] , dim = 1)
             top_k_scores, top_k_tokens = torch.topk(log_probs, k=beam_size, dim=-1,largest = True) # Dim : [batch_size, beam_size]
-            # print(top_k_scores)
+
             # Add the top k candidates to the new beam
             for j in range(beam_size):
                 new_seq = copy.deepcopy(seq)
@@ -136,7 +136,7 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
             # beam = [ [torch.cat((torch.ones(batch_size, i+2, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size,97-(i+2),dtype = torch.int).fill_(model_B.padding_id)),dim =1) , torch.zeros(16)] for _ in range(beam_size) ]
             beam = [ [torch.ones(batch_size, max_len,dtype = torch.int).fill_(model_B.padding_id) , torch.zeros(16)] for _ in range(beam_size) ]
-#            
+            
             for k in range(batch_size):
                 scores_path = torch.zeros(len(new_beam))
                 for path in range(len(new_beam)):

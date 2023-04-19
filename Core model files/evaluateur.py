@@ -19,17 +19,28 @@ def tensor_to_sentence(output,inv_dic):
         else :
             sentence+=word +" "
     return sentence
-
+def give_tokens(output, padding_id, end_id ) : #takes output of greedy search tensor of size [bsz,seqlen,n_token]. returns the tokens, with no padding before end of sentence token
+    #todoso, just need to take the 2nd outpuuts
+    values, indices = torch.kthvalue(output, 2 , dim = 2)
+    sentences = torch.argmax(output, dim  = 2 ) # size bsz, seqlen
+    #we modify this sentences tensor
+    for i in range(sentences.size(0)):#batch
+        authorize_padding = False
+        for j in range(sentences.size(1)):#sentence
+            if sentences[i][j] == end_id:
+                authorize_padding = True
+            elif sentences[i][j] == padding_id and not authorize_padding : 
+                sentences[i][j] = indices[i][j]
+    return sentences
 def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
     model_A.eval()
     model_B.eval()
     if image_bool : 
         data,features= src
-
     # 
     with open("logs.txt",'a') as logs :
         if mode == 'greedy':
-            output = torch.argmax(greedy_beam_search.CCF_greedy(model_A,model_B,data, features, True),dim = 2)[j]
+            output = give_tokens(greedy_beam_search.CCF_greedy(model_A,model_B,data, features, True),model_B.padding_id,model_B.end_id)[j]
         else : 
             output = greedy_beam_search.CCF_beam_search(model_A, model_B, data, 3, features, True)[j]
         logs.write("\nBleu score\n")
@@ -43,7 +54,8 @@ def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
         logs.write("\nOutput\n")
         logs.write(str(output))
         logs.write("\nAuto encoding\n")
-        logs.write(str(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2).view(-1),inv_map_src)[j]))
+        # print(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2).view(-1),inv_map_src))
+        logs.write(str(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2)[j].view(-1),inv_map_src)))
         logs.close()
     return tensor_to_sentence(output.view(-1),inv_map_tgt),bleu,meteor
 

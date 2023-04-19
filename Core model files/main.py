@@ -5,7 +5,7 @@ from Pipeline import *
 from Trainer import * 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 10
+batch_size = 64
 
 # Images
 # images = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")

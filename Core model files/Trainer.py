@@ -8,6 +8,7 @@ from evaluateur import *
 from greedy_beam_search import *
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 torch.autograd.set_detect_anomaly(True)
+
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
         data, feature = train_data
@@ -186,8 +187,10 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         # print("lra"+str(model_A.scheduler.get_last_lr()))
         # print("lrb"+str(model_B.scheduler.get_last_lr()))
         return loss_A.item()
+
 import matplotlib.pyplot as plt
 from livelossplot import PlotLosses
+
 def repartition_prechauffe(epoch,repartition):
     # if epoch < 50 :
     #     return 1

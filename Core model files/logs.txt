@@ -4,20 +4,20 @@ Bleu score
 Meteor score
 0.0
 Bonne traduction
-des hommes semblent discuter de quelque chose sur un bateau ou un navire . 
+un jeune garçon allongé sur un lit d&apos; hôpital avec sa jambe sur le côté . 
 Output
-tensor([ 874, 5523, 2630,  987,  635, 4817, 5523, 5523, 2960, 5523, 2960, 2960,
-         730, 5523,  730,  730, 5048, 5048, 5048, 3896, 4817, 5048, 5048, 3896,
-        3998,  730, 3998, 3998, 3998,  730, 3998, 2823, 1649,  730, 1649, 1649,
-        1649, 1649,  730, 1649, 1649, 1649, 1649,  730, 1649, 1649, 1649,  117,
-        1649, 1649,  117, 1649, 1649,  117, 1649, 1649, 1649,  117, 1649, 1649,
-         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
-         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
-         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
-        2689], device='cuda:0')
+tensor([ 852, 4584, 2360, 4584, 3041, 3041, 3041, 2439,  852,  852, 4584, 4584,
+        4584, 4584, 3041, 3041, 3041, 4584, 4584, 4584, 4584, 3041, 4584, 3041,
+        4584, 3041, 3041, 3041, 3041, 3041, 3041, 3041, 3041, 4584, 3041, 3041,
+        3041, 3041, 3041, 4584, 3041, 3041, 3041, 3041,  852, 3041, 3041, 2439,
+        2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439,
+        2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439, 2439,
+        6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553,
+        6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553, 6553,
+        1844], device='cuda:0')
 Auto encoding
-n
-Phrase à traduire : 
-some men appear to be discussing something on a boat or ship . 
+washington sculpblayellow i teetcries coney skis rollerninprechintourininbassshingles those ss metal participate foods foods participate strolls rollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerrollerroller
+Phrase � traduire : 
+a young boy laying on a hospital bed with his leg over the side . 
 Phrase traduite : 
-cher ethnimotous petites rette ethniethnitriste ethnitriste triste différentes ethnidifférentes différentes montagnemontagnemontagnequittant rette montagnemontagnequittant époque différentes époque époque époque différentes époque habits yant différentes yant yant yant yant différentes yant yant yant yant différentes yant yant yant brun yant yant brun yant yant brun yant yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant remplis 
+c&apos; sculfrasculvievieviegarée c&apos; c&apos; sculsculsculsculvievieviesculsculsculsculviesculviesculvievievievievievievieviesculvievievievieviesculvievievieviec&apos; vieviegarée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée garée ffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectffectfoire 

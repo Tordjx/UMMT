@@ -41,12 +41,20 @@ def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
     model_B.eval()
     if image_bool : 
         data,features= src
+    else :
+        data= src
     # 
     with open("logs.txt",'a') as logs :
-        if mode == 'greedy':
-            output = give_tokens(greedy_beam_search.CCF_greedy(model_A,model_B,data, features, True),model_B.padding_id,model_B.end_id)[j]
-        else : 
-            output = greedy_beam_search.CCF_beam_search(model_A, model_B, data, 3, features, True)[j]
+        if image_bool :
+            if mode == 'greedy':
+                output = give_tokens(greedy_beam_search.CCF_greedy(model_A,model_B,data, features, True),model_B.padding_id,model_B.end_id)[j]
+            else : 
+                output = greedy_beam_search.CCF_beam_search(model_A, model_B, data, 3, features, True)[j]
+        else :
+            if mode == 'greedy':
+                output = give_tokens(greedy_beam_search.CCF_greedy(model_A,model_B,data, None, False),model_B.padding_id,model_B.end_id)[j]
+            else : 
+                output = greedy_beam_search.CCF_beam_search(model_A, model_B, data, 3, None, False)[j]
         logs.write("\nBleu score\n")
         bleu = evalue_bleu(output.view(-1),inv_map_tgt,tgt.view(-1))
         logs.write(str(bleu))
@@ -59,7 +67,10 @@ def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
         logs.write(str(output))
         logs.write("\nAuto encoding\n")
         # print(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2).view(-1),inv_map_src))
-        logs.write(str(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2)[j].view(-1),inv_map_src)))
+        if image_bool :
+            logs.write(str(tensor_to_sentence(torch.argmax(model_A(data,True,features),dim = 2)[j].view(-1),inv_map_src)))
+        else :
+            logs.write(str(tensor_to_sentence(torch.argmax(model_A(data,False),dim = 2)[j].view(-1),inv_map_src)))
         logs.close()
     return tensor_to_sentence(output.view(-1),inv_map_tgt),bleu,meteor
 
@@ -72,20 +83,32 @@ def evalue_meteor(output,inv_dic_tgt, tgt):
     target = [inv_dic_tgt[int(x)] for x in tgt if inv_dic_tgt[int(x)] not in  ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
     return meteor_score([target], result)
 
-def donne_random(i,j,val_data_en,val_data_fr,batch_size):
-    batched_data_en,batched_data_fr=batchify([val_data_en,val_data_fr],batch_size,True)
-    src,features = batched_data_en
-    tgt,_ = batched_data_fr
-    return src[i],features[i],tgt[i]
+def donne_random(i,j,val_data_en,val_data_fr,batch_size,image_bool):
+    batched_data_en,batched_data_fr=batchify([val_data_en,val_data_fr],batch_size,image_bool)
+    if image_bool:
+        src,features = batched_data_en
+        tgt,_ = batched_data_fr
+        return src[i],features[i],tgt[i]
+    else :
+        src,tgt = batched_data_en,batched_data_fr
+        return src[i],tgt[i]
 
-def evaluation(mode,val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr):
-    tokenized_val_en = val_data_en[0]
+def evaluation(mode,val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool):
+    if image_bool :
+        tokenized_val_en = val_data_en[0]
+    else : 
+        tokenized_val_en = val_data_en
     i = np.random.randint(len(tokenized_val_en)//batch_size)
     j = np.random.randint(batch_size)
-    src,features,tgt = donne_random(i,j,val_data_en,val_data_fr,batch_size)
-    features = features.to(device,dtype=torch.float32)
-    data = [src,features]
-    trad,bleu,meteor = traduit(mode,model_en,model_fr,data, inv_map_en,True,tgt[j],inv_map_fr,j) 
+    if image_bool: 
+        src,features,tgt = donne_random(i,j,val_data_en,val_data_fr,batch_size,image_bool)
+        features = features.to(device,dtype=torch.float32)
+        data = [src,features]
+    else :
+        src,tgt = donne_random(i,j,val_data_en,val_data_fr,batch_size,image_bool)
+        data = src
+    
+    trad,bleu,meteor = traduit(mode,model_en,model_fr,data, inv_map_en,image_bool,tgt[j],inv_map_fr,j) 
     with open("logs.txt",'a') as logs :
         logs.write("\nPhrase à traduire : \n" + tensor_to_sentence(src[j],inv_map_en)+ "\nPhrase traduite : \n"+ trad)
         logs.close()

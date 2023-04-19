@@ -200,7 +200,7 @@ def repartition_prechauffe(epoch,repartition):
 def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = 1/2):
     loss_list = []
     liveloss= PlotLosses()
-    bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr)
+    bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool)
     
     model_fr.train()
     model_en.train()

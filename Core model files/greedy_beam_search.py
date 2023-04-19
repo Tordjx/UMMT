@@ -152,45 +152,45 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
 
 #%% Data for tests : 
 
-# from Modele_decodeur_maison import Modèle
-# from Pipeline import get_train_data_nouveau, batchify
+from Modele_decodeur_maison import Modèle
+from Pipeline import get_train_data_nouveau, batchify
 
-# def get_batch(source,i, image_bool = False): 
-#     if image_bool : 
-#         return source[0][i],source[1][i].to(device, dtype = torch.float32)
-#     else :
-#         return source[i],source[i]
+def get_batch(source,i, image_bool = False): 
+    if image_bool : 
+        return source[0][i],source[1][i].to(device, dtype = torch.float32)
+    else :
+        return source[i],source[i]
 
-# # Texts
-# tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)
-# #Data non batchés
-# n_token_fr = len(vocab_fr.keys())
-# n_token_en = len(vocab_en.keys())
+# Texts
+tokenized_fr,tokenized_en, vocab_fr,vocab_en = get_train_data_nouveau(batch_size)
+#Data non batchés
+n_token_fr = len(vocab_fr.keys())
+n_token_en = len(vocab_en.keys())
 
-# n_head =4 
-# num_encoder_layers = 4
-# num_decoder_layers = 4
-# dim_feedforward = 1024
-# dropout = 0.1
-# activation = nn.Softmax(dim=2)
-# embedding_dim = 512
+n_head =4 
+num_encoder_layers = 4
+num_decoder_layers = 4
+dim_feedforward = 1024
+dropout = 0.1
+activation = nn.Softmax(dim=2)
+embedding_dim = 512
 
-# model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_fr["TOKEN_VIDE"],vocab_fr["DEBUT_DE_PHRASE"],vocab_fr["FIN_DE_PHRASE"]).to(device)
-# model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_en["TOKEN_VIDE"],vocab_en["DEBUT_DE_PHRASE"],vocab_en["FIN_DE_PHRASE"]).to(device)
+model_fr = Modèle(n_token_fr,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_fr["TOKEN_VIDE"],vocab_fr["DEBUT_DE_PHRASE"],vocab_fr["FIN_DE_PHRASE"]).to(device)
+model_en = Modèle(n_token_en,embedding_dim,n_head, num_encoder_layers,num_decoder_layers,dim_feedforward,dropout,activation,vocab_en["TOKEN_VIDE"],vocab_en["DEBUT_DE_PHRASE"],vocab_en["FIN_DE_PHRASE"]).to(device)
 
-# # With images
-# # train_features = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
-# # train_features = torch.from_numpy(train_features)
-# # train_data_en = [tokenized_en, train_features]
-# # batched_data = batchify(train_data_en,batch_size,True)
-# # texts, images = get_batch(batched_data, 0, True)
+# With images
+# train_features = np.load("C:/Users/lucas/Desktop/train-resnet50-res4frelu.npy")
+# train_features = torch.from_numpy(train_features)
+# train_data_en = [tokenized_en, train_features]
+# batched_data = batchify(train_data_en,batch_size,True)
+# texts, images = get_batch(batched_data, 0, True)
 
-# # Text only 
-# # train_data_en = tokenized_en
-# # batched_data = batchify(train_data_en,batch_size,False)
-# # data = batched_data
+# Text only 
+# train_data_en = tokenized_en
+# batched_data = batchify(train_data_en,batch_size,False)
+# data = batched_data
 
-# #%% Tests 
+#%% Tests 
 
-# # A = CCF_beam_search(model_fr,model_en, texts,image_input=images, image_bool=True)
-# B = CCF_beam_search(model_fr,model_en, texts)
+# A = CCF_beam_search(model_fr,model_en, texts,image_input=images, image_bool=True)
+B = CCF_beam_search(model_fr,model_en, texts)

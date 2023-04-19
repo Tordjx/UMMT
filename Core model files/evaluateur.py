@@ -19,6 +19,8 @@ def tensor_to_sentence(output,inv_dic):
         else :
             sentence+=word +" "
     return sentence
+
+
 def give_tokens(output, padding_id, end_id ) : #takes output of greedy search tensor of size [bsz,seqlen,n_token]. returns the tokens, with no padding before end of sentence token
     #todoso, just need to take the 2nd outpuuts
     values, indices = torch.kthvalue(output, 2 , dim = 2)
@@ -32,6 +34,8 @@ def give_tokens(output, padding_id, end_id ) : #takes output of greedy search te
             elif sentences[i][j] == padding_id and not authorize_padding : 
                 sentences[i][j] = indices[i][j]
     return sentences
+
+
 def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
     model_A.eval()
     model_B.eval()

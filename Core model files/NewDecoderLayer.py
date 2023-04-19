@@ -7,7 +7,7 @@ import csv
 from Multimodal_Attention import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-get_attention_csv=False
+get_attention_csv = False
             
 #%% TransformerDecoderLayer
 
@@ -31,13 +31,12 @@ class TransformerDecoderLayer(nn.Module):
             nn.Linear(dim_feedforward,d_model)
             )  
         
+        # Yassine version
+        # self.csv_e = open("attention_weights_e.csv", "w", newline="")
+        # self.writer_e = csv.writer(self.csv_e)
+        # self.csv_i = open("attention_weights_i.csv", "w", newline="")
+        # self.writer_i = csv.writer(self.csv_i)
 
-        self.csv_e = open("attention_weights_e.csv", "w", newline="")
-        self.writer_e = csv.writer(self.csv_e)
-        
-        
-        self.csv_i = open("attention_weights_i.csv", "w", newline="")
-        self.writer_i = csv.writer(self.csv_i)
 
     def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):
         if type(x) == list:  # If there is an image
@@ -55,14 +54,22 @@ class TransformerDecoderLayer(nn.Module):
             memory_key_padding_mask, mem_ei_key_padding_mask = memory_key_padding_mask
             output,attention_weights_e,attention_weights_i=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)
             x = x + self.dropout_2(output)
+
             if get_attention_csv:
-                self.writer_e.writerows([attention_weights_e])
-                self.writer_i.writerows([attention_weights_i])
+                csv_e = open("attention_weights_e.csv", "w", newline="")
+                writer_e = csv.writer(csv_e)
+                csv_i = open("attention_weights_i.csv", "w", newline="")
+                writer_i = csv.writer(csv_i)
+                writer_e.writerows([attention_weights_e])
+                writer_i.writerows([attention_weights_i])
+            # Yassine version : 
+            # if get_attention_csv:
+            #     self.writer_e.writerows([attention_weights_e])
+            #     self.writer_i.writerows([attention_weights_i])
+
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
-            
 
-            
         else: # If there is only the text
             # print("case 2 : text only")
             memory_mask = memory_mask[0]
@@ -76,8 +83,15 @@ class TransformerDecoderLayer(nn.Module):
             ei_outputs = None
             output,attention_weights_e=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, None, memory_key_padding_mask, None, image_bool=False)
             x = x + self.dropout_2(output)
+
             if get_attention_csv:
-                self.writer_e.writerows([attention_weights_e])
+                csv_e = open("attention_weights_e.csv", "w", newline="")
+                writer_e = csv.writer(csv_e)
+                writer_e.writerows([attention_weights_e])
+            # Yassine version : 
+            # if get_attention_csv:
+            #     self.writer_e.writerows([attention_weights_e])
+
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         return x

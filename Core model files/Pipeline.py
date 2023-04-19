@@ -2,7 +2,9 @@
 import torch
 from torch import Tensor
 from typing import Tuple
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def get_vocab() : 
     fichier_vocab_fr = open('vocab.fr')
     fichier_vocab_en = open('vocab.en')
@@ -16,13 +18,16 @@ def get_vocab() :
 
 
 def get_train_data_nouveau(batch_size, train_bool):
+
     vocab_en,vocab_fr = get_vocab()
+
     if train_bool : 
         fichier_train_fr = open('train.BPE.fr')
         fichier_train_en = open('train.BPE.en')
     else: 
         fichier_train_fr = open('val.BPE.fr')
         fichier_train_en = open('val.BPE.en')
+
     train_data_fr = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+['FIN_DE_PHRASE'] for ligne in fichier_train_fr ]
     train_data_en = [["DEBUT_DE_PHRASE"]+ligne.strip().split(" ")+["FIN_DE_PHRASE"] for ligne in fichier_train_en ]
     fichier_train_en.close()
@@ -32,7 +37,6 @@ def get_train_data_nouveau(batch_size, train_bool):
 
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]
-
 
     #ATTENTION : DEMANDER IUN AVIS POUR CES DEUX BOUCLES QUI AJOUTENT AU VOCAB CE QUI MANQUE, CEST A DIRE '&@@' et ';@@' a cause des caracteres html
 #     for ligne in train_data_en: 
@@ -130,13 +134,13 @@ def get_batch(source,i, image_bool = False) :
 #     target = source[i:i+seq_len].reshape(-1)
 
 #     return data.to(device), target.to(device)
+
 def check_data(data,padding_id,begin_id,end_id):
     for i in range(len(data)):
         if torch.equal(data[i] , padding_id*torch.ones_like(data[i])):
             data[i][0] = begin_id
             data[i][1] = end_id
     return data
-
 
 def range_le_padding(data,padding_id) : 
     for i in range(data.size(0)):

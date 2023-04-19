@@ -9,7 +9,7 @@ import heapq
 import copy
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 16
+batch_size = 64
 
 #%% Greedy 
  
@@ -135,8 +135,8 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                 new_beam.append((new_seq, new_score))
 
             # beam = [ [torch.cat((torch.ones(batch_size, i+2, dtype = torch.int).fill_(model_B.begin_id),torch.ones(batch_size,97-(i+2),dtype = torch.int).fill_(model_B.padding_id)),dim =1) , torch.zeros(16)] for _ in range(beam_size) ]
-            beam = [ [torch.ones(batch_size, max_len,dtype = torch.int).fill_(model_B.padding_id) , torch.zeros(16)] for _ in range(beam_size) ]
-            
+            beam = [ [torch.ones(batch_size, max_len,dtype = torch.int).fill_(model_B.padding_id) , torch.zeros(batch_size)] for _ in range(beam_size) ]
+#            
             for k in range(batch_size):
                 scores_path = torch.zeros(len(new_beam))
                 for path in range(len(new_beam)):

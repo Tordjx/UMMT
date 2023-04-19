@@ -3,10 +3,10 @@
 from Pipeline import *
 import time
 import numpy as np 
+from evaluateur import *
+
 from greedy_beam_search import *
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-bptt = 10
-epoch = 1
 torch.autograd.set_detect_anomaly(True)
 def auto_encoding_train(model,train_data, image_bool):
     if image_bool : 
@@ -182,22 +182,31 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         model_B.optimizer.step()
         model_A.scheduler.step()
         model_B.scheduler.step()
-        # model_A.scheduler.step()
-        # model_B.scheduler.step()
+
         # print("lra"+str(model_A.scheduler.get_last_lr()))
         # print("lrb"+str(model_B.scheduler.get_last_lr()))
         return loss_A.item()
 import matplotlib.pyplot as plt
 from livelossplot import PlotLosses
-def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = [1/2,1]):
+def repartition_prechauffe(epoch,repartition):
+    # if epoch < 50 :
+    #     return 1
+    # else :
+    #     return 1/2
+    return repartition
+def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,repartition = 1/2):
     loss_list = []
     liveloss= PlotLosses()
+    bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr)
+    
     model_fr.train()
     model_en.train()
     
     total_loss = 0
     start_time = time.time()
     for i_iter in range(n_iter):
+        model_en.curr_epoch +=1
+        model_fr.curr_epoch +=1
         batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
         # batched_data_fr = batchify(train_data_fr,batch_size , image_bool)
         # batched_data_en = batchify(train_data_en, batch_size ,image_bool)
@@ -205,10 +214,11 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             N = len(batched_data_fr[0])
         else : 
             N = len(batched_data_fr)
-        log_interval = N//100
+        log_interval = N//10
         for i in range(N):
             U = np.random.rand()
             V = np.random.rand()
+
             if U<1/2 : #ENGLISH DATA
                 if image_bool : 
                     train_data= get_batch(batched_data_en,i,image_bool)
@@ -223,10 +233,10 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
                     train_data= get_batch(batched_data_fr,i)
                 model_A = model_fr
                 model_B = model_en
-            if V < repartition[0]  :#AUTO ENCODING
+            if V < repartition_prechauffe(model_en.curr_epoch,repartition)  :#AUTO ENCODING
                 loss = auto_encoding_train(model_A,train_data,image_bool)
                 model_A.loss_list.append(loss)
-            elif V < repartition[1]  :#CYCLE CONSISTENT
+            elif V <1  :#CYCLE CONSISTENT
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
                 model_A.loss_list.append(loss)
                 model_B.loss_list.append(loss)
@@ -239,9 +249,15 @@ def mixed_train(model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size,
             total_loss+=loss
 
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
-                print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval) + " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
-                liveloss.update({"Model FR mean training loss":np.mean(model_fr.loss_list[-log_interval:]),"Model EN mean training loss":np.mean(model_fr.loss_list[-log_interval:])})
+                with open("logs.txt","a") as logs :
+                    logs.write("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
+                    logs.close()
+                # print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval) + " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
+                bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr)
+                liveloss.update({"Model FR mean training loss":np.mean(model_fr.loss_list[-log_interval:]),"Model EN mean training loss":np.mean(model_fr.loss_list[-log_interval:]), "BLEU score" : bleu, "METEOR score" : meteor})
                 liveloss.send()
+                model_en.train()
+                model_fr.train()
                 total_loss = 0
                 start_time = time.time()
 

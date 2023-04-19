@@ -1,0 +1,23 @@
+
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des hommes semblent discuter de quelque chose sur un bateau ou un navire . 
+Output
+tensor([ 874, 5523, 2630,  987,  635, 4817, 5523, 5523, 2960, 5523, 2960, 2960,
+         730, 5523,  730,  730, 5048, 5048, 5048, 3896, 4817, 5048, 5048, 3896,
+        3998,  730, 3998, 3998, 3998,  730, 3998, 2823, 1649,  730, 1649, 1649,
+        1649, 1649,  730, 1649, 1649, 1649, 1649,  730, 1649, 1649, 1649,  117,
+        1649, 1649,  117, 1649, 1649,  117, 1649, 1649, 1649,  117, 1649, 1649,
+         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
+         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
+         117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,  117, 1649, 1649,
+        2689], device='cuda:0')
+Auto encoding
+n
+Phrase à traduire : 
+some men appear to be discussing something on a boat or ship . 
+Phrase traduite : 
+cher ethnimotous petites rette ethniethnitriste ethnitriste triste différentes ethnidifférentes différentes montagnemontagnemontagnequittant rette montagnemontagnequittant époque différentes époque époque époque différentes époque habits yant différentes yant yant yant yant différentes yant yant yant yant différentes yant yant yant brun yant yant brun yant yant brun yant yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant brun yant yant remplis 

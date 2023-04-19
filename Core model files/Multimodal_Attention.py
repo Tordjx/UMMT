@@ -78,7 +78,7 @@ class MultiModalAttention(nn.Module):
             if not(image_bool):
                 concat = scores_e.transpose(1,2).contiguous().view(-1, bs, self.d_model)
                 output = self.out(concat)
-                return output
+                return output,attn_weights_e
             else:
                 bs_i = k_i.size(0)
                 # Score for image : 
@@ -97,11 +97,11 @@ class MultiModalAttention(nn.Module):
 
                 # final scores 
                 scores = scores_e + self.lambda1 * scores_i + self.lambda2 * scores_ei
-                attn_weights = [attn_weights_e, attn_weights_i, attn_weights_ei]
+                
                 concat = scores.transpose(1,2).contiguous().view(-1, bs, self.d_model)
                 output = self.out(concat)
 
-                return output,attn_weights
+                return output,attn_weights_e,attn_weights_i
         
 
 # Old version

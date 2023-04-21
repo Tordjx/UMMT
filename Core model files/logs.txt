@@ -3057,3 +3057,2247 @@ Phrase à traduire :
 a man in an army uniform speaks into a microphone . 
 Phrase traduite : 
 poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit 
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+quatre enfants avec des sacs à dos se retournent pour être face à l&apos; objectif et sourient , tandis qu&apos; ils marchent sur une route de campagne . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5420, 5420, 2731, 2731,
+        2731, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+four children carrying backpacks turn to face the camera and grouas they walk down a country road . 
+Phrase à traduire : 
+four children carrying backpacks turn to face the camera and smile as they walk down a country road . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminvietnamvietnamilluminilluminilluminvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamgravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 45 en 150 ms par phrase, moyenne loss 0.16262739102045695 current lr [9.455032620941838e-06] [9.263200821770459e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un enfant fait un salto arrière en sautant sur un trampoline . 
+Output
+tensor([6574, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420], device='cuda:0')
+Auto encoding
+a child is doing a back flip whilst jumping on a trampotalking . 
+Phrase à traduire : 
+a child is doing a back flip whilst jumping on a trampoline . 
+Phrase traduite : 
+vietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamIteration : 0 batch numéro : 90 en 213 ms par phrase, moyenne loss 0.16442573053969278 current lr [7.477293342162034e-06] [7.199695849279571e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une gymnaste fait un mouvement délicat tandis qu&apos; elle impressionne le public . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+a girl small in gymnastics one a gutsy routine as peimhorse sses the block . 
+Phrase à traduire : 
+a girl competing in gymnastics performs a gutsy routine as she impresses the audience . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminillumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 0 batch numéro : 135 en 171 ms par phrase, moyenne loss 0.15714030315478641 current lr [4.842946204609357e-06] [4.764467746451786e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+l&apos; homme avec la ceinture blanche et des lunettes de soleil tient la main de la fille . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+the man in the white belt and peis holding the girl &apos;s hand . 
+Phrase à traduire : 
+the man in the white belt and sunglasses is holding the girl &apos;s hand . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminillumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 180 en 200 ms par phrase, moyenne loss 0.1621139152182473 current lr [2.2548859100093395e-06] [2.1249737397836064e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une jeune fille joue d&apos; un instrument de musique et chante dans un micro . 
+Output
+tensor([6574, 2731, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5420, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a young girl is playing a musical into and singing into a microphone . 
+Phrase à traduire : 
+a young girl is playing a musical instrument and singing into a microphone . 
+Phrase traduite : 
+illuminvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 225 en 192 ms par phrase, moyenne loss 0.1582264631986618 current lr [3.2277984585066296e-07] [5.811718495565325e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme âgé en surpoids fait sauter une crêpe en préparant le petit déjeuner . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731], device='cuda:0')
+Auto encoding
+an older , overweight man flips a panpewhile fountain breakfast . 
+Phrase à traduire : 
+an older , overweight man flips a pancake while making breakfast . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminIteration : 0 batch numéro : 270 en 178 ms par phrase, moyenne loss 0.15626373539368313 current lr [4.988171141721232e-08] [1.5413331334360178e-08]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un caissier de banque debout au guichet . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+a bank teller standing at a ex. 
+Phrase à traduire : 
+a bank teller standing at a counter . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminillumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 315 en 143 ms par phrase, moyenne loss 0.15188802414470248 current lr [9.549150281252614e-07] [8.209631931586484e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+on dirait un marché paysan , et quelques tables avec divers produits exposés . 
+Output
+tensor([6574,   18,   18,   18,   18,   18,   18,   18,   18,   18, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+looks dressed a farmers market , a . tables with -like pedisplayed . 
+Phrase à traduire : 
+looks like a farmers market , a few tables with various items displayed . 
+Phrase traduite : 
+le le le le le le le le le arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 0 batch numéro : 360 en 171 ms par phrase, moyenne loss 0.15632907268073823 current lr [3.0865828381745566e-06] [2.6603509286971355e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des gens faisant du bateau sur un lac avec le soleil traversant les nuages au loin . 
+Output
+tensor([6574, 2731, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675,
+        2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675,
+        2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675,
+        2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675,
+        2675, 2675, 2675, 2675, 2675, 2675, 2675, 2675, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+people boating on a lake with the senthrough the clouds in the behind . 
+Phrase à traduire : 
+people boating on a lake with the sun through the clouds in the distance . 
+Phrase traduite : 
+illuminituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituituantique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 0 batch numéro : 405 en 151 ms par phrase, moyenne loss 0.1491615288787418 current lr [5.47054156659258e-06] [5.157053795390647e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux jeunes hommes en jeans et baskets traversent une rue en ville . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 5420, 5420, 5420, 2731, 2731, 2731, 5420, 5420, 5420, 5420, 5420,
+        5420, 5420, 5420, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+two young men in blue jeans and sneakers cross an bstreet . 
+Phrase à traduire : 
+two young men in blue jeans and sneakers cross an urban street . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminvietnamvietnamvietnamilluminilluminilluminvietnamvietnamvietnamvietnamvietnamvietnamvietnamvietnamuminuminuminuminuminuminuminuminuminuminuminuminuminuminantique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 0 batch numéro : 450 en 171 ms par phrase, moyenne loss 0.15319601545731226 current lr [7.612492823579751e-06] [7.938926261462375e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+la jeune fille se fait faire des oreilles de lapin par le jeune garçon derrière elle . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+the young girl is given rabbit ears by the young boy behind her . 
+Phrase à traduire : 
+the young girl is given rabbit ears by the young boy behind her . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminantique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 0 batch numéro : 452 en 14 ms par phrase, moyenne loss 0.007860048611958822 current lr [7.745114089990666e-06] [8.06453526826489e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux chiens bruns se battent dans un espace vert . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731,   18, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two brown dogs wrestle on the grassy hill . 
+Phrase à traduire : 
+two brown dogs wrestle on the grassy hill . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminle illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 45 en 193 ms par phrase, moyenne loss 0.1568438553147846 current lr [9.343157572190969e-06] [9.822787092289003e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme assis par terre , jouant de la guitare . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man sitting on the ground , playing guitar . 
+Phrase à traduire : 
+a man sitting on the ground , playing guitar . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 90 en 172 ms par phrase, moyenne loss 0.1439935596452819 current lr [9.994449374809868e-06] [9.75528258147578e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme et une femme en noir sont debout proches l&apos; un de l&apos; autre dans la rue . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+man and woman in black stand close together on the street . 
+Phrase à traduire : 
+man and woman in black stand close together on the street . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminillumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 1 batch numéro : 135 en 171 ms par phrase, moyenne loss 0.1442080913318528 current lr [9.41882815044348e-06] [8.365062567548878e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme et deux garçons regardant une station d&apos; information . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a woman and two boys looking at an information over . 
+Phrase à traduire : 
+a woman and two boys looking at an information station . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 1 batch numéro : 180 en 193 ms par phrase, moyenne loss 0.14078544775644938 current lr [7.408768370508587e-06] [6.090716206982722e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe jouant sur un trottoir . 
+Output
+tensor([6574, 2731, 2731, 2675, 2675, 2675, 2675, 2675, 2731, 2675, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+a band playing on a sidewalk . 
+Phrase à traduire : 
+a band playing on a sidewalk . 
+Phrase traduite : 
+illuminilluminituituituituituilluminituarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 1 batch numéro : 225 en 164 ms par phrase, moyenne loss 0.136104054749012 current lr [4.5294584334074354e-06] [3.909283793017292e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un joueur de baseball fait jaillir de la terre en glissant devant un receveur . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 4260, 4260, 4260, 4260, 4260, 4260,
+        4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a baseball player kicks up dirt he in front of a catcher . 
+Phrase à traduire : 
+a baseball player kicks up dirt sliding in front of a catcher . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminpoulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 270 en 158 ms par phrase, moyenne loss 0.13254456255171035 current lr [1.9978988733705807e-06] [1.8128800512565504e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme en tenue colorée passe devant un camion blanc rempli de bouteilles . 
+Output
+tensor([6574, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967, 1967,
+        1967], device='cuda:0')
+Auto encoding
+a woman in a colorful ed is walking by a white truck st with bottles . 
+Phrase à traduire : 
+a woman in a colorful outfit is walking by a white truck filled with bottles . 
+Phrase traduite : 
+bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies bougies Iteration : 1 batch numéro : 315 en 214 ms par phrase, moyenne loss 0.13944143768813874 current lr [2.955961552288732e-07] [2.4471741852423323e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme regarde l&apos; un de ses quatre écrans plats d&apos; ordinateur . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2675, 2731, 2675, 2675, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 3725, 2731, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665,
+        1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665, 1665,
+        1665, 1665, 1665, 1665, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495, 5495,
+        5495], device='cuda:0')
+Auto encoding
+a man is looking at one of his four flat child computers . 
+Phrase à traduire : 
+a man is looking at one of his four flat screen computers . 
+Phrase traduite : 
+illuminilluminilluminilluminituilluminituituilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminarrose illuminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau beau antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique antique Iteration : 1 batch numéro : 360 en 178 ms par phrase, moyenne loss 0.134355319208569 current lr [6.155829702431169e-08] [1.570841943568446e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un gros chien noir creuse dans la neige profonde . 
+Output
+tensor([6574, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a large black dog is digging in the deep snow . 
+Phrase à traduire : 
+a large black dog is digging in the deep snow . 
+Phrase traduite : 
+arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 1 batch numéro : 405 en 164 ms par phrase, moyenne loss 0.13296913819180595 current lr [1.1474337861210511e-06] [1.3551568628929379e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une bande de jeunes adultes , en pleine concentration , regardent fixement leurs écrans d&apos; ordinateur pendant une compétition de jeu . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 1665, 1665, 1665, 1665, 1665,
+        1665], device='cuda:0')
+Auto encoding
+a n of young adults stare in concentration at their team monitors as they competitively game . 
+Phrase à traduire : 
+a bunch of young adults stare in concentration at their computer monitors as they competitively game . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminbeau beau beau beau beau beau 
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme prend une photo avec son appareil . 
+Output
+tensor([6574, 4260, 4260, 4260, 4260, 5328,  912,  912, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman is taking a picture with her camera . 
+Phrase à traduire : 
+a woman is taking a picture with her camera . 
+Phrase traduite : 
+poulets poulets poulets poulets uminhabillées habillées uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 45 en 200 ms par phrase, moyenne loss 0.1420026166571511 current lr [3.5297983738384737e-06] [3.909283793017291e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe de personnes en maillots violettes et pantalons de couleur marron marchant tous dans la même direction . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+a group of people in purple shirts and tan pants all walking in the 11 direction . 
+Phrase à traduire : 
+a group of people in purple shirts and tan pants all walking in the same direction . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 90 en 185 ms par phrase, moyenne loss 0.13620635039276546 current lr [5.936906572928624e-06] [6.840622763423386e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux hommes , un noir et un blanc , jouent avec leurs guitares et chantent dans les microphones pendant qu&apos; ils se tiennent à l&apos; extérieur . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two men , one black and one white , play their guitars and sing into microphones as they stand &apos;s . 
+Phrase à traduire : 
+two men , one black and one white , play their guitars and sing into microphones as they stand outdoors . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 135 en 199 ms par phrase, moyenne loss 0.13217120286491182 current lr [8.306559326618255e-06] [9.090748587125111e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une jeune femme aux cheveux foncés avec une visière rouge , tenant un parapluie blanc ouvert au milieu d&apos; une foule de personnes 
+Output
+tensor([6574, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+a young dark-haired woman with red on visor holding an open white unamidst a crowd of people 
+Phrase à traduire : 
+a young dark-haired woman with red sun visor holding an open white umbrella amidst a crowd of people 
+Phrase traduite : 
+poulets poulets poulets poulets poulets poulets poulets poulets uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminumingravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 180 en 178 ms par phrase, moyenne loss 0.1252028829521603 current lr [9.73042679413772e-06] [9.99013364214135e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des femmes en tenues ethniques chantant ensemble . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731], device='cuda:0')
+Auto encoding
+women in ethnic clothing sing together . 
+Phrase à traduire : 
+women in ethnic clothing sing together . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminIteration : 0 batch numéro : 225 en 143 ms par phrase, moyenne loss 0.1237844670812289 current lr [9.925546630773858e-06] [9.557016383177211e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux hommes sont à des cabines téléphoniques à l&apos; extérieur . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2675, 2731, 2675, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731], device='cuda:0')
+Auto encoding
+two men are standing at telephone booths outside . 
+Phrase à traduire : 
+two men are standing at telephone booths outside . 
+Phrase traduite : 
+illuminilluminilluminilluminituilluminituilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminIteration : 0 batch numéro : 270 en 157 ms par phrase, moyenne loss 0.12029374423954221 current lr [8.902152036691629e-06] [7.93892626146235e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+la femme avec un chapeau noir prend une photo tandis que la neige tombe . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+the lady wearing a black hat is taking a picture while the snowfalls . 
+Phrase à traduire : 
+the lady wearing a black hat is taking a picture while the snowfalls . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 315 en 178 ms par phrase, moyenne loss 0.11929158651166492 current lr [7.1288964578253555e-06] [5.078536586559092e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un vieil homme est assis dehors sur un banc devant une grande banderole où est écrit &quot; memoria justicia sin olvido &quot; 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 3725, 3725, 3725,
+        3725, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+an older man is sitting outside on a bench in front a large banner that says , &quot; memoria justicia sin olvirunning . &quot; 
+Phrase à traduire : 
+an older man is sitting outside on a bench in front a large banner that says , &quot; memoria justicia sin olvido . &quot; 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 360 en 150 ms par phrase, moyenne loss 0.11581625541051228 current lr [4.7644677464517764e-06] [2.5912316294914165e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+cette vieille femme asiatique se repose et s&apos; évente lors d&apos; une journée apparemment chaude en ville . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+this old asian woman rests and fans herself on an apparently boat day in the city . 
+Phrase à traduire : 
+this old asian woman rests and fans herself on an apparently hot day in the city . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 405 en 157 ms par phrase, moyenne loss 0.11956780486636692 current lr [2.1895831107393506e-06] [8.645971286271905e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe de personnes courent . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a group of people are running . 
+Phrase à traduire : 
+a group of people are running . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 0 batch numéro : 450 en 199 ms par phrase, moyenne loss 0.12059021045764287 current lr [5.098621211969181e-07] [0.0]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des nageurs dans un lac regardés par un garçon assis sur un mur . 
+Output
+tensor([6574, 2731, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260,
+        4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 3725, 3725, 3725, 3725, 3725, 3725, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+swimmers in a lake being watched by a boy sitting on a wall . 
+Phrase à traduire : 
+swimmers in a lake being watched by a boy sitting on a wall . 
+Phrase traduite : 
+illuminpoulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminarrose arrose arrose arrose arrose arrose gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 0 batch numéro : 452 en 0 ms par phrase, moyenne loss 0.004378130535284678 current lr [5.098621211969181e-07] [2.467198171342e-09]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme tenant un verre d&apos; alcool face au caméra . 
+Output
+tensor([6574, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man holding a hard glass at the camera . 
+Phrase à traduire : 
+a man holding a drinking glass at the camera . 
+Phrase traduite : 
+illuminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 45 en 214 ms par phrase, moyenne loss 0.12414907001786762 current lr [4.988171141721176e-08] [8.645971286271946e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe de personnes noires en chemises oranges en face d&apos; un parc clôturé . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a group of black people performing in orange shirts in front of a fenced off park . 
+Phrase à traduire : 
+a group of black people performing in orange shirts in front of a fenced off park . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 90 en 178 ms par phrase, moyenne loss 0.11716006282303068 current lr [9.549150281252612e-07] [3.0865828381745443e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme en t-shirt vert embrasse un enfant en pleurs tout en regardant des coureurs lors d&apos; une course sur route . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man in a green shirt is background a crying glasses whilst watching runners in a road race . 
+Phrase à traduire : 
+a man in a green shirt is kissing a crying toddler whilst watching runners in a road race . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 135 en 164 ms par phrase, moyenne loss 0.11915937612454096 current lr [2.8711035421746343e-06] [5.704506159687901e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+de jeunes adultes vêtus de t-shirts rouges , jaunes et noirs sont alignés et font un sketch . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+young adults wearing red , yellow , and black shirts in a straight line is a sketch . 
+Phrase à traduire : 
+young adults wearing red , yellow , and black shirts in a straight line perform a sketch . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 180 en 185 ms par phrase, moyenne loss 0.11559794611401028 current lr [5.626666167821523e-06] [8.064535268264875e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme dégarni avec des lunettes de soleil rouges et un t-shirt vert debout devant un bâtiment . 
+Output
+tensor([6574, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a balding man in red sunglasses wearing a green shirt standing in front of a building . 
+Phrase à traduire : 
+a balding man in red sunglasses wearing a green shirt standing in front of a building . 
+Phrase traduite : 
+arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 1 batch numéro : 225 en 157 ms par phrase, moyenne loss 0.11308017604880863 current lr [7.81041688926065e-06] [9.677220154149335e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme portant une autre femme avec la même tenue d&apos; entraînement sur son dos . 
+Output
+tensor([6574,   18,   18,   18,   18, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman carrying another woman wearing matching exercise football on her back . 
+Phrase à traduire : 
+a woman carrying another woman wearing matching exercise attire on her back . 
+Phrase traduite : 
+le le le le uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 270 en 221 ms par phrase, moyenne loss 0.11908071206675636 current lr [9.648882429441258e-06] [9.89611405310883e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+la fille et le garçon s&apos; embrassent tandis qu&apos; ils sont assis sur un banc en bois . 
+Output
+tensor([6574, 2731, 2731, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260,
+        4260, 4260, 4260, 4260, 4260, 4260, 4260, 4260, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+the girl and boy are direwhilst sitting on a wooden bench . 
+Phrase à traduire : 
+the girl and boy are kissing whilst sitting on a wooden bench . 
+Phrase traduite : 
+illuminilluminpoulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets poulets uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 315 en 164 ms par phrase, moyenne loss 0.11033484372827741 current lr [9.925546630773871e-06] [8.852566213878946e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une petite fille blonde avec une t-shirt à pois donne un &quot; bain &quot; à un animal en peluche dans un évier . 
+Output
+tensor([6574, 2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a little blond girl with a polka dot shirt is during a stuffed one a &quot; bath &quot; in a sink . 
+Phrase à traduire : 
+a little blond girl with a polka dot shirt is giving a stuffed animal a &quot; bath &quot; in a sink . 
+Phrase traduite : 
+illuminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 1 batch numéro : 360 en 186 ms par phrase, moyenne loss 0.10816516098048952 current lr [8.535533905932734e-06] [6.985739453173904e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+quatre hommes habillés en t-shirts et shorts regardent par une fenêtre dans la rue en-dessous . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+four men dressed in t-shirts and shorts are looking out a lady unto the street below . 
+Phrase à traduire : 
+four men dressed in t-shirts and shorts are looking out a window unto the street below . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 405 en 207 ms par phrase, moyenne loss 0.10787943551937738 current lr [5.936906572928622e-06] [4.3733338321784716e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+trois personnes sont sur la plage , à genoux ou debout au bord de l&apos; eau . 
+Output
+tensor([6574, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+three people are on the beach kneeling or standing near the water . 
+Phrase à traduire : 
+three people are on the beach kneeling or standing near the water . 
+Phrase traduite : 
+illuminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 450 en 165 ms par phrase, moyenne loss 0.1010885328054428 current lr [3.832773180720475e-06] [1.6349374324511326e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un individu traverse la rue et évite l&apos; étalage de peinture . 
+Output
+tensor([6574, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a person crosses the street and avoids the spill of and . 
+Phrase à traduire : 
+a person crosses the street and avoids the spill of paint . 
+Phrase traduite : 
+arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 1 batch numéro : 452 en 14 ms par phrase, moyenne loss 0.005615841183397505 current lr [3.6806347501731297e-06] [1.5204360170384222e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme sur un bateau avec un pantalon orange , tenant une corde . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+a man on a boat wearing orange pants holding a rope . 
+Phrase à traduire : 
+a man on a boat wearing orange pants holding a rope . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminhabillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées uminuminuminuminuminuminuminarrose arrose arrose arrose arrose arrose arrose gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 2 batch numéro : 45 en 193 ms par phrase, moyenne loss 0.10899497949414783 current lr [1.4093685111840573e-06] [1.2041619030626436e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une personne qui porte un jean et un pull rouge tourne à l&apos; angle d&apos; un mur . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a person wearing blue jeans and a red sweater us turning the corner of a brick wall . 
+Phrase à traduire : 
+a person wearing blue jeans and a red sweater us turning the corner of a brick wall . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 90 en 214 ms par phrase, moyenne loss 0.1083950397041109 current lr [4.988171141721282e-08] [2.2103492600834943e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une mariée ajuste la fleur de son mari sur sa veste tandis qu&apos; elle tient son propre bouquet de fleurs . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a running adnher husbands down on his coat as she holds her own bouquet of flowers . 
+Phrase à traduire : 
+a bride adjust her husbands flower on his coat as she holds her own bouquet of flowers . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 135 en 130 ms par phrase, moyenne loss 0.09754842089282142 current lr [2.2103492600834943e-07] [1.5772644703565636e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un vieil homme brandit un chien tandis que son autre chien grimpe sur ses genoux . 
+Output
+tensor([6574, 4260, 4260, 4260, 4260, 4260,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912, 5328, 5328,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912], device='cuda:0')
+Auto encoding
+an old man is holding up one dog while his other dog tion his lap . 
+Phrase à traduire : 
+an old man is holding up one dog while his other dog climbs on his lap . 
+Phrase traduite : 
+poulets poulets poulets poulets poulets habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées uminuminhabillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées Iteration : 2 batch numéro : 180 en 207 ms par phrase, moyenne loss 0.10675194627708859 current lr [1.812880051256544e-06] [3.986063523217445e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un joueur de baseball avec un casque rouge et un pantalon blanc est touché par le receveur tandis qu&apos; il court vers le marbre . 
+Output
+tensor([6574, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a baseball player with a red helmet and white pants is tagged by the catcher while running to air base . 
+Phrase à traduire : 
+a baseball player with a red helmet and white pants is tagged by the catcher while running to home base . 
+Phrase traduite : 
+arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 2 batch numéro : 225 en 108 ms par phrase, moyenne loss 0.09734755605459214 current lr [3.986063523217445e-06] [6.090716206982707e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une personne fait du motocross . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a person is riding his dirt bike . 
+Phrase à traduire : 
+a person is riding his dirt bike . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminarrose arrose arrose arrose Iteration : 2 batch numéro : 270 en 206 ms par phrase, moyenne loss 0.10469924095604155 current lr [6.69368960122645e-06] [8.535533905932739e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme aux cheveux foncés vêtue d&apos; un chemisier bleu et de lunettes de soleil tient une bannière tandis qu&apos; une jeune fille aux cheveux tressés écrit dessus . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a dark-haired woman wearing a blue blouse and sunglasses holds a banner while a young girl with braided hair writes on the banner . 
+Phrase à traduire : 
+a dark-haired woman wearing a blue blouse and sunglasses holds a banner while a young girl with braided hair writes on the banner . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 315 en 205 ms par phrase, moyenne loss 0.10099718372027079 current lr [8.852566213878952e-06] [9.896114053108839e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un vendeur de limonade préparant sa boutique pour la journée . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+lemonade stander worker train up shop for the day . 
+Phrase à traduire : 
+lemonade stander worker setting up shop for the day . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 360 en 168 ms par phrase, moyenne loss 0.09532784231834941 current lr [9.822787092289001e-06] [9.588773128419922e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un policier se bat avec un homme qui a la main en l&apos; air tandis que d&apos; autres policiers regardent . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+cop wrestle one man with his hand sticking up in the air as other cops watch . 
+Phrase à traduire : 
+cop wrestle one man with his hand sticking up in the air as other cops watch . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 405 en 161 ms par phrase, moyenne loss 0.09431434555186166 current lr [9.822787092289001e-06] [8.12621328167854e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un militaire tenant une caméra , montrant à un enfant le film qui est dessus . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 3725,  912, 3725, 3725, 3725,
+        3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,  912,
+         912], device='cuda:0')
+Auto encoding
+a bag man holding a camera , young a child the film on the camera . 
+Phrase à traduire : 
+a military man holding a camera , showing a child the film on the camera . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminarrose habillées arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminhabillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées habillées Iteration : 2 batch numéro : 450 en 133 ms par phrase, moyenne loss 0.0913451224565506 current lr [8.590631488815958e-06] [6.090716206982717e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une classe de plongée prenant une photo pendant le cours . 
+Output
+tensor([6574, 2731, 2731,  656, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a scuba diving stone taking a picture during stone stage . 
+Phrase à traduire : 
+a scuba diving class taking a picture during class time . 
+Phrase traduite : 
+illuminilluminpolicier uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 2 batch numéro : 452 en 7 ms par phrase, moyenne loss 0.004610184994008806 current lr [8.479563982961594e-06] [6.013936476782581e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme et une femme sont assis l&apos; un en face de l&apos; autre à une table de restaurant . 
+Output
+tensor([6574, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man and woman sit across from each other at a restaurant table . 
+Phrase à traduire : 
+a man and woman sit across from each other at a restaurant table . 
+Phrase traduite : 
+illuminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 45 en 162 ms par phrase, moyenne loss 0.0926222995751434 current lr [6.6195870909907605e-06] [3.0865828381745722e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des agriculteurs cultivent pendant la journée . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+farmers are performing their agriculture during the day . 
+Phrase à traduire : 
+farmers are performing their agriculture during the day . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 90 en 184 ms par phrase, moyenne loss 0.09203079301449987 current lr [3.9092837930173015e-06] [1.0492249381215567e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe joue de la musique sur scène devant une foule de personnes . 
+Output
+tensor([6574, 2731, 2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a group is playing music on stage in front of a crowd of people . 
+Phrase à traduire : 
+a group is playing music on stage in front of a crowd of people . 
+Phrase traduite : 
+illuminilluminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 3 batch numéro : 135 en 140 ms par phrase, moyenne loss 0.0888154849410057 current lr [1.8128800512565648e-06] [6.155829702431004e-08]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une personne vêtue de vêtements d&apos; hiver prend la pose avec un bonhomme de neige au milieu d&apos; un paysage enneigé . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a person dressed in tclothes poses with a snowman surrounded by snow covered landscape . 
+Phrase à traduire : 
+a person dressed in winter clothes poses with a snowman surrounded by snow covered landscape . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 180 en 169 ms par phrase, moyenne loss 0.09256377087699043 current lr [1.985315716152814e-07] [1.9853157161528868e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme et une femme vétérinaires examinant un énorme tigre allongé par terre . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man and woman veterinarian checking on a very large tiger laying on the ground . 
+Phrase à traduire : 
+a man and woman veterinarian checking on a very large tiger laying on the ground . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 225 en 176 ms par phrase, moyenne loss 0.09007417004969386 current lr [8.856374635655809e-08] [1.7527597583490687e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux enfants creusent des trous dans la terre . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 2561, 2561, 2561, 2561, 2561, 2561, 2561, 2561,
+        2561], device='cuda:0')
+Auto encoding
+twp children dig holes in the dirt . 
+Phrase à traduire : 
+twp children dig holes in the dirt . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose gravit gravit gravit gravit gravit gravit gravit gravit gravit Iteration : 3 batch numéro : 270 en 220 ms par phrase, moyenne loss 0.09500307945741547 current lr [1.5772644703565486e-06] [4.063093427071367e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une bande de jeunes adultes , en pleine concentration , regardent fixement leurs écrans d&apos; ordinateur pendant une compétition de jeu . 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a bunch of young adults stare in concentration at their team monitors as they competitively game . 
+Phrase à traduire : 
+a bunch of young adults stare in concentration at their computer monitors as they competitively game . 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 315 en 188 ms par phrase, moyenne loss 0.0885589525103569 current lr [3.6050444698038386e-06] [7.0575717930255334e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un garçon hisse un autre garçon sur son dos . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 2731,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+one boy hoists another boy up on his back . 
+Phrase à traduire : 
+one boy hoists another boy up on his back . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 360 en 228 ms par phrase, moyenne loss 0.09311657051245371 current lr [6.4702016261615115e-06] [9.263200821770462e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme est assise près de son stand de fleurs séchées sur un marché en plein air . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman is sitting by her dried arocean at an outside market . 
+Phrase à traduire : 
+a woman is sitting by her dried flower display at an outside market . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 405 en 192 ms par phrase, moyenne loss 0.09153303644723362 current lr [8.698155474893053e-06] [9.999383162408303e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+trois femmes courent pieds nus sur le sable vers l&apos; eau . 
+Output
+tensor([6574, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+three women run barefoot on the sand towards the water . 
+Phrase à traduire : 
+three women run barefoot on the sand towards the water . 
+Phrase traduite : 
+illuminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 450 en 144 ms par phrase, moyenne loss 0.08338708173897531 current lr [9.822787092288996e-06] [9.303710135019718e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un catamaran de course est soulevé sur une seule coque dans l&apos; eau . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a uncatamaran is lifted sunglasses one hull in the water . 
+Phrase à traduire : 
+a racing catamaran is lifted onto one hull in the water . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 3 batch numéro : 452 en 14 ms par phrase, moyenne loss 0.00403421421845754 current lr [9.86184960198839e-06] [9.22163962751008e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme et une femme sont assis sur un banc , regardant un bateau passer . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man and woman sit on a bench , watching a boat up by . 
+Phrase à traduire : 
+a man and woman sit on a bench , watching a boat go by . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 45 en 165 ms par phrase, moyenne loss 0.0834043358763059 current lr [9.801468428384714e-06] [7.269952498697734e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme en tenue de tennis blanche saute pour frapper la balle . 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman in a white tennis outfit is jumping up to shop the ball . 
+Phrase à traduire : 
+a woman in a white tennis outfit is jumping up to hit the ball . 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 90 en 178 ms par phrase, moyenne loss 0.08614023675521215 current lr [8.306559326618251e-06] [4.842946204609376e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme âgée avec un bonnet bleu est assise sur le trottoir , coupant quelque chose de jaune sur une planche à côté d&apos; elle . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+an elderly woman wearing a blue hat is sitting on the sidewalk chopping something yellow on a board beside her . 
+Phrase à traduire : 
+an elderly woman wearing a blue hat is sitting on the sidewalk chopping something yellow on a board beside her . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 135 en 199 ms par phrase, moyenne loss 0.08339103220237626 current lr [6.1672268192795065e-06] [1.9354647317351217e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux cyclistes traversent la rue par une journée très ventée en californie . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two cyclists cross the street on a very breezy california day . 
+Phrase à traduire : 
+two cyclists cross the street on a very breezy california day . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 180 en 193 ms par phrase, moyenne loss 0.08181089328394996 current lr [3.6806347501731314e-06] [2.4471741852423085e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un vendeur de limonade préparant sa boutique pour la journée . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+lemonade stander worker setting up shop for the day . 
+Phrase à traduire : 
+lemonade stander worker setting up shop for the day . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 225 en 192 ms par phrase, moyenne loss 0.08402660696042909 current lr [1.3551568628929427e-06] [1.381503980117416e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un personnage en costume perfectionné est devant une structure brillamment décorée . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+an elaborate costumed figure is in front of a brightly decorated boy . 
+Phrase à traduire : 
+an elaborate costumed figure is in front of a brightly decorated structure . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 270 en 143 ms par phrase, moyenne loss 0.07811460942029953 current lr [1.772129077110149e-07] [1.301844525108114e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux enfants indiens en costume officiel accomplissant heureusement une danse rituelle . 
+Output
+tensor([6574, 2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+two water children in formal stone happily performing a ritual o . 
+Phrase à traduire : 
+two indian children in formal costume happily performing a ritual dance . 
+Phrase traduite : 
+illuminarrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 4 batch numéro : 315 en 164 ms par phrase, moyenne loss 0.08006240038408173 current lr [1.5708419435698658e-07] [3.4549150281283852e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme prépare des ingrédients pour un bol de soupe . 
+Output
+tensor([6574, 2731,  656, 5328,  656, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman prepares ingredients for a hair of soup . 
+Phrase à traduire : 
+a woman prepares ingredients for a bowl of soup . 
+Phrase traduite : 
+illuminpolicier uminpolicier uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 360 en 213 ms par phrase, moyenne loss 0.08261167713337475 current lr [1.6934406733832496e-06] [6.1672268192850876e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+plusieurs mecs entrent en collision dans un match de football . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+multiple bodies collide in a soccer . 
+Phrase à traduire : 
+multiple bodies collide in a soccer match . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 405 en 192 ms par phrase, moyenne loss 0.08048812026778857 current lr [4.217827674802624e-06] [8.479563982969214e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux kickboxers femelles , l&apos; une avec un bustier pourpre , s&apos; affrontent dans une arène . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two female kickboxers , one with a purple abobra , battle it out in an arena . 
+Phrase à traduire : 
+two female kickboxers , one with a purple sports bra , battle it out in an arena . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 450 en 192 ms par phrase, moyenne loss 0.08155275078283417 current lr [7.057571793031885e-06] [9.801468428393545e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux femmes marchent sur la plage transportant des planches et des palmes . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two women are walking down the beach carrying boards and flippers . 
+Phrase à traduire : 
+two women are walking down the beach carrying boards and flippers . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 4 batch numéro : 452 en 7 ms par phrase, moyenne loss 0.0036753166053030226 current lr [7.199695849286053e-06] [9.822787092297841e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme debout tient un micro devant un homme tenant une guitare . 
+Output
+tensor([6574, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a standing man holds a microphone in front of a man holding a guitar . 
+Phrase à traduire : 
+a standing man holds a microphone in front of a man holding a guitar . 
+Phrase traduite : 
+arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 45 en 150 ms par phrase, moyenne loss 0.07601196434762743 current lr [8.9507750618865e-06] [9.77896507400046e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+il y a un homme en tenue de pompier , traversant la route à proximité d&apos; un bus blanc et d&apos; un semi-remorque rouge . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+there is a man in fireman &apos;s gear bucking the road near a white bus and a red semi . 
+Phrase à traduire : 
+there is a man in fireman &apos;s gear crossing the road near a white bus and a red semi . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 90 en 178 ms par phrase, moyenne loss 0.07774785243802601 current lr [9.925546630782811e-06] [8.187119948750813e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des jeunes participent à un match . 
+Output
+tensor([6574, 2731, 5328, 5328,  912,  912, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+young people are engaged in a game . 
+Phrase à traduire : 
+young people are engaged in a game . 
+Phrase traduite : 
+illuminuminuminhabillées habillées uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 135 en 164 ms par phrase, moyenne loss 0.07391751474804348 current lr [9.7304267941465e-06] [5.782172325206361e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+beaucoup de gens marchant sur une route en terre , portant des vêtements d&apos; été par une journée ensoleillée . 
+Output
+tensor([6574, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a ladies of people walking on a dirt road , wearing summer clothes on a sunny day . 
+Phrase à traduire : 
+a lot of people walking on a dirt road , wearing summer clothes on a sunny day . 
+Phrase traduite : 
+uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 180 en 157 ms par phrase, moyenne loss 0.07090899248917898 current lr [8.306559326625737e-06] [3.3063103987765334e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+la femme tient le garçon tout en regardant de l&apos; autre côté de la rue . 
+Output
+tensor([6574, 2731, 2731, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+the women is holding the boy while looking across the street . 
+Phrase à traduire : 
+the women is holding the boy while looking across the street . 
+Phrase traduite : 
+illuminilluminarrose arrose arrose arrose arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 225 en 150 ms par phrase, moyenne loss 0.07148355568448703 current lr [6.013936476787952e-06] [1.3018445251081227e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme jette un coup d &quot; œil dans un télescope dans les bois . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman peeks into a telescope in the n . 
+Phrase à traduire : 
+a woman peeks into a telescope in the woods . 
+Phrase traduite : 
+illuminilluminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 270 en 199 ms par phrase, moyenne loss 0.07333803334169918 current lr [3.4549150281283603e-06] [4.988171141725557e-08]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un garçon sourit pour la photo parmi un groupe d&apos; enfants assis . 
+Output
+tensor([6574, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725, 3725,
+        3725], device='cuda:0')
+Auto encoding
+a boy smiles for the camera in a group of sitting children . 
+Phrase à traduire : 
+a boy smiles for the camera in a group of sitting children . 
+Phrase traduite : 
+arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose arrose Iteration : 5 batch numéro : 315 en 171 ms par phrase, moyenne loss 0.0703387482298745 current lr [1.3018445251081227e-06] [3.8060233744389626e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme en collants rayés est dirigée par des ficelles . 
+Output
+tensor([6574, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman in striped tights is being guided with strings . 
+Phrase à traduire : 
+a woman in striped tights is being guided with strings . 
+Phrase traduite : 
+uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 5 batch numéro : 360 en 171 ms par phrase, moyenne loss 0.07132177361183696 current lr [6.155829702436602e-08] [1.7527597583506724e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme prend une photo d&apos; un autre homme avec ses deux chiens sur une colline verdoyante 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man is taking a photo of another man and his two dogs on some grassy hills 
+Phrase à traduire : 
+a man is taking a photo of another man and his two dogs on some grassy hills 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminumin
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un garçon pieds nus avec une serviette rayée bleue et blanche est debout sur la plage . 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a barefoot boy with a blue and white striped towel is standing on the beach . 
+Phrase à traduire : 
+a barefoot boy with a blue and white striped towel is standing on the beach . 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 45 en 164 ms par phrase, moyenne loss 0.07105984538793564 current lr [8.645971286279606e-07] [5.3139525976513516e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme en t-shirt rouge est debout avec deux filles devant un vieil édifice . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man in a red shirt is standing with two fitls in front of an old boy . 
+Phrase à traduire : 
+a man in a red shirt is standing with two fitls in front of an old structure . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 90 en 192 ms par phrase, moyenne loss 0.07276289049122069 current lr [2.9424282069770885e-06] [7.87502626022345e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme avec des perles de mardi gras autour du cou tenant une perche avec une bannière 
+Output
+tensor([6574, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+man with mardi gras beads around his neck holding pole with banner 
+Phrase à traduire : 
+man with mardi gras beads around his neck holding pole with banner 
+Phrase traduite : 
+illuminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 135 en 143 ms par phrase, moyenne loss 0.0675534860127502 current lr [4.921463413445343e-06] [9.64888242944994e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme avec des dreadlocks joue avec les cheveux d&apos; une femme qui est assise sur une chaise dans une rue pavée . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a man with dreadlocks is playing with the hair of a woman who is sitting on a chair on a cobblestone street . 
+Phrase à traduire : 
+a man with dreadlocks is playing with the hair of a woman who is sitting on a chair on a cobblestone street . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 180 en 136 ms par phrase, moyenne loss 0.06659025309814347 current lr [7.199695849286053e-06] [9.960573506581355e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux hommes assis dehors , ayant une conversation près d&apos; une pancarte free advice . 
+Output
+tensor([6574, 2731, 2731, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two men sitting outside having a dancing by a free advice sign . 
+Phrase à traduire : 
+two men sitting outside having a conversation by a free advice sign . 
+Phrase traduite : 
+illuminilluminilluminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 225 en 157 ms par phrase, moyenne loss 0.0667117763724592 current lr [9.045084971882885e-06] [8.950775061886494e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+l&apos; homme à la chemise bleue marche avec l&apos; homme en rouge . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+the man in the blue shirt is walking with the man in red . 
+Phrase à traduire : 
+the man in the blue shirt is walking with the man in red . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 270 en 220 ms par phrase, moyenne loss 0.07151357564661238 current lr [9.994449374818843e-06] [6.619587090996717e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme se faisant tatouer des lignes noires et des paillettes sur le visage . 
+Output
+tensor([6574, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a female getting a face tattoo of black lines and glitter . 
+Phrase à traduire : 
+a female getting a face tattoo of black lines and glitter . 
+Phrase traduite : 
+uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 315 en 213 ms par phrase, moyenne loss 0.06828398870097266 current lr [9.221639627518375e-06] [3.986063523221042e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un homme à vélo portant un casque bleu s&apos; insère dans la circulation . 
+Output
+tensor([6574, 2731, 3725, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+man wearing blue helmet merges into traffic on a bicycle . 
+Phrase à traduire : 
+man wearing blue helmet merges into traffic on a bicycle . 
+Phrase traduite : 
+illuminarrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 360 en 157 ms par phrase, moyenne loss 0.06234142498837577 current lr [7.339649071309488e-06] [1.752759758350657e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme coud pour gagner sa vie dans son pays . 
+Output
+tensor([6574, 2731, 5328, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+woman is sewing in order to make a living in her country . 
+Phrase à traduire : 
+woman is sewing in order to make a living in her country . 
+Phrase traduite : 
+illuminuminarrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 405 en 220 ms par phrase, moyenne loss 0.06817191557751762 current lr [4.529458433411515e-06] [1.9853157161547105e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+quatre personnes sont attachées sur le manège d&apos; un parc d&apos; attractions 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+jumping people are strapped to an amusement park ride 
+Phrase à traduire : 
+4 people are strapped to an amusement park ride 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 450 en 192 ms par phrase, moyenne loss 0.06316895874010192 current lr [2.061073738539503e-06] [1.985315716152874e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+des gens sont réunis devant une statue d&apos; un animal , et ils portent tous des vêtements d&apos; hiver . 
+Output
+tensor([6574, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+people are all standing together in front of a statue of an one , and they are all wearing cool-weather clothing . 
+Phrase à traduire : 
+people are all standing together in front of a statue of an animal , and they are all wearing cool-weather clothing . 
+Phrase traduite : 
+uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 0 batch numéro : 452 en 14 ms par phrase, moyenne loss 0.003037002599901623 current lr [1.9354647317368386e-06] [2.4471741852422677e-07]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un nageur nageant dans une piscine . 
+Output
+tensor([6574, 3725, 3725, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+an swimmer swimming in a swimming pool . 
+Phrase à traduire : 
+an swimmer swimming in a swimming pool . 
+Phrase traduite : 
+arrose arrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 45 en 193 ms par phrase, moyenne loss 0.06422145466009775 current lr [3.5111757055906473e-07] [1.8737867183214652e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+deux personnes sautent au sommet d&apos; une montagne . 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+two people are running at the top of a mountain . 
+Phrase à traduire : 
+two people are running at the top of a mountain . 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 90 en 150 ms par phrase, moyenne loss 0.061492456330193415 current lr [3.019522272410147e-08] [4.217827674798859e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un chien en laisse creuse dans la neige à la campagne . 
+Output
+tensor([6574, 2731, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+dog on leash burrows into snow in rural area . 
+Phrase à traduire : 
+dog on leash burrows into snow in rural area . 
+Phrase traduite : 
+illuminilluminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 135 en 171 ms par phrase, moyenne loss 0.062276074786980946 current lr [9.092514128748754e-07] [6.913417161825427e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme en blanc joue d&apos; une guitare noire . 
+Output
+tensor([6574, 2731, 3725, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman in white plays a black guitar . 
+Phrase à traduire : 
+a woman in white plays a black guitar . 
+Phrase traduite : 
+illuminarrose arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 180 en 157 ms par phrase, moyenne loss 0.05979767938454946 current lr [2.5912316294914207e-06] [9.090748587125126e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une petite fille fait un don à l&apos; armée du salut près d&apos; une vitrine avec des containers en plastique blancs . 
+Output
+tensor([6574, 3725, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a little girl donates to the salvation army near a storefront with white , plastic containers . 
+Phrase à traduire : 
+a little girl donates to the salvation army near a storefront with white , plastic containers . 
+Phrase traduite : 
+arrose uminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminIteration : 1 batch numéro : 225 en 157 ms par phrase, moyenne loss 0.05998226619429058 current lr [4.921463413440875e-06] [9.984586668665648e-06]
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+une femme en t-shirt vert marche dans une rue bondée . 
+Output
+tensor([6574, 2731, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328, 5328,
+        5328], device='cuda:0')
+Auto encoding
+a woman in a green shirt is walking down a crowded street . 
+Phrase à traduire : 
+a woman in a green shirt is walking down a crowded street . 
+Phrase traduite : 
+illuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminuminumin

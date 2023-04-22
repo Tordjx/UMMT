@@ -4,20 +4,20 @@ Bleu score
 Meteor score
 0.0
 Bonne traduction
-un artiste de rue en combinaison orange est sur un grand monocycle tandis qu&apos; une foule regarde 
+deux hommes de deux équipes adverses courent vers un ballon de football . 
 Output
-tensor([5670, 4680, 4891, 4891, 4758, 4758, 6139, 6139, 4758, 4587, 4116, 6139,
-        4116, 4116, 4116, 4116, 4116, 4116, 4116, 4116, 6388, 1638, 1638, 1638,
-        1638, 1638, 1638, 1638, 1638, 1638, 1638, 1638, 1638, 1638, 1638, 1638,
-        1638, 1638, 2936, 4116, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614,
-        4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614,
-        4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614,
-        4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614,
-        4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614, 4614,
-        2936], device='cuda:0')
+tensor([4266,  942,  942,  942,  942,  942,  874, 4996, 4996, 6020, 6020, 6020,
+        6020, 6020, 6020, 6020, 6020, 6020, 6020, 6020, 6020, 6020, 6020, 6170,
+        6020, 6020, 6020, 3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376,
+        3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376, 3376,  942,
+        3376,  942, 3376,  942, 3376,  942, 3376,  942, 3376,  942, 3376,  942,
+        3376,  942, 3376,  942, 3376,  942, 3376,  942, 3376,  942, 3376,  942,
+        3376,  942,  942, 3376,  942, 3376,  942, 3376,  942,  942, 3376,  942,
+        3376,  942, 3376,  942,  942, 3376,  942,  942, 3376,  942, 3376,  942,
+        4692], device='cuda:0')
 Auto encoding
-lanterns foupicture cking presenting vollepirate benches socks power male cking cking dge handed socks cking male live obama power selling onto onto cking spect dge silhouettes jumping giant ina plaid waiter cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking cking 
+eggs nafactory fully continsschicken roofsell live 00 staff ature attempt microscopes ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
 Phrase à traduire : 
-a street performer in an orange jumpsuit rides a tall unicycle as a crowd watches 
+two men on opposing teams race toward a soccer ball . 
 Phrase traduite : 
-boîrelidue due back back univeruniverback dentioche univeroche oche oche oche oche oche oche oche exhibit mememememememememememememememememeargentée oche stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores stores argentée 
+capitfume fume fume fume fume cher tutus tutus moymoymoymoymoymoymoymoymoymoymoymoymoymoyspémoymoymoyétroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume étroit fume fume étroit fume étroit fume étroit fume fume étroit fume étroit fume étroit fume fume étroit fume fume étroit fume étroit fume rang

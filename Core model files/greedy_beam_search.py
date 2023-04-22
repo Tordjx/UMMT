@@ -9,7 +9,7 @@ import heapq
 import copy
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-batch_size = 16
+batch_size = 32
 
 #%% Greedy 
  

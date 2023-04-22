@@ -52,7 +52,7 @@ class Modèle(nn.Module):
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss(ignore_index = self.padding_id,label_smoothing =0.1)
         self.lr = 10**(-3)
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,betas=(0.9, 0.999), eps=1e-09)
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,betas=(0.9, 0.98), eps=1e-09)
         self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=1, T_mult=2, eta_min=10**(-5), last_epoch=-1)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []

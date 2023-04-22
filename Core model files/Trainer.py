@@ -25,7 +25,7 @@ def auto_encoding_train(model,train_data, image_bool):
     loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
     model.optimizer.step()
-    model.scheduler.step()
+    # model.scheduler.step()
     return loss.item()
 
 def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = None, image_bool = False) : 
@@ -181,9 +181,9 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.1)
         model_A.optimizer.step()
         model_B.optimizer.step()
-        model_A.scheduler.step()
-        model_B.scheduler.step()
-
+        # # model_A.scheduler.step()
+        # model_B.scheduler.step()
+# 
         # print("lra"+str(model_A.scheduler.get_last_lr()))
         # print("lrb"+str(model_B.scheduler.get_last_lr()))
         return loss_A.item()
@@ -245,15 +245,18 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_B.loss_list.append(loss)
             else : #DIFFERENTIABLE CYCLE
                 loss = differentiable_cycle_consistency_train(model_A,model_B,train_data,image_bool)
-            model_fr.lr_list.append(model_fr.scheduler.get_last_lr())
-            model_en.lr_list.append(model_en.scheduler.get_last_lr())
+            # model_fr.lr_list.append(model_fr.scheduler.get_last_lr())
+            # model_en.lr_list.append(model_en.scheduler.get_last_lr())
+            
             loss_list.append(loss)
             # print(loss)
             total_loss+=loss
 
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
+                
                 with open("logs.txt","a") as logs :
-                    logs.write("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
+                    logs.write("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr ")
+                    # logs.write("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
                     logs.close()
                 # print("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par itération, moyenne loss "+ str(total_loss/log_interval) + " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
                 bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool)
@@ -263,6 +266,8 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_fr.train()
                 total_loss = 0
                 start_time = time.time()
+        model_en.scheduler.step()
+        model_fr.scheduler.step()
 
         # plt.plot(loss_list)
     

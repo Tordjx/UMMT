@@ -63,10 +63,10 @@ class Modèle(nn.Module):
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
-        self.criterion = nn.CrossEntropyLoss()
-        self.lr = 10**(-5)# learning rate
+        self.criterion = nn.CrossEntropyLoss(self.padding_id)
+        self.lr = 10**(-4)# learning rate
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay = 10**(-4))
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer,T_max = 200)
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=2, T_mult=1.5, eta_min=10**(-8), last_epoch=-1)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 

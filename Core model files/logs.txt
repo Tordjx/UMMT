@@ -1,110 +1,23 @@
 
 Bleu score
-5.8051759849861466e-232
-Meteor score
-0.012987012987012988
-Bonne traduction
-des hommes sont assis dans un bateau près d&apos; une plage recouverte de troncs et de branches empilés . 
-Output
-tensor([ 894, 3598, 3438, 3362, 3362, 1616, 1616, 1672, 1672, 1672, 1672, 1672,
-        1672, 1672, 1672, 1672, 6100, 6100, 6100, 6100, 6100, 1879, 6100, 6100,
-        6100, 6100, 6100, 6100, 6100, 6100, 6100,  429, 1879,  429, 1879,  894,
-        1879,  429,  894, 1879,  392,  392,  392,  392,  392,  392,  392,  392,
-         392,  392,  392,  392,  392,  392,  392,  392,  392,  392, 6321, 6321,
-        6321, 6321, 6321, 6321, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104,
-        4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104,
-        4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104, 4104,
-         743], device='cuda:0')
-Auto encoding
-silver zkiss -like crayfair newly solo welcome tree-stroll ki dots en vice zur pladeli businesszed stone en design zmarked bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends bends 
-Phrase � traduire : 
-some men are sitting on a boat near a beach covered in stacked logs and sticks . 
-Phrase traduite : 
-chballerines pizza survêtement survêtement ressemblant ressemblant commence commence commence commence commence commence commence commence commence hook hook hook hook hook prehook hook hook hook hook hook hook hook hook attendent preattendent prechpreattendent chpreccccccccccccccccccsumsumsumsumsumsumprofondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes profondes batterie Iteration : 0 batch num�ro : 90 en 74 ms par phrase, moyenne loss 6.072325653500027 current lr [0.001] [0.001]
-Bleu score
 0
 Meteor score
 0.0
 Bonne traduction
-un homme avec un costume et des lunettes a un objet dans les mains . 
+une fille en t-shirt blanc faisant des bulles dans une pièce obscure . 
 Output
-tensor([6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573], device='cuda:0')
+tensor([3882, 3192, 6067,  774,  774, 4125,  774, 4125,  774, 3384,   39, 4125,
+          39,   39, 4125, 5517, 5517, 5517, 4125, 4125, 4125, 4125, 4125, 4125,
+        4125, 4125, 4125, 4125, 4125, 4125, 4125,  895,  895,  895,  895,  895,
+         895,  305,  305,  305, 4408,  305,  305,  305, 4408,  305,  305, 4408,
+         305, 4408,  305, 4408,  305, 4408,  305, 4408,  305, 4408,  305, 4408,
+         305, 4408,  305, 4408, 4408,  305, 4408,  305, 4408,  305, 4408,  305,
+        4408, 4408,  305, 4408,  305, 4408, 4408,  305, 4408,  305, 4408,  305,
+        4408, 4408,  305, 4408, 4408,  305, 4408,  305, 4408, 4408,  305, 4408,
+        6399], device='cuda:0')
 Auto encoding
-a man in a kind and bian . in sthe . 
+prunairdrawn airairairairairterminal airairairairairairprunvette airprunkayak terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal 
 Phrase � traduire : 
-a man in a suit and glass has an object in his hands . 
+girl in white shirt blowing bubbles in dark room . 
 Phrase traduite : 
-Iteration : 0 batch num�ro : 180 en 81 ms par phrase, moyenne loss 3.647151396009657 current lr [0.000505] [0.000505]
-Bleu score
-0
-Meteor score
-0.0
-Bonne traduction
-un homme avec une veste de ski de couleur vive est debout parmi d&apos; autres dans une rue d&apos; europe . 
-Output
-tensor([6573, 6573, 6573, 6573, 6573,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,  432,
-         432], device='cuda:0')
-Auto encoding
-a man in a bpghtlyleading ungaops with von a eurouan street . 
-Phrase � traduire : 
-a man in a brightly-colored ski jacket stands with others on a european street . 
-Phrase traduite : 
-iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiIteration : 0 batch num�ro : 270 en 74 ms par phrase, moyenne loss 3.1321636888715956 current lr [0.001] [0.001]
-Bleu score
-0
-Meteor score
-0.0
-Bonne traduction
-un homme en t-shirt blanc est assis sur une caisse . 
-Output
-tensor([6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573], device='cuda:0')
-Auto encoding
-a man in a white shirt is sitting on a crate . 
-Phrase � traduire : 
-a man in a white shirt is sitting on a crate . 
-Phrase traduite : 
-Iteration : 0 batch num�ro : 360 en 77 ms par phrase, moyenne loss 2.861764907836914 current lr [0.000855017856687341] [0.000855017856687341]
-Bleu score
-0
-Meteor score
-0.0
-Bonne traduction
-un jeune homme installe des boules de billard , sur un tapis de billard violet . 
-Output
-tensor([6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573, 6573,
-        6573], device='cuda:0')
-Auto encoding
-a young man afternoon ts up women balls , on a ement felt billiard . 
-Phrase � traduire : 
-a young man sets up pool balls , on a purple felt billiard . 
-Phrase traduite : 
+tournage photographié aspirterrasse terrasse lourterrasse lourterrasse cow-boys qu&apos; lourqu&apos; qu&apos; lourplates plates plates lourlourlourlourlourlourlourlourlourlourlourlourlourécouteurs écouteurs écouteurs écouteurs écouteurs écouteurs fenêtre fenêtre fenêtre patte fenêtre fenêtre fenêtre patte fenêtre fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte patte fenêtre patte fenêtre patte patte fenêtre patte anni

@@ -4,20 +4,17 @@ Bleu score
 Meteor score
 0.0
 Bonne traduction
-une fille en t-shirt blanc faisant des bulles dans une pièce obscure . 
+voici deux mamans écoutant un petit enfant . 
 Output
-tensor([3882, 3192, 6067,  774,  774, 4125,  774, 4125,  774, 3384,   39, 4125,
-          39,   39, 4125, 5517, 5517, 5517, 4125, 4125, 4125, 4125, 4125, 4125,
-        4125, 4125, 4125, 4125, 4125, 4125, 4125,  895,  895,  895,  895,  895,
-         895,  305,  305,  305, 4408,  305,  305,  305, 4408,  305,  305, 4408,
-         305, 4408,  305, 4408,  305, 4408,  305, 4408,  305, 4408,  305, 4408,
-         305, 4408,  305, 4408, 4408,  305, 4408,  305, 4408,  305, 4408,  305,
-        4408, 4408,  305, 4408,  305, 4408, 4408,  305, 4408,  305, 4408,  305,
-        4408, 4408,  305, 4408, 4408,  305, 4408,  305, 4408, 4408,  305, 4408,
-        6399], device='cuda:0')
+tensor([3089, 2032, 2032, 2032, 2032, 4969, 3363, 4883, 4883, 4883, 4883, 4883,
+        4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883,
+        4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883,
+        4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883,
+        4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883, 4883,
+        4883, 4883, 4883, 6112], device='cuda:0')
 Auto encoding
-prunairdrawn airairairairairterminal airairairairairairprunvette airprunkayak terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal terminal 
-Phrase � traduire : 
-girl in white shirt blowing bubbles in dark room . 
+young men performs helicopter horseback iron synchronhelicopter synchrontemple tour 4cupcakes ystindubucks landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing landing 
+Phrase à traduire : 
+here are 2 moms listening to a toddler . 
 Phrase traduite : 
-tournage photographié aspirterrasse terrasse lourterrasse lourterrasse cow-boys qu&apos; lourqu&apos; qu&apos; lourplates plates plates lourlourlourlourlourlourlourlourlourlourlourlourlourécouteurs écouteurs écouteurs écouteurs écouteurs écouteurs fenêtre fenêtre fenêtre patte fenêtre fenêtre fenêtre patte fenêtre fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte patte fenêtre patte fenêtre patte fenêtre patte patte fenêtre patte patte fenêtre patte fenêtre patte patte fenêtre patte anni
+couverts bande bande bande bande izcoffre inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant inant mières 

@@ -23,7 +23,7 @@ def auto_encoding_train(model,train_data, image_bool):
         loss = model.criterion(output.mT,target)
     model.optimizer.zero_grad()
     loss.backward()
-    # torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
+    torch.nn.utils.clip_grad_norm_(model.parameters(), 5)
     model.optimizer.step()
     return loss.item()
 
@@ -71,8 +71,8 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
         loss_A.backward()
-        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 0.1)
-        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 0.1)
+        torch.nn.utils.clip_grad_norm_(model_A.parameters(), 5)
+        torch.nn.utils.clip_grad_norm_(model_B.parameters(), 5)
         model_A.optimizer.step()
         model_B.optimizer.step()
         return loss_A.item()
@@ -128,7 +128,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_en.scheduler.step()
                 model_fr.scheduler.step()
                 with open("logs.txt","a") as logs :
-                    logs.write("Iteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
+                    logs.write("\nIteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
                     logs.close()
                 bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool)
                 liveloss.update({"Model FR mean training loss":np.mean(model_fr.loss_list[-log_interval:]),"Model EN mean training loss":np.mean(model_fr.loss_list[-log_interval:]), "BLEU score" : bleu, "METEOR score" : meteor,"EN LR" : model_en.scheduler.get_last_lr()[0],"FR LR" : model_fr.scheduler.get_last_lr()[0]})
@@ -137,6 +137,56 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_fr.train()
                 total_loss = 0
                 start_time = time.time()
+
+def learning_rate_finder(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,part_auto_encoding = 1/2):
+    loss_list = [0]
+    model_fr.train()
+    model_en.train()
+    batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
+    k = 0
+    learning_rate = 10**(-10)
+    index = 0
+    while learning_rate < 10**3 : 
+        model_fr.learning_rate = learning_rate
+        model_en.learning_rate = learning_rate
+        for g in model_fr.optimizer.param_groups:
+            g['lr'] = learning_rate
+        for g in model_en.optimizer.param_groups:
+            g['lr'] = learning_rate
+        U = np.random.rand()
+        V = np.random.rand()
+        if k%2 ==0 : #ENGLISH DATA
+            if image_bool : 
+                train_data= get_batch(batched_data_en,k,image_bool)
+            else : 
+                train_data= get_batch(batched_data_en,k)
+            model_A = model_en
+            model_B = model_fr
+        else : #FRENCH DATA
+            if image_bool : 
+                    train_data= get_batch(batched_data_fr,k,image_bool)
+            else : 
+                train_data= get_batch(batched_data_fr,k)
+            model_A = model_fr
+            model_B = model_en
+        if k%4 <=1 :#AUTO ENCODING
+            loss = auto_encoding_train(model_A,train_data,image_bool)
+            model_A.loss_list.append(loss)
+        else: #CYCLE CONSISTENT
+            loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
+            model_A.loss_list.append(loss)
+            model_B.loss_list.append(loss)
+        loss_list[index]+=loss
+        if k%4 == 3:
+            learning_rate *=3
+            index +=1
+            loss_list.append(0)
+        k +=1
+        if k == batched_data_en[0].shape[0]:
+            batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
+            k = k%4
+        print(learning_rate)
+    return loss_list
 
     
     

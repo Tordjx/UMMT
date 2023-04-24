@@ -33,7 +33,7 @@ def get_train_data_nouveau(batch_size, train_bool):
     fichier_train_en.close()
     fichier_train_fr.close()
     # longueur_max = max(max([len(x) for x in train_data_fr]),max( [len(x) for x in train_data_fr]))
-    longueur_max = 97
+    longueur_max = 64
 
     train_data_fr = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_fr]
     train_data_en = [[phrase[i] if i < len(phrase) else "TOKEN_VIDE" for i in range (longueur_max)] for phrase in train_data_en]

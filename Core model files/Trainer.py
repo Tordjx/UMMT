@@ -118,10 +118,16 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
             if V < part_auto_encoding  :#AUTO ENCODING
                 loss = auto_encoding_train(model_A,train_data,image_bool)
                 model_A.loss_list.append(loss)
+                model_B.feedforward= model_A.feedforward
+                model_B.encoder = model_A.encoder
+                model_B.decoder = model_A.decoder
             else: #CYCLE CONSISTENT
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
                 model_A.loss_list.append(loss)
                 model_B.loss_list.append(loss)
+                model_A.feedforward= model_B.feedforward
+                model_A.encoder = model_B.encoder
+                model_B.decoder = model_A.decoder
             loss_list.append(loss)
             total_loss+=loss
             if (i%log_interval == 0 and i !=0) or i == N-1 : 

@@ -51,7 +51,7 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss(ignore_index = self.padding_id,label_smoothing =0.1)
-        self.lr = 5*10**(-3)
+        self.lr = 5*10**(-4)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,betas=(0.9, 0.98), eps=1e-09,weight_decay=10**(-5))
         self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=1, T_mult=1, eta_min=10**(-4), last_epoch=-1)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
@@ -74,7 +74,7 @@ class Modèle(nn.Module):
             mem_ei_key_padding_mask = None
         memory = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
-            decoder_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1)
+            text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1)
 
         if image_bool:
             mem_masks = [memory_mask, mem_ei_mask]

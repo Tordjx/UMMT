@@ -28,9 +28,11 @@ class PositionalEncoding(nn.Module):
         return self.dropout(x)
 
 class Modèle(nn.Module):
-    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ,padding_id,begin_id, end_id) -> None:
+    def __init__(self,n_token, d_model, n_head, num_encoder_layers, num_decoder_layers, dim_feedforward,dropout, activation ,padding_id,begin_id, end_id,teacher_forcing,prefix) -> None:
         super().__init__()
         self.curr_epoch=  0
+        self.teacher_forcing = teacher_forcing
+        self.prefix = prefix
         self.d_model = d_model 
         self.num_encoder_layers= num_encoder_layers
         self.num_decoder_layers= num_decoder_layers
@@ -51,7 +53,7 @@ class Modèle(nn.Module):
         self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss(ignore_index = self.padding_id,label_smoothing =0.1)
-        self.lr = 5*10**(-4)
+        self.lr = 10**(-3)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,betas=(0.9, 0.98), eps=1e-09,weight_decay=10**(-5))
         self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=1, T_mult=1, eta_min=10**(-4), last_epoch=-1)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
@@ -73,9 +75,10 @@ class Modèle(nn.Module):
             mem_ei_mask = None
             mem_ei_key_padding_mask = None
         memory = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
-        # if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
-        #     text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1)
-        target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id)),dim =1)
+        if not self.teacher_forcing :
+            if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+                text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1).to(device)
+        target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
         if image_bool:
             mem_masks = [memory_mask, mem_ei_mask]
             mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]

@@ -40,9 +40,10 @@ def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = No
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     memory = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
-    # if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
-    #     target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
-    target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    if not model_A.teacher_forcing :
+        if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+            target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1).to(device)
+    target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
@@ -130,7 +131,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
                 model_en.scheduler.step()
                 model_fr.scheduler.step()
-                with open("logs.txt","a") as logs :
+                with open(model_A.prefix +"logs.txt","a") as logs :
                     logs.write("\nIteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
                     logs.close()
                 bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool)

@@ -44,7 +44,7 @@ def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
     else :
         data= src
     # 
-    with open("logs.txt",'a') as logs :
+    with open(model_A.prefix+"logs.txt",'a') as logs :
         if image_bool :
             if mode == 'greedy':
                 output = give_tokens(greedy_beam_search.CCF_greedy(model_A,model_B,data, features, True),model_B.padding_id,model_B.end_id)[j]
@@ -109,7 +109,7 @@ def evaluation(mode,val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map
         data = src
     
     trad,bleu,meteor = traduit(mode,model_en,model_fr,data, inv_map_en,image_bool,tgt[j],inv_map_fr,j) 
-    with open("logs.txt",'a') as logs :
+    with open(model_en.prefix+"logs.txt",'a') as logs :
         logs.write("\nPhrase à traduire : \n" + tensor_to_sentence(src[j],inv_map_en)+ "\nPhrase traduite : \n"+ trad)
         logs.close()
     return bleu, meteor

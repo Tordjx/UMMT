@@ -40,9 +40,9 @@ def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = No
         mem_ei_key_padding_mask = (text_input ==  model_A.padding_id).to(device=device)
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     memory = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
-    if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
-        target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
-
+    # if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+    #     target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
+    target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id)),dim =1)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]

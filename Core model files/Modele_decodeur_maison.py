@@ -73,19 +73,19 @@ class Modèle(nn.Module):
             mem_ei_mask = None
             mem_ei_key_padding_mask = None
         memory = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
-        if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
-            text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1)
-
+        # if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+        #     text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1)
+        target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id)),dim =1)
         if image_bool:
             mem_masks = [memory_mask, mem_ei_mask]
             mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
             image_encoded = self.feedforward(image_input)
-            x = [self.positional_encoder(self.embedding(text_input)), image_encoded]
+            x = [self.positional_encoder(self.embedding(target)), image_encoded]
             output = self.decoder(x, memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
             return self.output_layer(output)
         else:
             # Pass through the decoder
-            output = self.decoder(self.positional_encoder(self.embedding(text_input)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            output = self.decoder(self.positional_encoder(self.embedding(target)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
             return self.output_layer(output)
 
     def generate_square_subsequent_mask(self,a,b) -> Tensor:

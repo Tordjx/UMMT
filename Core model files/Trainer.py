@@ -41,7 +41,7 @@ def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = No
         mem_ei_key_padding_mask = torch.cat((mem_ei_key_padding_mask, torch.full([text_input.shape[0], image_input.shape[1]], False).to(device=device)), dim=1)
     memory = model_A.encoder(model_A.positional_encoder(model_A.embedding(text_input)),src_mask,src_padding_mask)
     if not model_A.teacher_forcing :
-        if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+        if np.random.rand() < 1 : #DO NOT TEACHER FORCE
             target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1).to(device)
     target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
     if image_bool:
@@ -72,10 +72,6 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
                 first_output = range_le_padding(check_data(first_output,model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
             output = cycle_consistent_forward(model_B,model_A, first_output,data)
         loss_A = model_A.criterion(output.mT,data)
-        print(data)
-        print(first_output)
-        print(torch.argmax(output,dim = 2))
-        print(loss_A)
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
         loss_A.backward()
@@ -140,7 +136,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                     logs.close()
                 bleu,meteor = evaluation('greedy',val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map_en,inv_map_fr,image_bool)
                 liveloss.update({"Model FR mean training loss":np.mean(model_fr.loss_list[-log_interval:]),"Model EN mean training loss":np.mean(model_fr.loss_list[-log_interval:]), "BLEU score" : bleu, "METEOR score" : meteor,"EN LR" : model_en.scheduler.get_last_lr()[0],"FR LR" : model_fr.scheduler.get_last_lr()[0]})
-                # liveloss.send()
+                liveloss.send()
                 model_en.train()
                 model_fr.train()
                 total_loss = 0

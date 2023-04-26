@@ -76,7 +76,7 @@ def get_train_data_nouveau(batch_size, train_bool):
     #En sortie : les données tokenizées non batchées
     return [tokenized_fr,tokenized_en, vocab_fr,vocab_en]
 
-def batchify(data: Tensor, bsz: int, image_bool) -> Tensor:
+def batchify(data: Tensor, bsz: int, image_bool,conservative = False, permute= True) -> Tensor:
     """Divides the data into bsz separate sequences, removing extra elements
     that wouldn't cleanly fit.
 
@@ -91,25 +91,37 @@ def batchify(data: Tensor, bsz: int, image_bool) -> Tensor:
         data_en,data_fr = data
         text_en,features = data_en
         text_fr,features = data_fr
-        
-        permutation = torch.randperm(text_en.shape[0])
-        text_en = text_en[permutation]
-        text_fr = text_fr[permutation]
-        features = features[permutation]
-        if text_en.shape[0]%bsz != 0 :
+        if permute : 
+            permutation = torch.randperm(text_en.shape[0])
+            text_en = text_en[permutation]
+            text_fr = text_fr[permutation]
+            features = features[permutation]
+        if text_en.shape[0]%bsz != 0 and not conservative:
             text_en = text_en[:(text_en.shape[0]-text_en.shape[0]%bsz)]
             text_fr = text_fr[:(text_fr.shape[0]-text_fr.shape[0]%bsz)]
             features = features[:(text_fr.shape[0]-text_fr.shape[0]%bsz)] 
+        if text_en.shape[0]%bsz != 0 and  conservative:
+            text_en = torch.cat((text_en,torch.zeros(bsz-text_en.shape[0]%bsz,text_en.shape[1]).to(device = device, dtype = torch.long)),dim = 0)
+            text_fr= torch.cat((text_fr,torch.zeros(bsz-text_fr.shape[0]%bsz,text_fr.shape[1]).to(device = device, dtype = torch.long)),dim = 0)
+            features= torch.cat((features,torch.zeros(bsz-features.shape[0]%bsz,features.shape[1],features.shape[2],features.shape[2]).to(device = device, dtype = torch.float)),dim = 0)
         # print(text.shape)
         return [text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)],[text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)]
     else : 
         text_en,text_fr = data
-        permutation = torch.randperm(text_fr.shape[0])
-        text_en = text_en[permutation]
-        text_fr = text_fr[permutation]
-        if text_fr.shape[0]%bsz != 0 :
+        if permute :
+            permutation = torch.randperm(text_fr.shape[0])
+            text_en = text_en[permutation]
+            text_fr = text_fr[permutation]
+        if text_en.shape[0]%bsz != 0 and not conservative:
             text_fr = text_fr[:(text_fr.shape[0]-text_fr.shape[0]%bsz)]
             text_en = text_en[:(text_en.shape[0]-text_en.shape[0]%bsz)]
+        if text_en.shape[0]%bsz != 0 and  conservative:
+            text_en = torch.cat((text_en,torch.zeros(bsz-text_en.shape[0]%bsz,text_en.shape[1]).to(device = device, dtype = torch.long)),dim = 0)
+            text_fr= torch.cat((text_fr,torch.zeros(bsz-text_fr.shape[0]%bsz,text_fr.shape[1]).to(device = device, dtype = torch.long)),dim = 0)
+            
+
+
+
         return text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]),text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1])
         
     

@@ -76,7 +76,7 @@ class Modèle(nn.Module):
             mem_ei_key_padding_mask = None
         memory = self.encoder(self.positional_encoder(self.embedding(text_input)), src_mask, src_padding_mask)
         if not self.teacher_forcing :
-            if np.random.rand() < 1/2 : #DO NOT TEACHER FORCE
+            if np.random.rand() < 1 : #DO NOT TEACHER FORCE
                 text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1).to(device)
         target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
         if image_bool:

@@ -169,7 +169,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
         data = {"traductions_en_fr":traductions_en_fr,"references_fr":references_fr,"traductions_fr_en":traductions_fr_en,"references_en":references_en,"traductions_en_fr_txt_only":traductions_en_fr_txt_only,"traductions_fr_en_txt_only":traductions_fr_en_txt_only}
     else :
         data = {"traductions_en_fr":traductions_en_fr,"references_fr":references_fr,"traductions_fr_en":traductions_fr_en,"references_en":references_en}
-    print([len(x) for x in data])
+
     df = pd.DataFrame(data)
     return df.loc()[:tokenized_val_fr.shape[0]-1]
 def bleu(row,langue_src):
@@ -183,11 +183,11 @@ def bleu(row,langue_src):
         return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
 def bleu_txt_only(row,langue_src):
     if langue_src == "en":
-        candidates= list(row["traductions_en_fr_text_only"])
+        candidates= list(row["traductions_en_fr_txt_only"])
         references = [list(row["references_fr"])]
         return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
     else : 
-        candidates= list(row["traductions_fr_en_text_only"])
+        candidates= list(row["traductions_fr_en_txt_only"])
         references = [list(row["references_en"])]
         return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
     

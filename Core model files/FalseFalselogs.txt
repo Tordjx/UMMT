@@ -1,0 +1,20 @@
+
+Bleu score
+0
+Meteor score
+0.0
+Bonne traduction
+un groupe de personnes attendent derrière une barrière et regardent vers la droite . 
+Output
+tensor([4584, 1196, 1196, 1898, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
+        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
+        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
+        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
+        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
+        3070, 3070, 3070, 1392])
+Auto encoding
+frskydiving bathtub bathtub mounted mounted vestvestvestmounted mounted mounted mounted mounted mounted mounted mounted mounted mounted ninininininininininininininininininininininininininininininininininininininininininininini
+Phrase � traduire : 
+a group of people wait behind a barricade and look toward the right . 
+Phrase traduite : 
+sculmonde monde blondes blebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblepe

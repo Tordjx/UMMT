@@ -96,7 +96,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
     tokenized_val_en = val_data_en[0]
     tokenized_val_fr = val_data_fr[0]
     for i_iter in range(n_iter):
-        save_dataframe_eval(model_fr,model_en,tokenized_val_en,tokenized_val_fr,inv_map_en,inv_map_fr,image_bool,batch_size,i_iter)
+        save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,i_iter)
         model_en.curr_epoch +=1
         model_fr.curr_epoch +=1
         batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)

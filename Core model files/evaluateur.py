@@ -112,14 +112,14 @@ def evaluation(mode,val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map
         logs.close()
     return bleu, meteor
 
-import torchtext
+# import torchtext
 import pandas as pd
 def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size) :
     model_fr.eval()
     model_en.eval()
     if image_bool :
-        val_data_en,features= val_data_en
-        val_data_fr,features= val_data_en
+        tokenized_val_en,features= val_data_en[0],val_data_en[1]
+        tokenized_val_fr,features= val_data_fr[0] ,val_data_fr[1]
     else :
         val_data_en,val_data_fr = val_data_en,val_data_fr
     batched_data_en,batched_data_fr=batchify([val_data_en,val_data_fr],batch_size,image_bool,conservative=True,permute = False)
@@ -132,46 +132,46 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
     references_en = []
     traductions_fr_en = []
     references_fr = []
+    traductions_en_fr_txt_only = []
+    traductions_fr_en_txt_only = []
     for batch in range(len(src)):
         print(batch)
         if image_bool :
             src[batch],features[batch],tgt[batch] = src[batch].to(device),features[batch].to(device),tgt[batch].to(device)
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],features[batch],image_bool) ,dim = 2)
-        else :
-            src[batch] ,tgt[batch]= src[batch].to(device),tgt[batch].to(device)
-            traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
-        
-        for i in range(traduction.shape[0]):
-            traductions_en_fr.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-        if image_bool :
+            for i in range(traduction.shape[0]):
+                traductions_en_fr.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],features[batch],image_bool) ,dim = 2)
-        else :
-            traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
-        for i in range(traduction.shape[0]):
-            traductions_fr_en.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-        if image_bool: #Si image, on rajoute les traductions sans images
-            traductions_en_fr_txt_only = []
-            traductions_fr_en_txt_only = []
-            src[batch],tgt[batch] = src[batch].to(device),tgt[batch].to(device)
+            for i in range(traduction.shape[0]):
+                traductions_fr_en.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,False) ,dim = 2)
             for i in range(traduction.shape[0]):
                 traductions_en_fr_txt_only.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-                references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
             for i in range(traduction.shape[0]):
                 traductions_fr_en_txt_only.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+
+        
+        else :
+            src[batch] ,tgt[batch]= src[batch].to(device),tgt[batch].to(device)
+            traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
+            for i in range(traduction.shape[0]):
+                traductions_en_fr.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+            traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
+            for i in range(traduction.shape[0]):
+                traductions_fr_en.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            
+
     if image_bool:
         data = {"traductions_en_fr":traductions_en_fr,"references_fr":references_fr,"traductions_fr_en":traductions_fr_en,"references_en":references_en,"traductions_en_fr_txt_only":traductions_en_fr_txt_only,"traductions_fr_en_txt_only":traductions_fr_en_txt_only}
     else :
         data = {"traductions_en_fr":traductions_en_fr,"references_fr":references_fr,"traductions_fr_en":traductions_fr_en,"references_en":references_en}
-    
+    print([len(x) for x in data])
     df = pd.DataFrame(data)
-    return df.loc()[:val_data_fr.shape[0]-1]
-
+    return df.loc()[:tokenized_val_fr.shape[0]-1]
 def bleu(row,langue_src):
     if langue_src == "en":
         candidates= list(row["traductions_en_fr"])
@@ -191,8 +191,8 @@ def bleu_txt_only(row,langue_src):
         references = [list(row["references_en"])]
         return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
     
-def save_dataframe_eval(model_fr,model_en,tokenized_val_en,tokenized_val_fr,inv_map_en,inv_map_fr,image_bool,batch_size,epoch = 0):
-    df = dataframe_eval(model_fr,model_en,tokenized_val_en,tokenized_val_fr,inv_map_en,inv_map_fr,image_bool,batch_size)
+def save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,epoch = 0):
+    df = dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size)
     df["bleu_en_fr"] = df.apply(lambda row: bleu(row,"en"), axis=1)
     df["bleu_fr_en"] = df.apply(lambda row: bleu(row,"fr"), axis=1)
     if image_bool:

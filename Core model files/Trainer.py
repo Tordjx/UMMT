@@ -62,6 +62,7 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
             data,target = train_data
         if image_bool : 
             with torch.no_grad():
+                
                 first_output = torch.argmax(CCF_greedy(model_A,model_B, data, features, image_bool),dim = 2)
                 first_output = range_le_padding(check_data(first_output,model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
             output = cycle_consistent_forward(model_B,model_A, first_output,data, features, image_bool)
@@ -97,6 +98,8 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
     tokenized_val_fr = val_data_fr[0]
     for i_iter in range(n_iter):
         save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,i_iter)
+        model_en.train()
+        model_fr.train()
         model_en.curr_epoch +=1
         model_fr.curr_epoch +=1
         batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
@@ -117,7 +120,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_B = model_fr
             else : #FRENCH DATA
                 if image_bool : 
-                        train_data= get_batch(batched_data_fr,i,image_bool)
+                    train_data= get_batch(batched_data_fr,i,image_bool)
                 else : 
                     train_data= get_batch(batched_data_fr,i)
                 model_A = model_fr
@@ -126,6 +129,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 loss = auto_encoding_train(model_A,train_data,image_bool)
                 model_A.loss_list.append(loss)
             else: #CYCLE CONSISTENT
+                # print(train_data[0].shape)
                 loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
                 model_A.loss_list.append(loss)
                 model_B.loss_list.append(loss)

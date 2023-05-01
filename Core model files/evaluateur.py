@@ -117,11 +117,6 @@ import pandas as pd
 def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size) :
     model_fr.eval()
     model_en.eval()
-    if image_bool :
-        tokenized_val_en,features= val_data_en[0],val_data_en[1]
-        tokenized_val_fr,features= val_data_fr[0] ,val_data_fr[1]
-    else :
-        val_data_en,val_data_fr = val_data_en,val_data_fr
     batched_data_en,batched_data_fr=batchify([val_data_en,val_data_fr],batch_size,image_bool,conservative=True,permute = False)
     if image_bool:
         src,features = batched_data_en
@@ -152,8 +147,6 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
             for i in range(traduction.shape[0]):
                 traductions_fr_en_txt_only.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-
-        
         else :
             src[batch] ,tgt[batch]= src[batch].to(device),tgt[batch].to(device)
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
@@ -171,7 +164,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
         data = {"traductions_en_fr":traductions_en_fr,"references_fr":references_fr,"traductions_fr_en":traductions_fr_en,"references_en":references_en}
 
     df = pd.DataFrame(data)
-    return df.loc()[:tokenized_val_fr.shape[0]-1]
+    return df.loc()[:val_data_fr[0].shape[0]-1]
 def bleu(row,langue_src):
     if langue_src == "en":
         candidates= list(row["traductions_en_fr"])

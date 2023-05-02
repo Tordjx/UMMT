@@ -50,7 +50,7 @@ class Modèle(nn.Module):
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device, batch_first=True) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
-        self.decoder = nn.TransformerDecoder(decoder_layers,num_decoder_layers).to(device)
+        self.decoder = NewTransformerDecoder(decoder_layers,num_decoder_layers).to(device)
         self.positional_encoder = PositionalEncoding(d_model, dropout).to(device)
         self.criterion = nn.CrossEntropyLoss(ignore_index = self.padding_id,label_smoothing =0.1)
         self.lr = 10**(-3)
@@ -84,12 +84,12 @@ class Modèle(nn.Module):
             mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
             image_encoded = self.feedforward(image_input)
             x = [self.positional_encoder(self.embedding(target)), image_encoded]
-            output = self.decoder(x, memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
-            return self.output_layer(output)
+            output,attn_weights_e,attn_weights_i = self.decoder(x, memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
+            return self.output_layer(output),attn_weights_e,attn_weights_i
         else:
             # Pass through the decoder
-            output = self.decoder(self.positional_encoder(self.embedding(target)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
-            return self.output_layer(output)
+            output,attn_weights_e = self.decoder(self.positional_encoder(self.embedding(target)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)
+            return self.output_layer(output),attn_weights_e,attn_weights_i
 
     def generate_square_subsequent_mask(self,a,b) -> Tensor:
         return torch.triu(torch.full((a,b,b), True, device=device,dtype = bool), diagonal=1)

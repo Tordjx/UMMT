@@ -2,13 +2,12 @@
 import torch.nn as nn
 import torch
 import csv
-import os
+
 # Import de la classe MultimodalAttention 
 from Multimodal_Attention import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-get_attention_csv = True
-
+          
 #%% TransformerDecoderLayer
 
 
@@ -30,11 +29,12 @@ class TransformerDecoderLayer(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(dim_feedforward,d_model)
             )  
-        self.layer_id  =0
+        
+        
 
 
-    def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):
-        if type(x) == list:  # If there is an image
+    def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask,image_bool):
+        if image_bool:  # If there is an image
             # print("cas 1 : text + image")
             text = x[0]
             i_outputs = x[1]
@@ -50,34 +50,11 @@ class TransformerDecoderLayer(nn.Module):
             output,attention_weights_e,attention_weights_i=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)
             x = x + self.dropout_2(output)
 
-            if get_attention_csv:
-                if self.layer_id == 0 : 
-                    csv_e = open("attention_weights_e.csv", "w", newline="")
-                    csv_e.write('')
-                    csv_e.close()
-                    csv_i = open("attention_weights_i.csv", "w", newline="")
-                    csv_i.write('')
-                    csv_i.close()
-
-                csv_e = open("attention_weights_e.csv", "a", newline="")
-                writer_e = csv.writer(csv_e)
-                csv_i = open("attention_weights_i.csv", "a", newline="")
-                writer_i = csv.writer(csv_i)
-                
-                sheet_name = "sheet n°" + str(self.layer_id)
-                writer_e.writerow([sheet_name])
-                writer_i.writerow([sheet_name])
-                writer_e.writerows([attention_weights_e])
-                writer_i.writerows([attention_weights_i])
-                writer_e.writerow([])
-                writer_i.writerow([])
-                csv_i.close()
-                csv_e.close()
-                self.layer_id = (self.layer_id + 1) % 6
+           
 
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
-            
+            return x,attention_weights_e,attention_weights_i
 
         else: # If there is only the text
             # print("case 2 : text only")
@@ -93,22 +70,64 @@ class TransformerDecoderLayer(nn.Module):
             output,attention_weights_e=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, None, memory_key_padding_mask, None, image_bool=False)
             x = x + self.dropout_2(output)
 
-            if get_attention_csv:
-                if self.layer_id == 0 : 
-                    csv_e = open("attention_weights_e.csv", "w", newline="")
-                    csv_e.write('')
-                    csv_e.close()
+           
+            
 
-                csv_e = open("attention_weights_e.csv", "a", newline="")
-                writer_e = csv.writer(csv_e)
-                sheet_name = "sheet n°" + str(self.layer_id)
-                writer_e.writerow([sheet_name])
-                writer_e.writerows([attention_weights_e])
-                writer_e.writerow([])
-                csv_e.close()
-                self.layer_id = (self.layer_id + 1) % 6
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
-        return x
+            return x,attention_weights_e
 
-#%%
+class NewTransformerDecoder(Module):
+    
+    __constants__ = ['norm']
+
+    def __init__(self, decoder_layer, num_layers, norm=None):
+        super().__init__()
+        torch._C._log_api_usage_once(f"torch.nn.modules.{self.__class__.__name__}")
+        self.layers = _get_clones(decoder_layer, num_layers)
+        self.num_layers = num_layers
+        self.norm = norm
+        
+
+    def forward(self, tgt: Tensor, memory: Tensor, tgt_mask: Optional[Tensor] = None,
+                memory_mask: Optional[Tensor] = None, tgt_key_padding_mask: Optional[Tensor] = None,
+                memory_key_padding_mask: Optional[Tensor] = None, image_bool):
+       
+        output = tgt
+        if image_bool:
+            for i,mod in enumerate(self.layers):
+        
+                output,attention_weights_e,attention_weights_i = mod(output, memory, tgt_mask=tgt_mask,
+                                                                 memory_mask=memory_mask,
+                                                                 tgt_key_padding_mask=tgt_key_padding_mask,
+                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool)
+                if i == 0:
+                    attention_weights_e_sum = attention_weights_e
+                    attention_weights_i_sum = attention_weights_i
+                else:
+                    attention_weights_e_sum += attention_weights_e
+                    attention_weights_i_sum += attention_weights_i
+
+            attention_weights_e_sum = attention_weights_e_sum/self.num_layers
+            attention_weights_i_sum = attention_weights_i_sum/self.num_layers
+            if self.norm is not None:
+                output = self.norm(output)
+            return output,attention_weights_e_sum,attention_weights_i_sum
+        else:
+            for i,mod in enumerate(self.layers):
+        
+                output,attention_weights_e = mod(output, memory, tgt_mask=tgt_mask,
+                                                                 memory_mask=memory_mask,
+                                                                 tgt_key_padding_mask=tgt_key_padding_mask,
+                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool)
+
+                if i == 0:
+                    attention_weights_e_sum = attention_weights_e
+                
+                else:
+                    attention_weights_e_sum += attention_weights_e
+                
+            attention_weights_e_sum = attention_weights_e_sum/self.num_layers
+            if self.norm is not None:
+                output = self.norm(output)
+            return output,attention_weights_e_sum

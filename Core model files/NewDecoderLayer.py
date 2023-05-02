@@ -56,19 +56,24 @@ class TransformerDecoderLayer(nn.Module):
             x = x + self.dropout_2(output)
 
             if get_attention_csv:
-                csv_e = open("attention_weights_e.csv", "w", newline="")
+                csv_e = open("attention_weights_e.csv", "a", newline="")
                 writer_e = csv.writer(csv_e)
-                csv_i = open("attention_weights_i.csv", "w", newline="")
+                csv_i = open("attention_weights_i.csv", "a", newline="")
                 writer_i = csv.writer(csv_i)
+                
+                writer_e.writerow([sheet_name])
+                writer_i.writerow([sheet_name])
+                sheet_name = "sheet n°" + str(layer_id)
                 writer_e.writerows([attention_weights_e])
                 writer_i.writerows([attention_weights_i])
-            # Yassine version : 
-            # if get_attention_csv:
-            #     self.writer_e.writerows([attention_weights_e])
-            #     self.writer_i.writerows([attention_weights_i])
+                writer_e.writerow([])
+                writer_i.writerow([])
+                
+                layer_id = (layer_id + 1) % 6
 
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
+            
 
         else: # If there is only the text
             # print("case 2 : text only")
@@ -85,13 +90,18 @@ class TransformerDecoderLayer(nn.Module):
             x = x + self.dropout_2(output)
 
             if get_attention_csv:
-                csv_e = open("attention_weights_e.csv", "w", newline="")
+                csv_e = open("attention_weights_e.csv", "a", newline="")
                 writer_e = csv.writer(csv_e)
-                writer_e.writerows([attention_weights_e])
-            # Yassine version : 
-            # if get_attention_csv:
-            #     self.writer_e.writerows([attention_weights_e])
 
+                writer_e.writerow([sheet_name])
+
+                sheet_name = "sheet n°" + str(layer_id)
+                writer_e.writerows([attention_weights_e])
+
+                writer_e.writerow([])
+
+                
+                layer_id = (layer_id + 1) % 6
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         return x

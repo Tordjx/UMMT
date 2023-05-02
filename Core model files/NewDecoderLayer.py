@@ -2,13 +2,13 @@
 import torch.nn as nn
 import torch
 import csv
-
+import os
 # Import de la classe MultimodalAttention 
 from Multimodal_Attention import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 get_attention_csv = True
-layer_id  =0
+
 #%% TransformerDecoderLayer
 
 
@@ -30,13 +30,7 @@ class TransformerDecoderLayer(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(dim_feedforward,d_model)
             )  
-        
-        # Yassine version
-        if get_attention_csv : 
-          self.csv_e = open("attention_weights_e.csv", "w", newline="")
-          self.writer_e = csv.writer(self.csv_e)
-          self.csv_i = open("attention_weights_i.csv", "w", newline="")
-          self.writer_i = csv.writer(self.csv_i)
+        self.layer_id  =0
 
 
     def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):
@@ -57,20 +51,29 @@ class TransformerDecoderLayer(nn.Module):
             x = x + self.dropout_2(output)
 
             if get_attention_csv:
+                if self.layer_id == 0 : 
+                    csv_e = open("attention_weights_e.csv", "w", newline="")
+                    csv_e.write('')
+                    csv_e.close()
+                    csv_i = open("attention_weights_i.csv", "w", newline="")
+                    csv_i.write('')
+                    csv_i.close()
+
                 csv_e = open("attention_weights_e.csv", "a", newline="")
                 writer_e = csv.writer(csv_e)
                 csv_i = open("attention_weights_i.csv", "a", newline="")
                 writer_i = csv.writer(csv_i)
                 
+                sheet_name = "sheet n°" + str(self.layer_id)
                 writer_e.writerow([sheet_name])
                 writer_i.writerow([sheet_name])
-                sheet_name = "sheet n°" + str(layer_id)
                 writer_e.writerows([attention_weights_e])
                 writer_i.writerows([attention_weights_i])
                 writer_e.writerow([])
                 writer_i.writerow([])
-                
-                layer_id = (layer_id + 1) % 6
+                csv_i.close()
+                csv_e.close()
+                self.layer_id = (self.layer_id + 1) % 6
 
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
@@ -91,18 +94,21 @@ class TransformerDecoderLayer(nn.Module):
             x = x + self.dropout_2(output)
 
             if get_attention_csv:
+                if self.layer_id == 0 : 
+                    csv_e = open("attention_weights_e.csv", "w", newline="")
+                    csv_e.write('')
+                    csv_e.close()
+
                 csv_e = open("attention_weights_e.csv", "a", newline="")
                 writer_e = csv.writer(csv_e)
-
+                sheet_name = "sheet n°" + str(self.layer_id)
                 writer_e.writerow([sheet_name])
-
-                sheet_name = "sheet n°" + str(layer_id)
                 writer_e.writerows([attention_weights_e])
-
                 writer_e.writerow([])
-
-                
-                layer_id = (layer_id + 1) % 6
+                csv_e.close()
+                self.layer_id = (self.layer_id + 1) % 6
             x2 = self.norm_3(x)
             x = x + self.dropout_3(self.ffn(x2))
         return x
+
+#%%

@@ -8,7 +8,7 @@ from Multimodal_Attention import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 get_attention_csv = True
-            
+layer_id  =0
 #%% TransformerDecoderLayer
 
 

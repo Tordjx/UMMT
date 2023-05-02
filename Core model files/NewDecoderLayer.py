@@ -7,7 +7,7 @@ import csv
 from Multimodal_Attention import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-get_attention_csv = False
+get_attention_csv = True
             
 #%% TransformerDecoderLayer
 
@@ -32,10 +32,11 @@ class TransformerDecoderLayer(nn.Module):
             )  
         
         # Yassine version
-        self.csv_e = open("attention_weights_e.csv", "w", newline="")
-        self.writer_e = csv.writer(self.csv_e)
-        self.csv_i = open("attention_weights_i.csv", "w", newline="")
-        self.writer_i = csv.writer(self.csv_i)
+        if get_attention_csv : 
+          self.csv_e = open("attention_weights_e.csv", "w", newline="")
+          self.writer_e = csv.writer(self.csv_e)
+          self.csv_i = open("attention_weights_i.csv", "w", newline="")
+          self.writer_i = csv.writer(self.csv_i)
 
 
     def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):

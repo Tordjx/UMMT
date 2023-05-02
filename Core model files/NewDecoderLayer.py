@@ -32,10 +32,10 @@ class TransformerDecoderLayer(nn.Module):
             )  
         
         # Yassine version
-        # self.csv_e = open("attention_weights_e.csv", "w", newline="")
-        # self.writer_e = csv.writer(self.csv_e)
-        # self.csv_i = open("attention_weights_i.csv", "w", newline="")
-        # self.writer_i = csv.writer(self.csv_i)
+        self.csv_e = open("attention_weights_e.csv", "w", newline="")
+        self.writer_e = csv.writer(self.csv_e)
+        self.csv_i = open("attention_weights_i.csv", "w", newline="")
+        self.writer_i = csv.writer(self.csv_i)
 
 
     def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask):

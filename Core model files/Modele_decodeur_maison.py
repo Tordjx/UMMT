@@ -89,7 +89,7 @@ class Modèle(nn.Module):
         else:
             # Pass through the decoder
             output,attn_weights_e = self.decoder(self.positional_encoder(self.embedding(target)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)
-            return self.output_layer(output),attn_weights_e,attn_weights_i
+            return self.output_layer(output),attn_weights_e
 
     def generate_square_subsequent_mask(self,a,b) -> Tensor:
         return torch.triu(torch.full((a,b,b), True, device=device,dtype = bool), diagonal=1)

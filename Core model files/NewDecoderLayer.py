@@ -48,6 +48,7 @@ class TransformerDecoderLayer(nn.Module):
             memory_mask, mem_ei_mask = memory_mask
             memory_key_padding_mask, mem_ei_key_padding_mask = memory_key_padding_mask
             output,attention_weights_e,attention_weights_i=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)
+            
             x = x + self.dropout_2(output)
 
            
@@ -77,21 +78,21 @@ class TransformerDecoderLayer(nn.Module):
             x = x + self.dropout_3(self.ffn(x2))
             return x,attention_weights_e
 
-class NewTransformerDecoder(Module):
+class NewTransformerDecoder(nn.Module):
     
     __constants__ = ['norm']
 
     def __init__(self, decoder_layer, num_layers, norm=None):
         super().__init__()
-        torch._C._log_api_usage_once(f"torch.nn.modules.{self.__class__.__name__}")
-        self.layers = _get_clones(decoder_layer, num_layers)
+        #torch._C._log_api_usage_once(f"torch.nn.modules.{self.__class__.__name__}") je savaias pas à quoi cette ligne servait
+        self.layers = self.layers = nn.ModuleList([decoder_layer for _ in range(num_layers)])
         self.num_layers = num_layers
         self.norm = norm
         
 
-    def forward(self, tgt: Tensor, memory: Tensor, tgt_mask: Optional[Tensor] = None,
-                memory_mask: Optional[Tensor] = None, tgt_key_padding_mask: Optional[Tensor] = None,
-                memory_key_padding_mask: Optional[Tensor] = None, image_bool):
+    def forward(self, tgt, memory, tgt_mask = None,
+                memory_mask = None, tgt_key_padding_mask = None,
+                memory_key_padding_mask = None, image_bool=False):
        
         output = tgt
         if image_bool:
@@ -100,7 +101,7 @@ class NewTransformerDecoder(Module):
                 output,attention_weights_e,attention_weights_i = mod(output, memory, tgt_mask=tgt_mask,
                                                                  memory_mask=memory_mask,
                                                                  tgt_key_padding_mask=tgt_key_padding_mask,
-                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool)
+                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool=image_bool)
                 if i == 0:
                     attention_weights_e_sum = attention_weights_e
                     attention_weights_i_sum = attention_weights_i
@@ -119,7 +120,7 @@ class NewTransformerDecoder(Module):
                 output,attention_weights_e = mod(output, memory, tgt_mask=tgt_mask,
                                                                  memory_mask=memory_mask,
                                                                  tgt_key_padding_mask=tgt_key_padding_mask,
-                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool)
+                                                                memory_key_padding_mask=memory_key_padding_mask,image_bool=image_bool)
 
                 if i == 0:
                     attention_weights_e_sum = attention_weights_e
@@ -131,3 +132,5 @@ class NewTransformerDecoder(Module):
             if self.norm is not None:
                 output = self.norm(output)
             return output,attention_weights_e_sum
+
+# %%

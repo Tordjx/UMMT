@@ -50,11 +50,11 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
         if image_bool :  
             x = [model_B.positional_encoder(model_B.embedding(decoder_input.to(device))), image_encoded]
-            output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+            output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)[0]
         else:
             x = text_encoded
             
-            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input.to(device))),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input.to(device))),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
         
         # Greedy 
         prob =  model_B.output_layer(output)
@@ -117,10 +117,10 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
             # Decode the next token
             if image_bool:
                 x = [model_B.positional_encoder(model_B.embedding(last_token.to(device))), image_encoded]
-                output = model_B.decoder(x, text_encoded,tgt_mask,mem_masks, tgt_padding_mask, mem_padding_masks)
+                output = model_B.decoder(x, text_encoded,tgt_mask,mem_masks, tgt_padding_mask, mem_padding_masks,image_bool)[0]
             else:
                 x = text_encoded
-                output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+                output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
 
             # Get the top k candidates using log probabilities
             # log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1) LUCAS VERSION

@@ -18,7 +18,9 @@ def tensor_to_sentence(output,inv_dic):
             sentence+=word +" "
     return sentence
 
-
+def cut_list_at_value(L,value):
+    index = L.index(value)
+    return L[:index]
 def give_tokens(output, padding_id, end_id ) : #takes output of greedy search tensor of size [bsz,seqlen,n_token]. returns the tokens, with no padding before end of sentence token
     #todoso, just need to take the 2nd outpuuts
     values, indices = torch.kthvalue(output, 2 , dim = 2)
@@ -135,27 +137,33 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             src[batch],features[batch],tgt[batch] = src[batch].to(device),features[batch].to(device),tgt[batch].to(device)
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],features[batch],image_bool) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_en_fr.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_en_fr.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],features[batch],image_bool) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_fr_en.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_fr_en.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,False) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_en_fr_txt_only.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_en_fr_txt_only.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_fr_en_txt_only.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_fr_en_txt_only.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
         else :
             src[batch] ,tgt[batch]= src[batch].to(device),tgt[batch].to(device)
             traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_en_fr.append([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_fr[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_fr_en.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
             traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
             for i in range(traduction.shape[0]):
-                traductions_fr_en.append([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1]) if inv_map_en[traduction[i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
+                temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
+                traductions_en_fr.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
 
     if image_bool:
@@ -192,3 +200,54 @@ def save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv
         df["bleu_en_fr_txt_only"] = df.apply(lambda row: bleu_txt_only(row,"en"), axis=1)
         df["bleu_fr_en_txt_only"] = df.apply(lambda row: bleu_txt_only(row,"fr"), axis=1)
     df.to_csv(str(epoch)+model_fr.prefix+"_eval.csv")
+def repeater(tensor):
+    tensor = tensor.cpu()
+    tensor = tensor.detach().numpy()
+    tensor = np.repeat(tensor,14,axis=0)
+    tensor = np.repeat(tensor,14,axis=1)
+    tensor = torch.tensor(tensor)
+    return tensor
+import matplotlib.pyplot as plt
+def plot_attention_on_image(image,attention,titre):
+
+    attention = repeater(attention) 
+    image = image.cpu()
+    image = image.detach().numpy()
+    image = image.transpose(1,2,0)
+    plt.imshow(image)
+    plt.imshow(attention,alpha = 0.3,cmap = "inferno")
+    plt.colorbar()
+    plt.savefig("Graphs attention/"+titre +"attention_image.png")
+    plt.show()
+    
+def plot_attention_text(phrase, attention_text,titre):
+    fig, ax = plt.subplots(1,1)
+    attention_text = attention_text[:len(phrase)][:len(phrase)]
+    plt.imshow(attention_text,cmap = "inferno")
+    ax.set_xticks([i for i in range(len(phrase))])
+    ax.set_xticklabels(phrase,rotation = 90)
+    ax.set_yticks([i for i in range(len(phrase))])
+    ax.set_yticklabels(phrase)
+    plt.colorbar()
+    plt.savefig("Graphs attention/"+titre+"attention_text.png")
+def graphiques_attention(model_fr,model_en,batched_data_en,inv_map_en,inv_map_fr,batch_size,images,titres) :
+    model_fr.eval()
+    model_en.eval()
+
+    src,features = batched_data_en
+    traductions_en_fr = []
+    references_en = []
+
+    for batch in range(len(src)):
+
+        src[batch],features[batch] = src[batch].to(device),features[batch].to(device)
+        traduction,attention_e,attention_i= CCF_greedy(model_en,model_fr,src[batch],features[batch],True)
+        traduction = torch.argmax(traduction ,dim = 2)
+        for i in range(traduction.shape[0]):
+            #Attention text
+            phrase  = cut_list_at_value([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1])] ,"FIN_DE_PHRASE")
+            phrase = [x for x in phrase if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
+            plot_attention_text(phrase,attention_e[i],titres[i])
+
+            #Attention image
+            plot_attention_on_image(images[i],attention_i[i],titres[i])

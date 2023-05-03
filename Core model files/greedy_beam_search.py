@@ -13,7 +13,7 @@ batch_size = 256
 
 #%% Greedy 
  
-def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = False): 
+def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = False,get_attention = False): 
     max_len = 64
 
     src_mask = model_A.generate_square_subsequent_mask(model_A.n_head*text_input.shape[0],text_input.shape[1]) # square mask 
@@ -50,23 +50,33 @@ def CCF_greedy(model_A,model_B,text_input, image_input = None, image_bool = Fals
 
         if image_bool :  
             x = [model_B.positional_encoder(model_B.embedding(decoder_input.to(device))), image_encoded]
-            output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)[0]
+            if not get_attention: 
+                output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)[0]
+            else :
+                output,attention_e,attention_i = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
+            
         else:
             x = text_encoded
+            if not get_attention:
+                output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input.to(device))),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
+            else :
+                output,attention_e = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
             
-            output = model_B.decoder(model_B.positional_encoder(model_B.embedding(decoder_input.to(device))),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
-        
         # Greedy 
         prob =  model_B.output_layer(output)
         next_words = torch.argmax(prob, dim=2)[:,i+1]
         decoder_input[:,i+1] = next_words
-
-    return model_B.output_layer(output)
-
+    if not get_attention:
+        return model_B.output_layer(output)
+    else :
+        if image_bool:
+            return model_B.output_layer(output),attention_e,attention_i
+        else : 
+            return model_B.output_layer(output),attention_e
 
 #%% Beam search 
 
-def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False):
+def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None, image_bool=False,get_attention=False):
     max_len = 64
     device = text_input.device
 
@@ -117,11 +127,17 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
             # Decode the next token
             if image_bool:
                 x = [model_B.positional_encoder(model_B.embedding(last_token.to(device))), image_encoded]
-                output = model_B.decoder(x, text_encoded,tgt_mask,mem_masks, tgt_padding_mask, mem_padding_masks,image_bool)[0]
+                if not get_attention: 
+                    output = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)[0]
+                else :
+                    output,attention_e,attention_i = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
             else:
                 x = text_encoded
-                output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token)), x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
-
+                if not get_attention:
+                    output = model_B.decoder(model_B.positional_encoder(model_B.embedding(last_token.to(device))),x, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)[0]
+                else :
+                    output,attention_e = model_B.decoder(x,text_encoded, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
+            
             # Get the top k candidates using log probabilities
             # log_probs = torch.log_softmax(model_B.output_layer(output)[:, -1, :], dim=-1) LUCAS VERSION
             log_probs = torch.sum(torch.log_softmax(model_B.output_layer(output),dim = 2)[:,:i+1,:] , dim = 1)
@@ -150,7 +166,14 @@ def CCF_beam_search(model_A, model_B, text_input, beam_size=3, image_input=None,
                     beam[id][1][k] = scores_path[id]
 
     # Return the top sequence
-    return beam[0][0]
+    if not get_attention:
+        return beam[0][0]
+    else :
+        if image_bool:
+            return beam[0][0],attention_e,attention_i
+        else : 
+            return beam[0][0],attention_e
+ 
 
 #%% Data for tests : 
 

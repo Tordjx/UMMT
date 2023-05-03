@@ -102,13 +102,15 @@ class NewTransformerDecoder(nn.Module):
                                                                  memory_mask=memory_mask,
                                                                  tgt_key_padding_mask=tgt_key_padding_mask,
                                                                 memory_key_padding_mask=memory_key_padding_mask,image_bool=image_bool)
+
+                output = output,tgt[1]
                 if i == 0:
                     attention_weights_e_sum = attention_weights_e
                     attention_weights_i_sum = attention_weights_i
                 else:
                     attention_weights_e_sum += attention_weights_e
                     attention_weights_i_sum += attention_weights_i
-
+            output  = output[0]
             attention_weights_e_sum = attention_weights_e_sum/self.num_layers
             attention_weights_i_sum = attention_weights_i_sum/self.num_layers
             if self.norm is not None:

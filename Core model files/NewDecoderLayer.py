@@ -47,8 +47,7 @@ class TransformerDecoderLayer(nn.Module):
             # Here we get the two mem_masks
             memory_mask, mem_ei_mask = memory_mask
             memory_key_padding_mask, mem_ei_key_padding_mask = memory_key_padding_mask
-            output,attention_weights_e,attention_weights_i=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, mem_ei_mask, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)
-            
+            output,attention_weights_e,attention_weights_i=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, None, None, memory_key_padding_mask, mem_ei_key_padding_mask,image_bool=True)
             x = x + self.dropout_2(output)
 
            
@@ -68,7 +67,7 @@ class TransformerDecoderLayer(nn.Module):
             # Here, att1 returns a tuple, the first being the result, the second being the attention weights
             x2 = self.norm_2(x)
             ei_outputs = None
-            output,attention_weights_e=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, memory_mask, None, memory_key_padding_mask, None, image_bool=False)
+            output,attention_weights_e=self.attn_2(x2, memory, i_outputs, ei_outputs, memory, i_outputs, ei_outputs, None, None, memory_key_padding_mask, None, image_bool=False)
             x = x + self.dropout_2(output)
 
            
@@ -97,22 +96,23 @@ class NewTransformerDecoder(nn.Module):
         output = tgt
         if image_bool:
             for i,mod in enumerate(self.layers):
-        
+
                 output,attention_weights_e,attention_weights_i = mod(output, memory, tgt_mask=tgt_mask,
                                                                  memory_mask=memory_mask,
                                                                  tgt_key_padding_mask=tgt_key_padding_mask,
                                                                 memory_key_padding_mask=memory_key_padding_mask,image_bool=image_bool)
-
+                
                 output = output,tgt[1]
                 if i == 0:
-                    attention_weights_e_sum = attention_weights_e
-                    attention_weights_i_sum = attention_weights_i
+                    n_heads = attention_weights_i.shape[1]
+                    attention_weights_e_sum = attention_weights_e.sum(dim=1)
+                    attention_weights_i_sum = attention_weights_i.sum(dim=1)
                 else:
-                    attention_weights_e_sum += attention_weights_e
-                    attention_weights_i_sum += attention_weights_i
+                    attention_weights_e_sum += attention_weights_e.sum(dim=1)
+                    attention_weights_i_sum += attention_weights_i.sum(dim=1)
             output  = output[0]
-            attention_weights_e_sum = attention_weights_e_sum/self.num_layers
-            attention_weights_i_sum = attention_weights_i_sum/self.num_layers
+            attention_weights_e_sum = attention_weights_e_sum/(self.num_layers*n_heads)
+            attention_weights_i_sum = attention_weights_i_sum/(self.num_layers*n_heads)
             if self.norm is not None:
                 output = self.norm(output)
             return output,attention_weights_e_sum,attention_weights_i_sum
@@ -125,12 +125,13 @@ class NewTransformerDecoder(nn.Module):
                                                                 memory_key_padding_mask=memory_key_padding_mask,image_bool=image_bool)
 
                 if i == 0:
-                    attention_weights_e_sum = attention_weights_e
+                    n_heads = attention_weights_e.shape[1]
+                    attention_weights_e_sum = attention_weights_e.sum(dim=1)
                 
                 else:
-                    attention_weights_e_sum += attention_weights_e
+                    attention_weights_e_sum += attention_weights_e.sum(dim=1)
                 
-            attention_weights_e_sum = attention_weights_e_sum/self.num_layers
+            attention_weights_e_sum = attention_weights_e_sum/(self.num_layers*n_heads)
             if self.norm is not None:
                 output = self.norm(output)
             return output,attention_weights_e_sum

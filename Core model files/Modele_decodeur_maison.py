@@ -46,7 +46,7 @@ class Modèle(nn.Module):
         self.begin_id = begin_id
         self.end_id = end_id
         self.embedding = nn.Embedding(n_token, d_model, device=device)
-        self.feedforward = nn.Linear(196,d_model,device=device)
+        self.feedforward = nn.Linear(1024,d_model,device=device)
         encoder_layers = nn.TransformerEncoderLayer(d_model, n_head, dim_feedforward, dropout,device = device, batch_first=True)
         decoder_layers = TransformerDecoderLayer(d_model, n_head, dim_feedforward, dropout, device = device, batch_first=True) # NewDecoderLayer qui prend en compte l'image
         self.encoder = nn.TransformerEncoder(encoder_layers,num_encoder_layers).to(device)
@@ -55,7 +55,8 @@ class Modèle(nn.Module):
         self.criterion = nn.CrossEntropyLoss(ignore_index = self.padding_id,label_smoothing =0.1)
         self.lr = 10**(-3)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay=10**(-5))
-        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=10, T_mult=2, last_epoch=-1)
+        # self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=10, T_mult=2, last_epoch=-1)
+        self.scheduler = Scheduler(self.optimizer,self.d_model,1000,-1,False)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 
@@ -85,11 +86,11 @@ class Modèle(nn.Module):
             image_encoded = self.feedforward(image_input)
             x = [self.positional_encoder(self.embedding(target)), image_encoded]
             output,attn_weights_e,attn_weights_i = self.decoder(x, memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,image_bool)
-            return self.output_layer(output),attn_weights_e,attn_weights_i
+            return self.output_layer(output)
         else:
             # Pass through the decoder
             output,attn_weights_e = self.decoder(self.positional_encoder(self.embedding(target)),memory , tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask],image_bool)
-            return self.output_layer(output),attn_weights_e
+            return self.output_layer(output)
 
     def generate_square_subsequent_mask(self,a,b) -> Tensor:
         return torch.triu(torch.full((a,b,b), True, device=device,dtype = bool), diagonal=1)
@@ -99,3 +100,29 @@ class Modèle(nn.Module):
         for p in self.parameters():
             if p.dim() > 1:
                 xavier_uniform_(p)
+
+
+from torch.optim import Optimizer
+from torch.optim.lr_scheduler import _LRScheduler
+
+class Scheduler(_LRScheduler):
+    def __init__(self, 
+                 optimizer: Optimizer,
+                 dim_embed: int,
+                 warmup_steps: int,
+                 last_epoch: int=-1,
+                 verbose: bool=False) -> None:
+
+        self.dim_embed = dim_embed
+        self.warmup_steps = warmup_steps
+        self.num_param_groups = len(optimizer.param_groups)
+
+        super().__init__(optimizer, last_epoch, verbose)
+        
+    def get_lr(self) -> float:
+        lr = calc_lr(self._step_count, self.dim_embed, self.warmup_steps)
+        return [lr] * self.num_param_groups
+
+
+def calc_lr(step, dim_embed, warmup_steps):
+    return dim_embed**(-0.5) * min(step**(-0.5), step * warmup_steps**(-1.5))

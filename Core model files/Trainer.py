@@ -49,9 +49,9 @@ def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = No
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
         image_encoded = model_A.feedforward(image_input)
         decoder_input = [model_B.positional_encoder(model_B.embedding(target)), image_encoded]
-        output = model_B.decoder(decoder_input,memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks)
+        output = model_B.decoder(decoder_input,memory, tgt_mask , mem_masks , tgt_padding_mask, mem_padding_masks,True)[0]
     else:
-        output = model_B.decoder(model_B.positional_encoder(model_B.embedding(target)),memory, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])
+        output = model_B.decoder(model_B.positional_encoder(model_B.embedding(target)),memory, tgt_mask , [memory_mask] , tgt_padding_mask, [memory_key_padding_mask])[0]
     return model_B.output_layer(output)
 
 def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
@@ -109,6 +109,8 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
             N = len(batched_data_fr)
         log_interval = N//10
         for i in range(N):
+            model_en.scheduler.step()
+            model_fr.scheduler.step()
             U = np.random.rand()
             V = np.random.rand()
             if U<1/2 : #ENGLISH DATA
@@ -136,8 +138,7 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
             loss_list.append(loss)
             total_loss+=loss
             if (i%log_interval == 0 and i !=0) or i == N-1 : 
-                model_en.scheduler.step()
-                model_fr.scheduler.step()
+
                 with open(model_A.prefix +"logs.txt","a") as logs :
                     logs.write("\nIteration : " + str(i_iter) + " batch numéro : "+str(i)+" en "+ str(int(1000*(time.time()-start_time)/(log_interval*batch_size))) + " ms par phrase, moyenne loss "+ str(total_loss/log_interval)+ " current lr " + str(model_fr.scheduler.get_last_lr()) +' ' + str(model_en.scheduler.get_last_lr()))
                     logs.close()
@@ -148,56 +149,6 @@ def mixed_train(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,
                 model_fr.train()
                 total_loss = 0
                 start_time = time.time()
-
-def learning_rate_finder(val_data_en,val_data_fr,inv_map_en,inv_map_fr,model_fr,model_en,train_data_fr,train_data_en,n_iter,batch_size, image_bool = False,part_auto_encoding = 1/2):
-    loss_list = [0]
-    model_fr.train()
-    model_en.train()
-    batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
-    k = 0
-    learning_rate = 10**(-10)
-    index = 0
-    while learning_rate < 10**3 : 
-        model_fr.learning_rate = learning_rate
-        model_en.learning_rate = learning_rate
-        for g in model_fr.optimizer.param_groups:
-            g['lr'] = learning_rate
-        for g in model_en.optimizer.param_groups:
-            g['lr'] = learning_rate
-        U = np.random.rand()
-        V = np.random.rand()
-        if k%2 ==0 : #ENGLISH DATA
-            if image_bool : 
-                train_data= get_batch(batched_data_en,k,image_bool)
-            else : 
-                train_data= get_batch(batched_data_en,k)
-            model_A = model_en
-            model_B = model_fr
-        else : #FRENCH DATA
-            if image_bool : 
-                    train_data= get_batch(batched_data_fr,k,image_bool)
-            else : 
-                train_data= get_batch(batched_data_fr,k)
-            model_A = model_fr
-            model_B = model_en
-        if k%4 <=1 :#AUTO ENCODING
-            loss = auto_encoding_train(model_A,train_data,image_bool)
-            model_A.loss_list.append(loss)
-        else: #CYCLE CONSISTENT
-            loss = cycle_consistency_train(model_A,model_B,train_data,image_bool)
-            model_A.loss_list.append(loss)
-            model_B.loss_list.append(loss)
-        loss_list[index]+=loss
-        if k%4 == 3:
-            learning_rate *=3
-            index +=1
-            loss_list.append(0)
-        k +=1
-        if k == batched_data_en[0].shape[0]:
-            batched_data_en,batched_data_fr = batchify([train_data_en,train_data_fr],batch_size , image_bool)
-            k = k%4
-        print(learning_rate)
-    return loss_list
 
     
     

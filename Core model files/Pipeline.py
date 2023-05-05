@@ -105,7 +105,7 @@ def batchify(data: Tensor, bsz: int, image_bool,conservative = False, permute= T
             text_fr= torch.cat((text_fr,torch.zeros(bsz-text_fr.shape[0]%bsz,text_fr.shape[1]).to(device = device, dtype = torch.long)),dim = 0)
             features= torch.cat((features.to(device = device),torch.zeros(bsz-features.shape[0]%bsz,features.shape[1],features.shape[2],features.shape[2]).to(device = device, dtype = torch.float)),dim = 0)
         # print(text.shape)
-        return [text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)],[text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2)]
+        return [text_en.view(text_en.shape[0]//bsz, bsz, text_en.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2).transpose(-1,-2)],[text_fr.view(text_fr.shape[0]//bsz, bsz, text_fr.shape[1]), features.view(features.shape[0]//bsz, bsz , features.shape[1],features.shape[2]**2).transpose(-1,-2)]
     else : 
         text_en,text_fr = data
         if permute :

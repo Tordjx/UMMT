@@ -12,22 +12,20 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #%% Attention computation
 
 def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None, only_image=False):
-    
     output = torch.matmul(q, k.transpose(-2, -1)) /  math.sqrt(d_k)
-
     if not(only_image):
         if mask is not None:
             mask = mask.unsqueeze(1)
+    
             output = output.masked_fill(mask == True, float('-inf'))
-
+    
         if padding_mask is not None:
             output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
-
-    attn_weights = F.softmax(output, dim=-1)
     
+    attn_weights = F.softmax(output, dim=-1)
     if dropout is not None:
         output = dropout(attn_weights)
-        
+
     output = torch.matmul(attn_weights, v)
     return output,attn_weights
 
@@ -63,15 +61,17 @@ class MultiModalAttention(nn.Module):
         if not(self.batch_first):
             raise TypeError("The dimensions of the inputs are not batch_size * seq_len * embedding")
         else:
+            
             bs = q.size(1)
             q = self.q_linear(q).view(-1, q.size(1), self.h, self.d_k) 
             q = q.transpose(1,2)
-
+            
             # Matrices for text
             k_e = self.k_e_linear(k_e).view(-1, k_e.size(1), self.h, self.d_k) 
             k_e = k_e.transpose(1,2)
             v_e = self.v_e_linear(v_e).view(-1, v_e.size(1), self.h, self.d_k)
             v_e = v_e.transpose(1,2)
+            
             scores_e, attn_weights_e = attention(q, k_e, v_e, self.d_k, mask_e, padding_mask_e, self.dropout, only_image=False)
 
             # If there is only text in the input, image_bool = False
@@ -80,14 +80,19 @@ class MultiModalAttention(nn.Module):
                 output = self.out(concat)
                 return output,attn_weights_e
             else:
+                
                 bs_i = k_i.size(0)
                 # Score for image : 
+
+                
                 k_i = self.k_i_linear(k_i).view(-1, k_i.size(1), self.h, self.d_k) 
+                
                 k_i = k_i.transpose(1,2)
+                
                 v_i = self.v_i_linear(v_i).view(-1, v_i.size(1), self.h, self.d_k)
                 v_i = v_i.transpose(1,2)
+                
                 scores_i, attn_weights_i = attention(q, k_i, v_i, self.d_k, None, None, self.dropout, only_image=True)
-
                 # Score for text and image : 
                 k_ei = self.k_ei_linear(k_ei).view(-1, k_ei.size(1), self.h, self.d_k) 
                 k_ei = k_ei.transpose(1,2)
@@ -100,6 +105,7 @@ class MultiModalAttention(nn.Module):
                 
                 concat = scores.transpose(1,2).contiguous().view(-1, bs, self.d_model)
                 output = self.out(concat)
+                
 
                 return output,attn_weights_e,attn_weights_i
         

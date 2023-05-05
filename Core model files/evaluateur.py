@@ -1,9 +1,8 @@
-from nltk.translate.bleu_score import sentence_bleu , SmoothingFunction
-from nltk.translate.meteor_score import meteor_score
+import torchmetrics
 from greedy_beam_search import *
 from Pipeline import *
 import numpy as np
-
+from nltk.translate.meteor_score import meteor_score
 def tensor_to_sentence(output,inv_dic):
     result = [inv_dic[int(x)] for x in output]
     sentence = ""
@@ -19,8 +18,11 @@ def tensor_to_sentence(output,inv_dic):
     return sentence
 
 def cut_list_at_value(L,value):
-    index = L.index(value)
-    return L[:index]
+    if value in L :
+        index = L.index(value)
+        return L[:index]
+    else :
+        return L
 def give_tokens(output, padding_id, end_id ) : #takes output of greedy search tensor of size [bsz,seqlen,n_token]. returns the tokens, with no padding before end of sentence token
     #todoso, just need to take the 2nd outpuuts
     values, indices = torch.kthvalue(output, 2 , dim = 2)
@@ -75,9 +77,10 @@ def traduit(mode,model_A,model_B,src, inv_map_src,image_bool,tgt,inv_map_tgt,j):
     return tensor_to_sentence(output.view(-1),inv_map_tgt),bleu,meteor
 
 def evalue_bleu(output,inv_dic_tgt, tgt):
+    sacre_bleu =torchmetrics.SacreBLEUScore()
     result = [inv_dic_tgt[int(x)] for x in output if inv_dic_tgt[int(x)] not in  ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
     target = [inv_dic_tgt[int(x)] for x in tgt if inv_dic_tgt[int(x)] not in  ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
-    return sentence_bleu([target], result)
+    return sacre_bleu( result,[target])
 def evalue_meteor(output,inv_dic_tgt, tgt):
     result = [inv_dic_tgt[int(x)] for x in output if inv_dic_tgt[int(x)] not in  ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
     target = [inv_dic_tgt[int(x)] for x in tgt if inv_dic_tgt[int(x)] not in  ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]]
@@ -174,23 +177,25 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
     df = pd.DataFrame(data)
     return df.loc()[:val_data_fr[0].shape[0]-1]
 def bleu(row,langue_src):
+    sacre_bleu = torchmetrics.SacreBLEUScore()
     if langue_src == "en":
         candidates= list(row["traductions_en_fr"])
         references = [list(row["references_fr"])]
-        return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
+        return sacre_bleu(candidates,references)
     else : 
         candidates= list(row["traductions_fr_en"])
         references = [list(row["references_en"])]
-        return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
+        return sacre_bleu(candidates,references)
 def bleu_txt_only(row,langue_src):
+    sacre_bleu = torchmetrics.SacreBLEUScore()
     if langue_src == "en":
         candidates= list(row["traductions_en_fr_txt_only"])
         references = [list(row["references_fr"])]
-        return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
+        return sacre_bleu(candidates,references)
     else : 
         candidates= list(row["traductions_fr_en_txt_only"])
         references = [list(row["references_en"])]
-        return sentence_bleu(references, candidates,smoothing_function=SmoothingFunction().method4)
+        return sacre_bleu(candidates,references)
     
 def save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,epoch = 0):
     df = dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size)

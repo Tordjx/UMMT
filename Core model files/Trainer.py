@@ -17,10 +17,11 @@ def auto_encoding_train(model,train_data, image_bool):
         data,target = train_data
     if image_bool : 
         output = model(data,True,features)
-        loss = model.criterion(output.mT,data)
+
     else : 
         output = model(data)
-        loss = model.criterion(output.mT,target)
+    # loss = model.criterion(output.mT,target)
+    loss = model.criterion(output.mT,torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = target.dtype))
     model.optimizer.zero_grad()
     loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), 5)
@@ -43,7 +44,7 @@ def cycle_consistent_forward(model_A,model_B,text_input,target, image_input = No
     if not model_A.teacher_forcing :
         if np.random.rand() < 1 : #DO NOT TEACHER FORCE
             target = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(model_B.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(model_B.padding_id)),dim =1).to(device)
-    target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
+    # target = torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model_B.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
     if image_bool:
         mem_masks = [memory_mask, mem_ei_mask]
         mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]
@@ -72,7 +73,8 @@ def cycle_consistency_train(model_A, model_B,train_data,image_bool=False):
                 
                 first_output = range_le_padding(check_data(first_output,model_B.padding_id,model_B.begin_id,model_B.end_id),model_B.padding_id)
             output = cycle_consistent_forward(model_B,model_A, first_output,data)
-        loss_A = model_A.criterion(output.mT,data)
+
+        loss_A = model_A.criterion(output.mT,torch.cat((data[:,1:],torch.ones(data.shape[0] ,1,dtype = torch.int).fill_(model_A.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = data.dtype))
         model_A.optimizer.zero_grad()
         model_B.optimizer.zero_grad()
         loss_A.backward()

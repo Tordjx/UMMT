@@ -79,7 +79,8 @@ class Modèle(nn.Module):
         if not self.teacher_forcing :
             if np.random.rand() < 1 : #DO NOT TEACHER FORCE
                 text_input = torch.cat((torch.ones(text_input.shape[0], 1, dtype = torch.int).fill_(self.begin_id),torch.ones(text_input.shape[0] ,text_input.shape[1]-1,dtype = torch.int).fill_(self.padding_id)),dim =1).to(device)
-        target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
+        # target = torch.cat((text_input[:,1:],torch.ones(text_input.shape[0] ,1,dtype = torch.int).fill_(self.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = torch.int)
+        target = text_input
         if image_bool:
             mem_masks = [memory_mask, mem_ei_mask]
             mem_padding_masks = [memory_key_padding_mask, mem_ei_key_padding_mask]

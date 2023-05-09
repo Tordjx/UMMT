@@ -21,11 +21,7 @@ def auto_encoding_train(model,train_data, image_bool):
     else : 
         output = model(data)
     # loss = model.criterion(output.mT,target)
-<<<<<<< HEAD
     loss = model.criterion(output.mT,torch.cat((data[:,1:],torch.ones(data.shape[0] ,1,dtype = torch.int).fill_(model.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = data.dtype))
-=======
-    loss = model.criterion(output.mT,torch.cat((target[:,1:],torch.ones(target.shape[0] ,1,dtype = torch.int).fill_(model.padding_id).to(device=device,dtype = torch.int)),dim =1).to(device=device,dtype = target.dtype))
->>>>>>> 780c1cee52f2cc5e608bf3aaef93917a10e55e0d
     model.optimizer.zero_grad()
     loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), 5)

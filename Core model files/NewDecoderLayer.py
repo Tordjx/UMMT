@@ -36,8 +36,8 @@ class TransformerDecoderLayer(nn.Module):
     def forward(self, x, memory, tgt_mask, memory_mask, tgt_key_padding_mask, memory_key_padding_mask,image_bool):
         if image_bool:  # If there is an image
             # print("cas 1 : text + image")
-            text = x[0].masked_fill(tgt_mask == True, float('-inf'))
             i_outputs = x[1]
+            text = x[0]
             x2 = self.norm_1(text)
             x=text
             x = x + self.dropout_1(self.attn_1(x2, x2, x2, key_padding_mask=tgt_key_padding_mask, attn_mask=tgt_mask)[0])
@@ -58,9 +58,9 @@ class TransformerDecoderLayer(nn.Module):
 
         else: # If there is only the text
             # print("case 2 : text only")
+            text = x
             memory_mask = memory_mask[0]
             memory_key_padding_mask = memory_key_padding_mask[0]
-            text = x.masked_fill(tgt_mask == True, float('-inf'))
             i_outputs = None
             x2 = self.norm_1(text)
             x = x + self.dropout_1(self.attn_1(x2, x2, x2, key_padding_mask=tgt_key_padding_mask, attn_mask=tgt_mask)[0])

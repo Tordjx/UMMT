@@ -16,9 +16,7 @@ def attention(q, k, v, d_k, mask=None, padding_mask=None, dropout=None, only_ima
     if not(only_image):
         if mask is not None:
             mask = mask.unsqueeze(1)
-    
             output = output.masked_fill(mask == True, float('-inf'))
-    
         if padding_mask is not None:
             output = output.masked_fill(padding_mask.unsqueeze(1).unsqueeze(2), float('-inf'))
     

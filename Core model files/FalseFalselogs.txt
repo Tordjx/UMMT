@@ -1,20 +1,160 @@
 
 Bleu score
-0
+tensor(0.)
 Meteor score
 0.0
 Bonne traduction
-un groupe de personnes attendent derrière une barrière et regardent vers la droite . 
+une petite fille dans une robe à poids regarde en arrière vers une femme en robe noire . 
 Output
-tensor([4584, 1196, 1196, 1898, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
-        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
-        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
-        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
-        3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070, 3070,
-        3070, 3070, 3070, 1392])
+tensor([2664, 1235, 2830, 2949, 6045, 2949, 1737, 1737,  422,  422,  422,  422,
+         422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,
+         422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,
+         422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,
+         422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,  422,
+         422,  422,  422,  422], device='cuda:0')
 Auto encoding
-frskydiving bathtub bathtub mounted mounted vestvestvestmounted mounted mounted mounted mounted mounted mounted mounted mounted mounted ninininininininininininininininininininininininininininininininininininininininininininini
-Phrase � traduire : 
-a group of people wait behind a barricade and look toward the right . 
+sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting sting 
+Phrase à traduire : 
+a little girl in a dotted dress looks back towards a woman in a black dress . 
 Phrase traduite : 
-sculmonde monde blondes blebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblebleblepe
+clofestival cuisiner pataufloral patauproteproteuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+Iteration : 0 batch numéro : 11 en 37 ms par phrase, moyenne loss 10.333171497691762 current lr [3.633610463437159e-05] [3.633610463437159e-05]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+un homme en t-shirt blanc et pantalon kaki est accroupi sur un tronc d&apos; arbre tombé . 
+Output
+tensor([  50, 1490, 5409, 2407, 1435, 2221, 1435, 1061, 1061, 1354, 1354, 1354,
+        1354, 1354, 1375,   50,   50, 6021, 6021, 6021, 6021, 5069, 5069, 5069,
+        5069, 5069, 5069, 5069, 5069,  820,  820,  820,  820,  820,  820,  820,
+         820,  820,  820,  820,  820,  820,  820,  820,  820, 1522,  820,  820,
+         820,  820, 1522,  820,  820,  820, 1522,  820,  820,  820,  820, 1522,
+         820,  820,  820, 1977], device='cuda:0')
+Auto encoding
+purpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpurpur
+Phrase à traduire : 
+a man in a white shirt and khaki pants crouches on a fallen tree trunk . 
+Phrase traduite : 
+femmes pointe gement disputent new bulle new touche touche piano piano piano piano piano murs femmes femmes farmfarmfarmfarmperruperruperruperruperruperruperruperruauauauauauauauauauauauauauauauauéclairé auauauauéclairé auauauéclairé auauauauéclairé auauautro
+Iteration : 0 batch numéro : 22 en 27 ms par phrase, moyenne loss 9.25634410164573 current lr [6.70820393249937e-05] [6.70820393249937e-05]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+deux hommes sont debout dans une rue recouverte de graffitis . 
+Output
+tensor([1020, 1020, 1020, 1020, 1020, 2252, 2252, 2252, 2252, 2252, 2252, 2252,
+        2252, 2252, 2252, 2252, 2252, 4834, 2252, 4834, 2250, 2252, 2250, 2250,
+        2252, 2250, 2250, 2250, 2250, 2250, 2250, 2250, 2250, 2250, 2250, 1443,
+        2250, 2250, 1443, 2250, 2255, 4910, 1443, 1443, 2255, 2255, 4910, 1443,
+        2255, 1443, 2255, 1443, 2255, 4910, 1443, 2255, 1443, 2255, 2255, 4910,
+        1443, 2255, 4910, 5474], device='cuda:0')
+Auto encoding
+sterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterstersterster
+Phrase à traduire : 
+two men are standing on the street covered in graffiti . 
+Phrase traduite : 
+épaule épaule épaule épaule épaule imperméable imperméable imperméable imperméable imperméable imperméable imperméable imperméable imperméable imperméable imperméable imperméable isier imperméable isier draimperméable dradraimperméable dradradradradradradradradradrafile dradrafile dranuageux lama file file nuageux nuageux lama file nuageux file nuageux file nuageux lama file nuageux file nuageux nuageux lama file nuageux lama grin
+Iteration : 0 batch numéro : 33 en 20 ms par phrase, moyenne loss 9.019922256469727 current lr [9.782797401561581e-05] [9.782797401561581e-05]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+un homme tenant un petit enfant qui porte un sac à dos . 
+Output
+tensor([3197, 3197, 3629, 3629, 1335, 1335, 1335, 1335, 1493, 1493, 1493, 1493,
+        1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493,
+        1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493,
+        1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493,
+        1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493, 1493,
+        1493, 1493, 1493,   59], device='cuda:0')
+Auto encoding
+participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant participant 
+Phrase à traduire : 
+a man holding a small child who is wearing a backpack . 
+Phrase traduite : 
+après-midi après-midi fruit fruit monmonmonmonparticipe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe participe autre 
+Iteration : 0 batch numéro : 44 en 27 ms par phrase, moyenne loss 8.752204548228871 current lr [0.00012857390870623793] [0.00012857390870623793]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+cinq membres d&apos; un groupe jouent une chanson . 
+Output
+tensor([2603,  973,  973,  973,  973,  973,  973,  973, 3713, 3713, 3713, 3713,
+        3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713,
+        3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713,
+        3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713,
+        3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713, 3713,
+        3713, 3713, 3713,  422], device='cuda:0')
+Auto encoding
+a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a 
+Phrase à traduire : 
+five members of a band are playing a song . 
+Phrase traduite : 
+jaillisculpture sculpture sculpture sculpture sculpture sculpture sculpture talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent talent u
+Iteration : 0 batch numéro : 55 en 20 ms par phrase, moyenne loss 8.595025669444691 current lr [0.00015931984339686005] [0.00015931984339686005]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+un petit enfant brandit une batte de base-ball rouge en arrière . 
+Output
+tensor([1020,  673,  673, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790,
+        3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790,
+        3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790,
+        3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790,
+        3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790, 3790,
+        3790, 3790, 3790,  422], device='cuda:0')
+Auto encoding
+a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a 
+Phrase à traduire : 
+a small child swings back a red baseball bat . 
+Phrase traduite : 
+épaule mangent mangent on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-on-u
+Iteration : 0 batch numéro : 66 en 20 ms par phrase, moyenne loss 8.446128151633523 current lr [0.00019006577808748214] [0.00019006577808748214]
+Bleu score
+tensor(0.)
+Meteor score
+0.01677852348993289
+Bonne traduction
+deux petits garçons noirs jouent avec des bouteilles en plastique et s&apos; amusent beaucoup . 
+Output
+tensor([4077, 1188,  336, 4769, 4769, 4769, 1854, 1854, 3373,  336, 1854, 1854,
+        3373, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346,
+        2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346,
+        2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346, 2346,
+        1188, 1188, 1188, 1188, 1188, 1188, 1188, 1188, 1188, 1188, 1188, 1188,
+        1188, 1188, 1188,  497], device='cuda:0')
+Auto encoding
+a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a 
+Phrase à traduire : 
+two little black boys are playing with plastic bottles and having a lot of fun . 
+Phrase traduite : 
+dres banaombrelombrelombrelcricket cricket cerceaux acricket cricket cerceaux client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client client banbanbanbanbanbanbanbanbanbanbanbanbanbanbanmontagnes 
+Iteration : 0 batch numéro : 77 en 34 ms par phrase, moyenne loss 8.392539717934348 current lr [0.00022081171277810424] [0.00022081171277810424]
+Bleu score
+tensor(0.)
+Meteor score
+0.0
+Bonne traduction
+deux petites filles en robes bleues rient . 
+Output
+tensor([5457, 1171, 1854, 1854, 1854, 1854, 1854, 1188, 1854, 1854, 1188, 1854,
+        1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854,
+        1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854,
+        1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854,
+        1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854, 1854, 1188, 1854,
+        1854, 1188, 1854, 4125], device='cuda:0')
+Auto encoding
+a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a 
+Phrase à traduire : 
+two little girls in blue dresses laugh . 
+Phrase traduite : 
+jourguitariste cricket cricket cricket cricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket cricket bancricket lour

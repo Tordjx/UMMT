@@ -56,7 +56,7 @@ class Modèle(nn.Module):
         self.lr = 10**(-3)
         self.optimizer = torch.optim.Adam(self.parameters(), lr=self.lr,weight_decay=10**(-5))
         # self.scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(self.optimizer, T_0=10, T_mult=2, last_epoch=-1)
-        self.scheduler = Scheduler(self.optimizer,self.d_model,1000,-1,False)
+        self.scheduler = Scheduler(self.optimizer,self.d_model,4000,-1,False)
         self.output_layer = nn.Linear(d_model, n_token).to(device)
         self.loss_list = []
 

@@ -119,7 +119,7 @@ def evaluation(mode,val_data_en,val_data_fr,batch_size,model_en,model_fr,inv_map
 
 # import torchtext
 import pandas as pd
-def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size) :
+def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,mode= "greedy") :
     model_fr.eval()
     model_en.eval()
     batched_data_en,batched_data_fr=batchify([val_data_en,val_data_fr],batch_size,image_bool,conservative=True,permute = False)
@@ -138,32 +138,55 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
         print(batch)
         if image_bool :
             src[batch],features[batch],tgt[batch] = src[batch].to(device),features[batch].to(device),tgt[batch].to(device)
-            traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],features[batch],image_bool) ,dim = 2)
+            if mode == "greedy":
+                traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],features[batch],image_bool) ,dim = 2)
+            else : 
+                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_en_fr.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],features[batch],image_bool) ,dim = 2)
+            if mode =="greedy":
+                traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],features[batch],image_bool) ,dim = 2)
+            else : 
+                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
+            
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_fr_en.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_en.append([inv_map_en[src[batch][i][j].item()] for j in range(src[batch].shape[1]) if inv_map_en[src[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,False) ,dim = 2)
+            if mode =="greedy":
+                traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,False) ,dim = 2)
+            else : 
+                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+            
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_en_fr_txt_only.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
+            if mode =="greedy":
+                traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
+            else :
+                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+            
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_fr_en_txt_only.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
         else :
             src[batch] ,tgt[batch]= src[batch].to(device),tgt[batch].to(device)
-            traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
+            if mode =="greedy": 
+                traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
+            else : 
+                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+            
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_fr_en.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
                 references_fr.append([inv_map_fr[tgt[batch][i][j].item()] for j in range(tgt[batch].shape[1]) if inv_map_fr[tgt[batch][i][j].item()] not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
-            traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
+            if mode =="greedy":
+                traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
+            else : 
+                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+            
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_en_fr.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
@@ -197,8 +220,8 @@ def bleu_txt_only(row,langue_src):
         references = [list(row["references_en"])]
         return sacre_bleu(candidates,references)
     
-def save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,epoch = 0):
-    df = dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size)
+def save_dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,epoch = 0,mode = "greedy"):
+    df = dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_fr,image_bool,batch_size,mode)
     df["bleu_en_fr"] = df.apply(lambda row: bleu(row,"en"), axis=1)
     df["bleu_fr_en"] = df.apply(lambda row: bleu(row,"fr"), axis=1)
     if image_bool:

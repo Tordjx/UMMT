@@ -141,7 +141,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode == "greedy":
                 traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],features[batch],image_bool) ,dim = 2)
             else : 
-                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
+                traduction = CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
                 traductions_en_fr.append([x for x in temp if x not in ["TOKEN_VIDE","DEBUT_DE_PHRASE","FIN_DE_PHRASE"]])
@@ -149,7 +149,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode =="greedy":
                 traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],features[batch],image_bool) ,dim = 2)
             else : 
-                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
+                traduction = CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=features[batch], image_bool=True,get_attention=False)
             
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
@@ -158,7 +158,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode =="greedy":
                 traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,False) ,dim = 2)
             else : 
-                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+                traduction = CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
             
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
@@ -166,7 +166,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode =="greedy":
                 traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,False) ,dim = 2)
             else :
-                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+                traduction = CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
             
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
@@ -176,7 +176,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode =="greedy": 
                 traduction = torch.argmax(CCF_greedy(model_en,model_fr,src[batch],None,image_bool) ,dim = 2)
             else : 
-                CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+                traduction = CCF_beam_search(model_en, model_fr, src[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
             
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_fr[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
@@ -185,7 +185,7 @@ def dataframe_eval(model_fr,model_en,val_data_en,val_data_fr,inv_map_en,inv_map_
             if mode =="greedy":
                 traduction = torch.argmax(CCF_greedy(model_fr,model_en,tgt[batch],None,image_bool) ,dim = 2)
             else : 
-                CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
+                traduction = CCF_beam_search(model_fr, model_en, tgt[batch], beam_size=3, image_input=None, image_bool=False,get_attention=False)
             
             for i in range(traduction.shape[0]):
                 temp = cut_list_at_value([inv_map_en[traduction[i][j].item()]  for j in range(traduction.shape[1])],"FIN_DE_PHRASE")
